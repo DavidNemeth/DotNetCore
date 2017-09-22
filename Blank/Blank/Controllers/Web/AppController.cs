@@ -4,17 +4,21 @@ using Blank.Services;
 using Blank.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using System;
 
 namespace Blank.Controllers.Web
 {
     public class AppController : Controller
     {
+        private ILogger<AppController> logger;
         private IMailService mailService;
         private IConfigurationRoot config;
         private IBlankRepository repo;
 
-        public AppController(IMailService mailService, IConfigurationRoot config, BlankRepository repo)
+        public AppController(IMailService mailService, IConfigurationRoot config, BlankRepository repo, ILogger<AppController> logger)
         {
+            this.logger = logger;
             this.mailService = mailService;
             this.config = config;
             this.repo = repo;
@@ -22,9 +26,19 @@ namespace Blank.Controllers.Web
 
         public IActionResult Index()
         {
-            var data = repo.GetAllTrip();
+            try
+            {
+                var data = repo.GetAllTrip();
 
-            return View(data);
+                return View(data);
+            }
+            catch (Exception ex)
+            {
+
+                logger.LogError($"Failed to get trips in Index page: {ex.Message}");
+                return Redirect("/error");
+            }
+
         }
 
         public IActionResult Contact()
