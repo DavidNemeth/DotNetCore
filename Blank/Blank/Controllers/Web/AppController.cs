@@ -29,7 +29,17 @@ namespace Blank.Controllers.Web
         [HttpPost]
         public IActionResult Contact(ContactViewModel model)
         {
-            mailService.SendMail(_config["MailSettings:ToAddress"], model.Email, "from app Blank", model.Message);
+            if (model.Email.Contains("aol.com"))
+                ModelState.AddModelError("Email", "We don`t support AOL addresses");
+
+            if (ModelState.IsValid)
+            {
+                mailService.SendMail(_config["MailSettings:ToAddress"], model.Email, "from app Blank", model.Message);
+
+                ModelState.Clear();
+                ViewBag.UserMessage = "Message sent";
+            }
+
             return View();
         }
 

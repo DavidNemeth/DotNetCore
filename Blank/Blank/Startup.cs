@@ -1,4 +1,5 @@
-﻿using Blank.Services;
+﻿using Blank.Models;
+using Blank.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -31,6 +32,13 @@ namespace Blank
             {
                 services.AddScoped<IMailService, DebugMailService>();
             }
+            else
+            {
+                // TODO Implement real Mail Service
+            }
+
+            services.AddDbContext<BlankContext>();
+
             services.AddMvc();
         }
 
