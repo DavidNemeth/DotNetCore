@@ -1,5 +1,4 @@
-﻿using Blank.DAL;
-using Blank.DAL.Interfaces;
+﻿using Blank.DAL.Interfaces;
 using Blank.Services;
 using Blank.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +15,7 @@ namespace Blank.Controllers.Web
         private IConfigurationRoot config;
         private IBlankRepository repo;
 
-        public AppController(IMailService mailService, IConfigurationRoot config, BlankRepository repo, ILogger<AppController> logger)
+        public AppController(IMailService mailService, IConfigurationRoot config, IBlankRepository repo, ILogger<AppController> logger)
         {
             this.logger = logger;
             this.mailService = mailService;

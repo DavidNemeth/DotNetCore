@@ -1,7 +1,9 @@
-﻿using Blank.DAL;
+﻿using AutoMapper;
+using Blank.DAL;
 using Blank.DAL.Interfaces;
 using Blank.Models;
 using Blank.Services;
+using Blank.ViewModels;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -59,11 +61,16 @@ namespace Blank
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app,
-            IHostingEnvironment env,
-            BlankSeedData seeder,
-            ILoggerFactory factory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, BlankSeedData seeder, ILoggerFactory factory)
         {
+            //Automapper Mappings
+            Mapper.Initialize(config =>
+            {
+                config.CreateMap<TripViewModel, Trip>().ReverseMap();
+                config.CreateMap<StopViewModel, Stop>().ReverseMap();
+            });
+
+            //Development enviroment setup
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
