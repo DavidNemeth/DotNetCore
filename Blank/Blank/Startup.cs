@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Serialization;
 
 namespace Blank
 {
@@ -40,11 +41,20 @@ namespace Blank
                 // TODO Implement real Mail Service
             }
 
+            //Context and seedData
             services.AddDbContext<BlankContext>();
             services.AddTransient<BlankSeedData>();
-            services.AddMvc();
+
+            //MVC config
+            services.AddMvc()
+                .AddJsonOptions(config =>
+                {
+                    config.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                });
             services.AddLogging();
 
+
+            //IoC mapping
             services.AddScoped<IBlankRepository, BlankRepository>();
         }
 
