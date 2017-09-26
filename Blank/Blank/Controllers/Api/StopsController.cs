@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Blank.DAL.Interfaces;
 using Blank.Models;
+using Blank.Services;
 using Blank.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -13,13 +14,15 @@ namespace Blank.Controllers.Api
     [Route("/api/trips/{tripName}/stops")]
     public class StopsController : Controller
     {
+        private GeoCoordsService coordsService;
         private IBlankRepository repo;
         private ILogger<StopsController> logger;
 
-        public StopsController(IBlankRepository repo, ILogger<StopsController> logger)
+        public StopsController(IBlankRepository repo, ILogger<StopsController> logger, GeoCoordsService coordsService)
         {
             this.repo = repo;
             this.logger = logger;
+            this.coordsService = coordsService;
         }
 
         [HttpGet("")]
@@ -47,7 +50,15 @@ namespace Blank.Controllers.Api
                 if (ModelState.IsValid)
                 {
                     var newStop = Mapper.Map<Stop>(stopVm);
+                    var result = await coordsService.GetCoordsAsync(newStop.Name);
 
+                    if (!result.Success)
+                        logger.LogError(result.Message);
+                    else
+                    {
+                        newStop.Latitude = result.Latitude;
+                        newStop.Longitude = result.Longitude;
+                    }
                     repo.AddStop(tripName, newStop);
 
                     if (await repo.SaveChangesAsync())
