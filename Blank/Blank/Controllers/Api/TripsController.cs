@@ -42,7 +42,7 @@ namespace Blank.Controllers.Api
         }
 
         [HttpPost("")]
-        public async Task<IActionResult> Post([FromBody]TripViewModel trip)
+        public async Task<IActionResult> Post([FromBody]TripViewModel tripVm)
         {
             if (ModelState.IsValid)
             {
@@ -53,11 +53,11 @@ namespace Blank.Controllers.Api
                 //    DateCreated = trip.Created
                 //};
 
-                var newTrip = Mapper.Map<Trip>(trip);
+                var newTrip = Mapper.Map<Trip>(tripVm);
                 repo.AddTrip(newTrip);
 
                 if (await repo.SaveChangesAsync())
-                    return Created($"api/trips/{trip.Name}", Mapper.Map<TripViewModel>(newTrip));
+                    return Created($"api/trips/{tripVm.Name}", Mapper.Map<TripViewModel>(newTrip));
             }
             return BadRequest("Failed to save the Trip");
         }

@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using Blank.DAL.Interfaces;
+using Blank.Models;
 using Blank.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Blank.Controllers.Api
 {
@@ -36,6 +38,29 @@ namespace Blank.Controllers.Api
             }
 
             return BadRequest("Failed to get Stops");
+        }
+        [HttpPost("")]
+        public async Task<IActionResult> Set(string tripName, [FromBody]StopViewModel stopVm)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var newStop = Mapper.Map<Stop>(stopVm);
+
+                    repo.AddStop(tripName, newStop);
+
+                    if (await repo.SaveChangesAsync())
+                    {
+                        return Created($"/api/trips/{tripName}/stops/{newStop.Name}", Mapper.Map<StopViewModel>(newStop));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError($"Failed to save new Stop: {ex}");
+            }
+            return BadRequest("Failed to add Stop to Trip");
         }
     }
 }

@@ -19,6 +19,11 @@ namespace Blank.DAL
             this.context = context;
         }
 
+        public void AddStop(string tripName, Stop newStop)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public void AddTrip(Trip newTrip)
         {
             context.Add(newTrip);
