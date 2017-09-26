@@ -6,6 +6,7 @@ using Blank.Services;
 using Blank.ViewModels;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -49,16 +50,32 @@ namespace Blank
                 {
                     config.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                 });
-            services.AddLogging();
 
+            //Identity services
+            services.AddIdentity<BlankUser, IdentityRole>(config =>
+            {
+                config.User.RequireUniqueEmail = true;
+                config.Password.RequiredLength = 6;
+                config.Password.RequireDigit = true;
+                config.Password.RequiredUniqueChars = 0;
+                config.Password.RequireUppercase = false;
+                config.Password.RequireNonAlphanumeric = false;
+            })
+            .AddEntityFrameworkStores<BlankContext>();
 
-            //Other services
-            services.AddTransient<GeoCoordsService>();
+            services.ConfigureApplicationCookie(config =>
+            {
+                config.LoginPath = "/Auth/Login";
+            });
+
             //Context and seedData
             services.AddDbContext<BlankContext>();
             services.AddTransient<BlankSeedData>();
             //IoC mapping
             services.AddScoped<IBlankRepository, BlankRepository>();
+            //Other services
+            services.AddLogging();
+            services.AddTransient<GeoCoordsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -83,6 +100,8 @@ namespace Blank
             }
 
             app.UseStaticFiles();
+
+            app.UseAuthentication();
 
             app.UseMvc(config =>
             {
