@@ -43,10 +43,6 @@ namespace Blank
                 // TODO Implement real Mail Service
             }
 
-            //Context and seedData
-            services.AddDbContext<BlankContext>();
-            services.AddTransient<BlankSeedData>();
-
             //MVC config
             services.AddMvc()
                 .AddJsonOptions(config =>
@@ -56,6 +52,11 @@ namespace Blank
             services.AddLogging();
 
 
+            //Other services
+            services.AddTransient<GeoCoordsService>();
+            //Context and seedData
+            services.AddDbContext<BlankContext>();
+            services.AddTransient<BlankSeedData>();
             //IoC mapping
             services.AddScoped<IBlankRepository, BlankRepository>();
         }

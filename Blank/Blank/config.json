@@ -4,5 +4,8 @@
   },
   "ConnectionStrings": {
     "BlankAppContextConnection": "Server=(localdb)\\MSSQLLocalDB;Database=BlankAppDb;Trusted_Connection=true;MultipleActiveResultSets=true;"
+  },
+  "Keys": {
+    "BingKey": "DONT EVER PUT KEYS IN SOURCE CONTROL"
   }
 }

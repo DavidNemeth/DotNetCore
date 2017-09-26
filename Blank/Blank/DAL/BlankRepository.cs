@@ -21,7 +21,12 @@ namespace Blank.DAL
 
         public void AddStop(string tripName, Stop newStop)
         {
-            throw new System.NotImplementedException();
+            var trip = GetTripByname(tripName);
+            if (trip != null)
+            {
+                trip.Stops.Add(newStop);
+                context.Stops.Add(newStop);
+            }
         }
 
         public void AddTrip(Trip newTrip)
