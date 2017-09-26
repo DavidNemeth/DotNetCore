@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace Blank.Models
 {
-    public class BlankContext : DbContext
+    public class BlankContext : IdentityDbContext<BlankUser>
     {
         private IConfigurationRoot config;
 
@@ -19,7 +20,6 @@ namespace Blank.Models
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-
             optionsBuilder.UseSqlServer(config["ConnectionStrings:BlankAppContextConnection"]);
         }
     }

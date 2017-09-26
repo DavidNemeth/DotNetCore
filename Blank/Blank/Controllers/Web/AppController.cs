@@ -1,6 +1,7 @@
 ﻿using Blank.DAL.Interfaces;
 using Blank.Services;
 using Blank.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -25,11 +26,18 @@ namespace Blank.Controllers.Web
 
         public IActionResult Index()
         {
+            return View();
+
+        }
+
+        [Authorize]
+        public IActionResult Trips()
+        {
             try
             {
-                var data = repo.GetAllTrip();
+                var trips = repo.GetAllTrip();
 
-                return View(data);
+                return View(trips);
             }
             catch (Exception ex)
             {

@@ -8,8 +8,10 @@ namespace Blank.DAL.Interfaces
     {
         IEnumerable<Trip> GetAllTrip();
         void AddTrip(Trip newTrip);
-        Task<bool> SaveChangesAsync();
         Trip GetTripByname(string tripName);
+
         void AddStop(string tripName, Stop newStop);
+
+        Task<bool> SaveChangesAsync();
     }
 }
