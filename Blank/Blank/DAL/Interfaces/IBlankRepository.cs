@@ -7,10 +7,13 @@ namespace Blank.DAL.Interfaces
     public interface IBlankRepository
     {
         IEnumerable<Trip> GetAllTrip();
-        void AddTrip(Trip newTrip);
+        IEnumerable<Trip> GetTripsByUserName(string username);
         Trip GetTripByname(string tripName);
+        Trip GetUserTripByName(string tripName, string username);
 
-        void AddStop(string tripName, Stop newStop);
+
+        void AddTrip(Trip newTrip);
+        void AddStop(string tripName, Stop newStop, string username);
 
         Task<bool> SaveChangesAsync();
     }

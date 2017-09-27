@@ -19,9 +19,9 @@ namespace Blank.DAL
             this.context = context;
         }
 
-        public void AddStop(string tripName, Stop newStop)
+        public void AddStop(string tripName, Stop newStop, string username)
         {
-            var trip = GetTripByname(tripName);
+            var trip = GetUserTripByName(tripName, username);
             if (trip != null)
             {
                 trip.Stops.Add(newStop);
@@ -46,6 +46,24 @@ namespace Blank.DAL
                 .Include(t => t.Stops)
                 .Where(t => t.Name == tripName
                 ).FirstOrDefault();
+        }
+
+        public IEnumerable<Trip> GetTripsByUserName(string name)
+        {
+            return context
+                .Trips
+                .Include(t => t.Stops)
+                .Where(t => t.UserName == name)
+                .ToList();
+        }
+
+        public Trip GetUserTripByName(string tripName, string username)
+        {
+            return context
+                .Trips
+                .Include(t => t.Stops)
+                .Where(t => t.Name == tripName && t.UserName == username)
+                .FirstOrDefault();
         }
 
         public async Task<bool> SaveChangesAsync()

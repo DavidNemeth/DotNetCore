@@ -3,6 +3,7 @@ using Blank.DAL.Interfaces;
 using Blank.Models;
 using Blank.Services;
 using Blank.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 namespace Blank.Controllers.Api
 {
     [Route("/api/trips/{tripName}/stops")]
+    [Authorize]
     public class StopsController : Controller
     {
         private GeoCoordsService coordsService;
@@ -30,7 +32,7 @@ namespace Blank.Controllers.Api
         {
             try
             {
-                var trip = repo.GetTripByname(tripName);
+                var trip = repo.GetUserTripByName(tripName, User.Identity.Name);
                 var stops = Mapper.Map<IEquatable<StopViewModel>>(trip.Stops.OrderBy(t => t.Order).ToList());
 
                 return Ok(stops);
@@ -59,7 +61,7 @@ namespace Blank.Controllers.Api
                         newStop.Latitude = result.Latitude;
                         newStop.Longitude = result.Longitude;
                     }
-                    repo.AddStop(tripName, newStop);
+                    repo.AddStop(tripName, newStop, User.Identity.Name);
 
                     if (await repo.SaveChangesAsync())
                     {

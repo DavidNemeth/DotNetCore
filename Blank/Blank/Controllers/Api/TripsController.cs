@@ -29,7 +29,7 @@ namespace Blank.Controllers.Api
         {
             try
             {
-                var results = repo.GetAllTrip();
+                var results = repo.GetTripsByUserName(this.User.Identity.Name);
                 var tripList = Mapper.Map<IEnumerable<TripViewModel>>(results);
 
                 return Ok(tripList);
@@ -48,14 +48,10 @@ namespace Blank.Controllers.Api
         {
             if (ModelState.IsValid)
             {
-                // save to db
-                //var newTrip = new Trip()
-                //{
-                //    Name = trip.Name,
-                //    DateCreated = trip.Created
-                //};
-
                 var newTrip = Mapper.Map<Trip>(tripVm);
+
+                newTrip.UserName = User.Identity.Name;
+
                 repo.AddTrip(newTrip);
 
                 if (await repo.SaveChangesAsync())
