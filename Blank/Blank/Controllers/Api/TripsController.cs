@@ -29,35 +29,38 @@ namespace Blank.Controllers.Api
         {
             try
             {
-                var results = repo.GetTripsByUserName(this.User.Identity.Name);
-                var tripList = Mapper.Map<IEnumerable<TripViewModel>>(results);
+                var results = repo.GetTripsByUsername(User.Identity.Name);
 
-                return Ok(tripList);
+                return Ok(Mapper.Map<IEnumerable<TripViewModel>>(results));
             }
             catch (Exception ex)
             {
-                // TODO Logging error
-                logger.LogError($"Failed to get all Trips {ex}");
-                return BadRequest("Error occured");
+                logger.LogError($"Failed to get All Trips: {ex}");
+
+                return BadRequest("Error occurred");
             }
 
         }
 
         [HttpPost("")]
-        public async Task<IActionResult> Post([FromBody]TripViewModel tripVm)
+        public async Task<IActionResult> Post([FromBody]TripViewModel theTrip)
         {
             if (ModelState.IsValid)
             {
-                var newTrip = Mapper.Map<Trip>(tripVm);
+                // Save to the Database
+                var newTrip = Mapper.Map<Trip>(theTrip);
 
                 newTrip.UserName = User.Identity.Name;
 
                 repo.AddTrip(newTrip);
 
                 if (await repo.SaveChangesAsync())
-                    return Created($"api/trips/{tripVm.Name}", Mapper.Map<TripViewModel>(newTrip));
+                {
+                    return Created($"api/trips/{theTrip.Name}", Mapper.Map<TripViewModel>(newTrip));
+                }
             }
-            return BadRequest("Failed to save the Trip");
+
+            return BadRequest("Failed to save the trip");
         }
     }
 }

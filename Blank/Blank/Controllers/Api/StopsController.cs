@@ -32,7 +32,7 @@ namespace Blank.Controllers.Api
         {
             try
             {
-                var trip = repo.GetUserTripByName(tripName, User.Identity.Name);
+                var trip = repo.GetTripByName(tripName, User.Identity.Name);
                 var stops = Mapper.Map<IEquatable<StopViewModel>>(trip.Stops.OrderBy(t => t.Order).ToList());
 
                 return Ok(stops);
@@ -61,7 +61,7 @@ namespace Blank.Controllers.Api
                         newStop.Latitude = result.Latitude;
                         newStop.Longitude = result.Longitude;
                     }
-                    repo.AddStop(tripName, newStop, User.Identity.Name);
+                    repo.AddStop(tripName, User.Identity.Name, newStop);
 
                     if (await repo.SaveChangesAsync())
                     {

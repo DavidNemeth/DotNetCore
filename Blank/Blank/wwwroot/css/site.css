@@ -93,3 +93,7 @@ input[type=text], input[type=password], textarea {
     .list-group-item{
         min-width: 190px;
     }
+
+[ng\:cloak], [ng-cloak], .ng-cloak {
+    display: none;
+}

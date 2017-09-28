@@ -11,8 +11,8 @@ using System;
 namespace Blank.Migrations
 {
     [DbContext(typeof(BlankContext))]
-    [Migration("20170926135107_AddIdentity")]
-    partial class AddIdentity
+    [Migration("20170928132745_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

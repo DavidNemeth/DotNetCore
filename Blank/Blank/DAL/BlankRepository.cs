@@ -19,51 +19,41 @@ namespace Blank.DAL
             this.context = context;
         }
 
-        public void AddStop(string tripName, Stop newStop, string username)
+        public void AddStop(string tripName, string username, Stop newStop)
         {
-            var trip = GetUserTripByName(tripName, username);
+            var trip = GetTripByName(tripName, username);
+
             if (trip != null)
             {
                 trip.Stops.Add(newStop);
-                context.Stops.Add(newStop);
             }
         }
 
-        public void AddTrip(Trip newTrip)
+        public void AddTrip(Trip trip)
         {
-            context.Add(newTrip);
+            context.Add(trip);
         }
 
-        public IEnumerable<Trip> GetAllTrip()
+        public IEnumerable<Trip> GetAllTrips()
         {
             logger.LogInformation("Getting All Trips from the Database");
+
             return context.Trips.ToList();
         }
 
-        public Trip GetTripByname(string tripName)
+        public Trip GetTripByName(string tripName, string username)
         {
             return context.Trips
-                .Include(t => t.Stops)
-                .Where(t => t.Name == tripName
-                ).FirstOrDefault();
+              .Include(t => t.Stops)
+              .Where(t => t.Name == tripName && t.UserName == username)
+              .FirstOrDefault();
         }
 
-        public IEnumerable<Trip> GetTripsByUserName(string name)
+        public object GetTripsByUsername(string name)
         {
-            return context
-                .Trips
-                .Include(t => t.Stops)
-                .Where(t => t.UserName == name)
-                .ToList();
-        }
-
-        public Trip GetUserTripByName(string tripName, string username)
-        {
-            return context
-                .Trips
-                .Include(t => t.Stops)
-                .Where(t => t.Name == tripName && t.UserName == username)
-                .FirstOrDefault();
+            return context.Trips
+               .Where(t => t.UserName == name)
+              .ToList();
         }
 
         public async Task<bool> SaveChangesAsync()

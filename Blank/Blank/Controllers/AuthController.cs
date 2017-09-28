@@ -30,7 +30,7 @@ namespace Blank.Controllers
         {
             if (ModelState.IsValid)
             {
-                var signInResult = await signInManager.PasswordSignInAsync(vm.Username, vm.Password, true, false);
+                var signInResult = await signInManager.PasswordSignInAsync(vm.Username, vm.Password, false, false);
 
                 if (signInResult.Succeeded)
                 {

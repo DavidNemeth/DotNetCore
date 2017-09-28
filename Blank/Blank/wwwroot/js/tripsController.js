@@ -1,11 +1,11 @@
-﻿(function () {
+﻿// tripsController.js
+(function () {
 
-    "user strict";
+    "use strict";
 
-    //Getting the existing module
+    // Getting the existing module
     angular.module("app-trips")
         .controller("tripsController", tripsController);
-
 
     function tripsController($http) {
 
@@ -18,23 +18,39 @@
         vm.errorMessage = "";
         vm.isBusy = true;
 
-
         $http.get("/api/trips")
             .then(function (response) {
-                //success
+                // Success
                 angular.copy(response.data, vm.trips);
             }, function (error) {
-                //failure
-                vm.errorMessage = "Failed to load data: " + error;                
+                // Failure
+                vm.errorMessage = "Failed to load data: " + error;
             })
             .finally(function () {
                 vm.isBusy = false;
             });
-
+       
         vm.addTrip = function () {
-            vm.trips.push({ name: vm.newTrip.name, created: new Date() });
-            vm.newTrip = {};
+
+            vm.isBusy = true;
+            vm.errorMessage = "";
+
+            $http.post("/api/trips", vm.newTrip)
+                .then(function (response) {
+                    // success
+                    vm.trips.push(response.data);
+                    vm.newTrip = {};
+                }, function () {
+                    // failure
+                    vm.errorMessage = "Failed to save new trip";
+                })
+                .finally(function () {
+                    vm.isBusy = false;
+                });
+
         };
+
+
 
     }
 

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Blank.Migrations
 {
-    public partial class AddIdentity : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

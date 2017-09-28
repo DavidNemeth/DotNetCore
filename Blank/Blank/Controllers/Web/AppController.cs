@@ -35,7 +35,7 @@ namespace Blank.Controllers.Web
         {
             try
             {
-                var trips = repo.GetAllTrip();
+                var trips = repo.GetAllTrips();
 
                 return View(trips);
             }
