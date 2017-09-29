@@ -15,13 +15,13 @@ namespace Blank.Controllers.Api
     [Authorize]
     public class TripsController : Controller
     {
-        private ILogger<TripsController> logger;
-        private IBlankRepository repo;
+        private ILogger<TripsController> _logger;
+        private IBlankRepository _repository;
 
-        public TripsController(IBlankRepository repo, ILogger<TripsController> logger)
+        public TripsController(IBlankRepository repository, ILogger<TripsController> logger)
         {
-            this.logger = logger;
-            this.repo = repo;
+            _repository = repository;
+            _logger = logger;
         }
 
         [HttpGet("")]
@@ -29,17 +29,16 @@ namespace Blank.Controllers.Api
         {
             try
             {
-                var results = repo.GetTripsByUsername(User.Identity.Name);
+                var results = _repository.GetTripsByUsername(User.Identity.Name);
 
                 return Ok(Mapper.Map<IEnumerable<TripViewModel>>(results));
             }
             catch (Exception ex)
             {
-                logger.LogError($"Failed to get All Trips: {ex}");
+                _logger.LogError($"Failed to get All Trips: {ex}");
 
                 return BadRequest("Error occurred");
             }
-
         }
 
         [HttpPost("")]
@@ -52,9 +51,9 @@ namespace Blank.Controllers.Api
 
                 newTrip.UserName = User.Identity.Name;
 
-                repo.AddTrip(newTrip);
+                _repository.AddTrip(newTrip);
 
-                if (await repo.SaveChangesAsync())
+                if (await _repository.SaveChangesAsync())
                 {
                     return Created($"api/trips/{theTrip.Name}", Mapper.Map<TripViewModel>(newTrip));
                 }

@@ -11,23 +11,25 @@ namespace Blank.Controllers.Web
 {
     public class AppController : Controller
     {
-        private ILogger<AppController> logger;
-        private IMailService mailService;
-        private IConfigurationRoot config;
-        private IBlankRepository repo;
+        private IMailService _mailService;
+        private IConfigurationRoot _config;
+        private IBlankRepository _repository;
+        private ILogger<AppController> _logger;
 
-        public AppController(IMailService mailService, IConfigurationRoot config, IBlankRepository repo, ILogger<AppController> logger)
+        public AppController(IMailService mailService,
+          IConfigurationRoot config,
+          IBlankRepository repository,
+          ILogger<AppController> logger)
         {
-            this.logger = logger;
-            this.mailService = mailService;
-            this.config = config;
-            this.repo = repo;
+            _mailService = mailService;
+            _config = config;
+            _repository = repository;
+            _logger = logger;
         }
 
         public IActionResult Index()
         {
             return View();
-
         }
 
         [Authorize]
@@ -35,17 +37,15 @@ namespace Blank.Controllers.Web
         {
             try
             {
-                var trips = repo.GetAllTrips();
+                var data = _repository.GetAllTrips();
 
-                return View(trips);
+                return View(data);
             }
             catch (Exception ex)
             {
-
-                logger.LogError($"Failed to get trips in Index page: {ex.Message}");
+                _logger.LogError($"Failed to get trips in Index page: {ex.Message}");
                 return Redirect("/error");
             }
-
         }
 
         public IActionResult Contact()
@@ -57,14 +57,17 @@ namespace Blank.Controllers.Web
         public IActionResult Contact(ContactViewModel model)
         {
             if (model.Email.Contains("aol.com"))
-                ModelState.AddModelError("Email", "We don`t support AOL addresses");
+            {
+                ModelState.AddModelError("", "We don't support AOL addresses");
+            }
 
             if (ModelState.IsValid)
             {
-                mailService.SendMail(config["MailSettings:ToAddress"], model.Email, "from app Blank", model.Message);
+                _mailService.SendMail(_config["MailSettings:ToAddress"], model.Email, "From TheWorld", model.Message);
 
                 ModelState.Clear();
-                ViewBag.UserMessage = "Message sent";
+
+                ViewBag.UserMessage = "Message Sent";
             }
 
             return View();
@@ -76,3 +79,4 @@ namespace Blank.Controllers.Web
         }
     }
 }
+

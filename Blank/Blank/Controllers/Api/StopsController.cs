@@ -3,28 +3,29 @@ using Blank.DAL.Interfaces;
 using Blank.Models;
 using Blank.Services;
 using Blank.ViewModels;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Blank.Controllers.Api
 {
     [Route("/api/trips/{tripName}/stops")]
-    [Authorize]
     public class StopsController : Controller
     {
-        private GeoCoordsService coordsService;
-        private IBlankRepository repo;
-        private ILogger<StopsController> logger;
+        private GeoCoordsService _coordsService;
+        private ILogger<StopsController> _logger;
+        private IBlankRepository _repository;
 
-        public StopsController(IBlankRepository repo, ILogger<StopsController> logger, GeoCoordsService coordsService)
+        public StopsController(IBlankRepository repository,
+          ILogger<StopsController> logger,
+          GeoCoordsService coordsService)
         {
-            this.repo = repo;
-            this.logger = logger;
-            this.coordsService = coordsService;
+            _repository = repository;
+            _logger = logger;
+            _coordsService = coordsService;
         }
 
         [HttpGet("")]
@@ -32,48 +33,56 @@ namespace Blank.Controllers.Api
         {
             try
             {
-                var trip = repo.GetTripByName(tripName, User.Identity.Name);
-                var stops = Mapper.Map<IEquatable<StopViewModel>>(trip.Stops.OrderBy(t => t.Order).ToList());
+                var trip = _repository.GetTripByName(tripName, User.Identity.Name);
 
-                return Ok(stops);
+                return Ok(Mapper.Map<IEnumerable<StopViewModel>>(trip.Stops.OrderBy(s => s.Order).ToList()));
             }
             catch (Exception ex)
             {
-                logger.LogError($"Failed to get stop: {ex}");
+                _logger.LogError("Failed to get stops: {0}", ex);
             }
 
-            return BadRequest("Failed to get Stops");
+            return BadRequest("Failed to get stops");
         }
+
         [HttpPost("")]
-        public async Task<IActionResult> Set(string tripName, [FromBody]StopViewModel stopVm)
+        public async Task<IActionResult> Post(string tripName, [FromBody]StopViewModel vm)
         {
             try
             {
+                // If the VM is valid
                 if (ModelState.IsValid)
                 {
-                    var newStop = Mapper.Map<Stop>(stopVm);
-                    var result = await coordsService.GetCoordsAsync(newStop.Name);
+                    var newStop = Mapper.Map<Stop>(vm);
 
+                    // Lookup the Geocodes
+                    var result = await _coordsService.GetCoordsAsync(newStop.Name);
                     if (!result.Success)
-                        logger.LogError(result.Message);
+                    {
+                        _logger.LogError(result.Message);
+                    }
                     else
                     {
                         newStop.Latitude = result.Latitude;
                         newStop.Longitude = result.Longitude;
-                    }
-                    repo.AddStop(tripName, User.Identity.Name, newStop);
 
-                    if (await repo.SaveChangesAsync())
-                    {
-                        return Created($"/api/trips/{tripName}/stops/{newStop.Name}", Mapper.Map<StopViewModel>(newStop));
+                        // Save to the Database
+                        _repository.AddStop(tripName, User.Identity.Name, newStop);
+
+                        if (await _repository.SaveChangesAsync())
+                        {
+                            return Created($"/api/trips/{tripName}/stops/{newStop.Name}",
+                              Mapper.Map<StopViewModel>(newStop));
+                        }
                     }
                 }
             }
             catch (Exception ex)
             {
-                logger.LogError($"Failed to save new Stop: {ex}");
+                _logger.LogError("Failed to save new Stop: {0}", ex);
             }
-            return BadRequest("Failed to add Stop to Trip");
+
+            return BadRequest("Failed to save new stop");
         }
     }
 }
