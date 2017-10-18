@@ -3,6 +3,12 @@ Skeleton application to serve as a starting point for building well structured, 
 Technologies will include:   
 
 
+ChangeSets:             
+                        
+2017.10.18:             
+-DataAccesLayer with UnitOfWork and Repository pattern implemented.                    
+-User and premission based role management implemented backend.                     
+
 
 Backend:    
             
@@ -20,3 +26,6 @@ Razor views to serve MVC controllers, modern javascript framework for SPA parts.
 Sass (css extension):  Its key features are the ability to use variables, nesting, mixins and loops within css.   
 Bootstrap: Reusable, robust and attractive styles for everyday styling.   
 Bower: Front-end package management tool.
+
+
+
