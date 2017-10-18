@@ -1,17 +1,16 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using SkeletaDAL.Model.Interfaces;
+using System.Collections.Generic;
 
 namespace SkeletaDAL.Model
 {
-	public class Customer : BaseEntity
+	public class Customer : AuditableEntity
 	{
-		[Required]
+		public int Id { get; set; }
 		public string FirstName { get; set; }
 		public string LastName { get; set; }
-
-		[EmailAddress]
 		public string Email { get; set; }
 
 		public IEnumerable<Order> Orders { get; set; }
+		public string Description { get; set; }
 	}
 }

@@ -1,9 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SkeletaDAL;
+using SkeletaDAL.ApplicationContext;
+using SkeletaDAL.Core.CoreModel;
 
 namespace SkeletaWeb
 {
@@ -21,8 +24,13 @@ namespace SkeletaWeb
 		{
 			services.AddMvc();
 
-			//Register IUnitOfWork
+			//add IUnitOfWork
 			services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+			//add identity
+			services.AddIdentity<ApplicationUser, ApplicationRole>()
+					.AddEntityFrameworkStores<ApplicationDbContext>()
+					.AddDefaultTokenProviders();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
