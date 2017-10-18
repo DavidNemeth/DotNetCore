@@ -1,6 +1,7 @@
 Skeleton application to serve as a starting point for building well structured, reusable and robust multilayer enterprise solutions.
 
-Technologies will include:    
+Technologies will include:   
+
 
 
 Backend:    
@@ -10,6 +11,7 @@ Inheritable base model to track changes.
 Hybrid SPA Applicaion making use of .net core MVC controllers Together with Restfull APIs to create responsive, modern, yet safe application layer.   
 Swagger for API documentation.    
 Automapper to "copy" data from entities to DTOs. Easy to use, fast and extensible.    
+        
         
              
 FrontEnd:   
