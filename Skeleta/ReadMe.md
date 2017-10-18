@@ -1,18 +1,15 @@
 Skeleton application to serve as a starting point for building well structured, reusable and robust multilayer enterprise solutions.
 
-Technologies will include:   
+ChangeSets:
 
 
-ChangeSets:             
-                        
-2017.10.18:             
--DataAccesLayer with UnitOfWork and Repository pattern implemented.                    
+2017.10.18:
+-DataAccesLayer with UnitOfWork and Repository pattern implemented.
 -User and premission based role management on backend implemented.
 
-                    
-    
-    
-    
+
+
+Technologies will include:   
 
 Backend:    
             
