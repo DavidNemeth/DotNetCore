@@ -16,11 +16,11 @@ namespace Blank.Controllers.Api
     public class TripsController : Controller
     {
         private ILogger<TripsController> _logger;
-        private IBlankRepository _repository;
+        private IBlankRepository repository;
 
         public TripsController(IBlankRepository repository, ILogger<TripsController> logger)
         {
-            _repository = repository;
+            this.repository = repository;
             _logger = logger;
         }
 
@@ -29,7 +29,7 @@ namespace Blank.Controllers.Api
         {
             try
             {
-                var results = _repository.GetTripsByUsername(User.Identity.Name);
+                var results = repository.GetTripsByWhatever(User.Identity.Name);
 
                 return Ok(Mapper.Map<IEnumerable<TripViewModel>>(results));
             }
@@ -51,9 +51,9 @@ namespace Blank.Controllers.Api
 
                 newTrip.UserName = User.Identity.Name;
 
-                _repository.AddTrip(newTrip);
+                repository.AddTrip(newTrip);
 
-                if (await _repository.SaveChangesAsync())
+                if (await repository.SaveChangesAsync())
                 {
                     return Created($"api/trips/{theTrip.Name}", Mapper.Map<TripViewModel>(newTrip));
                 }

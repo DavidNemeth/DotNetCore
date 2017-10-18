@@ -13,6 +13,7 @@ namespace Blank.DAL.Interfaces
         void AddStop(string tripName, string username, Stop newStop);
 
         Task<bool> SaveChangesAsync();
-        object GetTripsByUsername(string name);
+        List<Trip> GetTripsByWhatever<T>(T name);
+
     }
 }
