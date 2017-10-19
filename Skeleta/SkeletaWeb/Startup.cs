@@ -115,7 +115,7 @@ namespace SkeletaWeb
 					Type = "apiKey"
 				});
 
-				c.SwaggerDoc("v1", new Info { Title = "Quick_Application1 API", Version = "v1" });
+				c.SwaggerDoc("v1", new Info { Title = "Skeleta API", Version = "v1" });
 			});
 
 			Mapper.Initialize(cfg =>
