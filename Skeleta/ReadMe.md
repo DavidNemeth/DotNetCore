@@ -1,8 +1,17 @@
 Skeleton application to serve as a starting point for building well structured, reusable and robust multilayer enterprise solutions.
 
+ChangeSets:
+
+
+**2017.10.18:**  
+**-DataAccesLayer with UnitOfWork and Repository pattern implemented.**  
+**-User and premission based role management on backend implemented.(Able to create and manage roles, premissions etc so you can make it fit with different business requirements)**  
+  
+  
+  
+  
+  
 Technologies will include:   
-
-
 
 Backend:    
             
@@ -20,3 +29,6 @@ Razor views to serve MVC controllers, modern javascript framework for SPA parts.
 Sass (css extension):  Its key features are the ability to use variables, nesting, mixins and loops within css.   
 Bootstrap: Reusable, robust and attractive styles for everyday styling.   
 Bower: Front-end package management tool.
+
+
+
