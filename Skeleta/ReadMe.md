@@ -7,7 +7,7 @@ ChangeSets:
 **-DataAccesLayer with UnitOfWork and Repository pattern implemented.**  
 **-User and premission based role management on backend implemented.(Able to create and manage roles, premissions etc so you can make it fit with different business requirements)**  
   
-**2017.10.18:**  
+**2017.10.19:**  
 **-Setup Db creation and seeding**  
 **-Configured Email sender, and implemented helper class**  
 **-Added Swagger for api documentation**  
