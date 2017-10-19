@@ -1,18 +1,22 @@
 using AspNet.Security.OAuth.Validation;
 using AspNet.Security.OpenIdConnect.Primitives;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 using SkeletaDAL;
 using SkeletaDAL.ApplicationContext;
 using SkeletaDAL.Core.CoreModel;
 using SkeletaDAL.Core.Interfaces;
 using SkeletaWeb.Helpers;
 using Swashbuckle.AspNetCore.Swagger;
+using System.Net;
 
 namespace SkeletaWeb
 {
@@ -130,6 +134,31 @@ namespace SkeletaWeb
 			}
 
 			app.UseStaticFiles();
+			app.UseAuthentication();
+			EmailTemplates.Initialize(env);
+
+			app.UseExceptionHandler(builder =>
+			{
+				builder.Run(async context =>
+				{
+					context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+					context.Response.ContentType = MediaTypeNames.ApplicationJson;
+
+					var error = context.Features.Get<IExceptionHandlerFeature>();
+
+					if (error != null)
+					{
+						var errorMsg = JsonConvert.SerializeObject(new { error = error.Error.Message });
+						await context.Response.WriteAsync(errorMsg).ConfigureAwait(false);
+					}
+				});
+			});
+
+			app.UseSwagger();
+			app.UseSwaggerUI(c =>
+			{
+				c.SwaggerEndpoint("/swagger/v1/swagger.json", "Skeleta V1");
+			});
 
 			app.UseMvc(routes =>
 			{

@@ -1,5 +1,5 @@
 ﻿using SkeletaDAL.GenericRepository;
-using SkeletaDAL.Model;
+using SkeletaDAL.Models;
 
 namespace SkeletaDAL.Repositories.Customers
 {

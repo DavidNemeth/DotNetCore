@@ -36,7 +36,7 @@ namespace SkeletaDAL.ApplicationContext
 			builder.Entity<Customer>().Property(c => c.Email).HasMaxLength(100);
 			builder.Entity<Customer>().ToTable($"App{nameof(this.Customers)}");
 
-			builder.Entity<Order>().Property(o => o.Comments).HasMaxLength(500);
+			builder.Entity<Order>().Property(o => o.Description).HasMaxLength(500);
 			builder.Entity<Order>().ToTable($"App{nameof(this.Orders)}");
 		}
 
