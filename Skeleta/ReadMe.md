@@ -14,6 +14,8 @@ ChangeSets:
 **-Registered OpenId services with OpenIddict**  
 **-Configured Authentication with OAuth**  
 **-Configured Identity**  
+**-Seeded database, fixed setup config**  
+**-Added ViewModels and AutoMapper**  
 
 
   
