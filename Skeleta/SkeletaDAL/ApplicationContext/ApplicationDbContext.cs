@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SkeletaDAL.Core.CoreModel;
-using SkeletaDAL.Model;
-using SkeletaDAL.Model.Interfaces;
+using SkeletaDAL.Models;
+using SkeletaDAL.Models.Interfaces;
 using System;
 using System.Linq;
 using System.Threading;

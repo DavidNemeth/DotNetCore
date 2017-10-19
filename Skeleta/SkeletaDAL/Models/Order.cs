@@ -1,15 +1,14 @@
-﻿using SkeletaDAL.Core;
-using SkeletaDAL.Core.CoreModel;
-using SkeletaDAL.Model.Interfaces;
+﻿using SkeletaDAL.Core.CoreModel;
+using SkeletaDAL.Models.Interfaces;
 using System;
 
-namespace SkeletaDAL.Model
+namespace SkeletaDAL.Models
 {
 	public class Order : AuditableEntity
 	{
 		public int Id { get; set; }
-		public decimal Discount { get; set; }
-		public string Comments { get; set; }
+		public decimal Price { get; set; }
+		public string Description { get; set; }
 		public DateTime DateCreated { get; set; }
 		public DateTime DateModified { get; set; }
 

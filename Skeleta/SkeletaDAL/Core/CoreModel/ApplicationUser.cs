@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using SkeletaDAL.Model;
-using SkeletaDAL.Model.Interfaces;
+using SkeletaDAL.Models;
+using SkeletaDAL.Models.Interfaces;
 using System;
 using System.Collections.Generic;
 

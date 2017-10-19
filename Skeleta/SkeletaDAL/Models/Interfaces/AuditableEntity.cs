@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace SkeletaDAL.Model.Interfaces
+namespace SkeletaDAL.Models.Interfaces
 {
 	/*Use this class to Log entity Changes*/
 	public class AuditableEntity

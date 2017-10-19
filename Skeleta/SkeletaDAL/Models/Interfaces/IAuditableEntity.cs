@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SkeletaDAL.Model.Interfaces
+namespace SkeletaDAL.Models.Interfaces
 {
 	public interface IAuditableEntity
 	{

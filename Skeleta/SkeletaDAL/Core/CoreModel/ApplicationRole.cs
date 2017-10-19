@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using SkeletaDAL.Model.Interfaces;
+using SkeletaDAL.Models.Interfaces;
 using System;
 using System.Collections.Generic;
 
@@ -62,11 +62,11 @@ namespace SkeletaDAL.Core.CoreModel
 		/// <summary>
 		/// Navigation property for the users in this role.
 		/// </summary>
-		public virtual ICollection<IdentityUserRole<string>> Users { get; set; }
+		public virtual List<IdentityUserRole<string>> Users { get; set; }
 
 		/// <summary>
 		/// Navigation property for claims in this role.
 		/// </summary>
-		public virtual ICollection<IdentityRoleClaim<string>> Claims { get; set; }
+		public virtual List<IdentityRoleClaim<string>> Claims { get; set; }
 	}
 }

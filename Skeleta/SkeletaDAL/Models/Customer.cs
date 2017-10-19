@@ -1,7 +1,8 @@
-﻿using SkeletaDAL.Model.Interfaces;
+﻿using SkeletaDAL.Models.Interfaces;
 using System.Collections.Generic;
+using static SkeletaDAL.Core.Enums;
 
-namespace SkeletaDAL.Model
+namespace SkeletaDAL.Models
 {
 	public class Customer : AuditableEntity
 	{
@@ -9,8 +10,8 @@ namespace SkeletaDAL.Model
 		public string FirstName { get; set; }
 		public string LastName { get; set; }
 		public string Email { get; set; }
+		public Gender Gender { get; set; }
 
 		public IEnumerable<Order> Orders { get; set; }
-		public string Description { get; set; }
 	}
 }
