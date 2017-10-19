@@ -1,5 +1,6 @@
 using AspNet.Security.OAuth.Validation;
 using AspNet.Security.OpenIdConnect.Primitives;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
@@ -15,6 +16,7 @@ using SkeletaDAL.ApplicationContext;
 using SkeletaDAL.Core.CoreModel;
 using SkeletaDAL.Core.Interfaces;
 using SkeletaWeb.Helpers;
+using SkeletaWeb.ViewModels;
 using Swashbuckle.AspNetCore.Swagger;
 using System.Net;
 
@@ -115,6 +117,12 @@ namespace SkeletaWeb
 
 				c.SwaggerDoc("v1", new Info { Title = "Quick_Application1 API", Version = "v1" });
 			});
+
+			Mapper.Initialize(cfg =>
+			{
+				cfg.AddProfile<AutoMapperProfile>();
+			});
+
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
