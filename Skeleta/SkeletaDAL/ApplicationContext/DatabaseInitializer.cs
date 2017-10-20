@@ -58,6 +58,7 @@ namespace SkeletaDAL.ApplicationContext
 				{
 					FirstName = "David Nemeth",
 					LastName = "",
+					DateOfBirth = new DateTime(1990, 02, 26),
 					Email = "testC1@test.com",
 					Gender = Gender.Male,
 					CreatedDate = DateTime.Now,
@@ -70,6 +71,7 @@ namespace SkeletaDAL.ApplicationContext
 				{
 					FirstName = "Temp2 Name2",
 					LastName = "",
+					DateOfBirth = new DateTime(1995, 12, 30),
 					Email = "testC2@test.com",
 					Gender = Gender.Male,
 					CreatedDate = DateTime.Now,
@@ -82,6 +84,7 @@ namespace SkeletaDAL.ApplicationContext
 				{
 					FirstName = "Temp3 Name3",
 					LastName = "",
+					DateOfBirth = new DateTime(2001, 04, 15),
 					Email = "testC3@test.com",
 					Gender = Gender.Male,
 					CreatedDate = DateTime.Now,
@@ -94,6 +97,7 @@ namespace SkeletaDAL.ApplicationContext
 				{
 					FirstName = "Temp4 Name4",
 					LastName = "",
+					DateOfBirth = new DateTime(1960, 06, 12),
 					Email = "testC4@test.com",
 					Gender = Gender.Male,
 					CreatedDate = DateTime.Now,
