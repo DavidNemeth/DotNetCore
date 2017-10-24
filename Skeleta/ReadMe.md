@@ -16,6 +16,9 @@ ChangeSets:
 **-Configured Identity**  
 **-Seeded database, fixed setup config**  
 **-Added ViewModels and AutoMapper**  
+**2017.10.20:**  
+**-Model Update**  
+**-Added Sample API, paging, and sample services**
 
 
   
