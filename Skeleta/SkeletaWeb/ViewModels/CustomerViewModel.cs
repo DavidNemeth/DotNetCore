@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace SkeletaWeb.ViewModels
 {
-	public class CustomerViewModel
+	public class CustomerViewModel : ViewModelBase
 	{
 		public int Id { get; set; }
 		public string FirstName { get; set; }

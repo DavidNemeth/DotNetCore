@@ -10,12 +10,14 @@ using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using SkeletaDAL;
 using SkeletaDAL.ApplicationContext;
 using SkeletaDAL.Core.CoreModel;
 using SkeletaDAL.Core.Interfaces;
 using SkeletaWeb.Helpers;
+using SkeletaWeb.Services;
 using SkeletaWeb.ViewModels;
 using Swashbuckle.AspNetCore.Swagger;
 using System.Net;
@@ -48,6 +50,7 @@ namespace SkeletaWeb
 			// Repositories
 			services.AddScoped<IUnitOfWork, UnitOfWork>();
 			services.AddScoped<IAccountManager, AccountManager>();
+			services.AddScoped<IServices, AppServices>();
 
 			//add identity
 			services.AddIdentity<ApplicationUser, ApplicationRole>()
@@ -126,8 +129,13 @@ namespace SkeletaWeb
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+		public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
 		{
+			loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+			loggerFactory.AddDebug(LogLevel.Warning);
+
+			Utilities.ConfigureLogger(loggerFactory);
+
 			if (env.IsDevelopment())
 			{
 				app.UseDeveloperExceptionPage();

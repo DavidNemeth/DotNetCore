@@ -12,8 +12,8 @@ using System;
 namespace SkeletaWeb.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20171020081030_CustomerDoB")]
-    partial class CustomerDoB
+    [Migration("20171024083819_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

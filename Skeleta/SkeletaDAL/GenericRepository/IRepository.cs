@@ -26,6 +26,7 @@ namespace SkeletaDAL.GenericRepository
 		IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
 		TEntity GetSingleOrDefault(Expression<Func<TEntity, bool>> predicate);
 
+		bool Exists(Expression<Func<TEntity, bool>> predicate);
 		int Count();
 	}
 }

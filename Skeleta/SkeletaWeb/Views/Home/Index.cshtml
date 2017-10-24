@@ -1,33 +1,16 @@
+
 @{
 	ViewData["Title"] = "Home Page";
 }
 
-<skeleta-app>
-
-
-
-	<div id="pre-bootstrap">
-		<div class="messaging">
-			<h1>
-				App is Loading...
-			</h1>
-			<div class="cs-loader">
-				<div class="cs-loader-inner">
-					<label>&#9679</label>
-					<label>&#9679</label>
-					<label>&#9679</label>
-					<label>&#9679</label>
-					<label>&#9679</label>
-					<label>&#9679</label>
-				</div>
-			</div>
-			<p>
-				Skeleta System - <span class="appName" style="font-style:italic">skeleta</span><span class="appName">App</span> &copy;
-			</p>
-
-		</div>
+<div class="row">
+	<div class="col-md-12">
+		<h1>Test MVC view</h1>
+		<p>This is the static multi page test for views.</p>
+		<a asp-controller="Customers" asp-action="Index">Customers Page</a>
 	</div>
-</skeleta-app>
+
+</div>
 <script src="~/dist/vendor.js" asp-append-version="true"></script>
 @section scripts {
 	<script src="~/dist/main-client.js" asp-append-version="true"></script>

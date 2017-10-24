@@ -31,10 +31,10 @@ namespace SkeletaWeb.Controllers.APIs
 		{
 			try
 			{
-				var customers = await context.Customers.GetAllCustomerDataAsync();
-				var model = Mapper.Map<CustomerViewModel>(customers);
+				var model = await context.Customers.GetAllCustomerDataAsync();
+				var customers = Mapper.Map<List<CustomerViewModel>>(model);
 
-				return Ok(model);
+				return Ok(customers);
 			}
 			catch (Exception ex)
 			{
@@ -46,13 +46,12 @@ namespace SkeletaWeb.Controllers.APIs
 
 		// GET api/customers/page/10/10
 		[HttpGet("page/{skip}/{take}")]
-		[ProducesResponseType(typeof(List<CustomerViewModel>), 200)]
-		[ProducesResponseType(typeof(ApiResponse), 400)]
 		public async Task<ActionResult> GetCustomersPageAsync(int skip, int take)
 		{
 			try
 			{
 				var pagingResult = await context.Customers.GetCustomersPageAsync(skip, take);
+
 				Response.Headers.Add("X-InlineCount", pagingResult.TotalRecords.ToString());
 				return Ok(pagingResult.Records);
 			}

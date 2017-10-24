@@ -72,5 +72,10 @@ namespace SkeletaDAL.GenericRepository
 		{
 			return _entities.Count();
 		}
+
+		public bool Exists(Expression<Func<TEntity, bool>> predicate)
+		{
+			return _entities.Any(predicate);
+		}
 	}
 }

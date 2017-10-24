@@ -8,7 +8,6 @@ namespace SkeletaDAL
 		ICustomerRepository Customers { get; }
 		IOrderRepository Orders { get; }
 
-
 		int Complete();
 	}
 }
