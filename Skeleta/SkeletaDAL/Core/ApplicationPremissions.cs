@@ -8,7 +8,6 @@ namespace SkeletaDAL.Core
 	{
 		public static ReadOnlyCollection<ApplicationPermission> AllPermissions;
 
-
 		public const string UsersPermissionGroupName = "User Permissions";
 		public static ApplicationPermission ViewUsers = new ApplicationPermission("View Users", "users.view", UsersPermissionGroupName, "Permission to view other users account details");
 		public static ApplicationPermission ManageUsers = new ApplicationPermission("Manage Users", "users.manage", UsersPermissionGroupName, "Permission to create, delete and modify other users account details");
@@ -17,9 +16,6 @@ namespace SkeletaDAL.Core
 		public static ApplicationPermission ViewRoles = new ApplicationPermission("View Roles", "roles.view", RolesPermissionGroupName, "Permission to view available roles");
 		public static ApplicationPermission ManageRoles = new ApplicationPermission("Manage Roles", "roles.manage", RolesPermissionGroupName, "Permission to create, delete and modify roles");
 		public static ApplicationPermission AssignRoles = new ApplicationPermission("Assign Roles", "roles.assign", RolesPermissionGroupName, "Permission to assign roles to users");
-
-
-
 
 		static ApplicationPermissions()
 		{
@@ -36,12 +32,13 @@ namespace SkeletaDAL.Core
 		}
 
 		public static ApplicationPermission GetPermissionByName(string permissionName) => AllPermissions.FirstOrDefault(p => p.Name == permissionName);
+
 		public static ApplicationPermission GetPermissionByValue(string permissionValue) => AllPermissions.FirstOrDefault(p => p.Value == permissionValue);
 
 		public static string[] GetAllPermissionValues() => AllPermissions.Select(p => p.Value).ToArray();
+
 		public static string[] GetAdministrativePermissionValues() => new string[] { ManageUsers, ManageRoles, AssignRoles };
 	}
-
 
 	public class ApplicationPermission
 	{
@@ -56,13 +53,10 @@ namespace SkeletaDAL.Core
 			Description = description;
 		}
 
-
-
 		public string Name { get; set; }
 		public string Value { get; set; }
 		public string GroupName { get; set; }
 		public string Description { get; set; }
-
 
 		public override string ToString() => Value;
 

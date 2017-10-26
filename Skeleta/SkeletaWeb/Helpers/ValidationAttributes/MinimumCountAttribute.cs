@@ -16,7 +16,6 @@ namespace SkeletaWeb.Helpers.ValidationAttributes
 
 		public MinimumCountAttribute() : this(1)
 		{
-
 		}
 
 		public MinimumCountAttribute(int minCount, bool required = true, bool allowEmptyStringValues = false) : base(_defaultError)
@@ -31,20 +30,16 @@ namespace SkeletaWeb.Helpers.ValidationAttributes
 			if (value == null)
 				return !_required;
 
-
 			var stringList = value as ICollection<string>;
 			if (!_allowEmptyStringValues && stringList != null)
 				return stringList.Count(s => !string.IsNullOrWhiteSpace(s)) >= _minCount;
-
 
 			var list = value as ICollection;
 			if (list != null)
 				return list.Count >= _minCount;
 
-
 			return false;
 		}
-
 
 		public override string FormatErrorMessage(string name)
 		{

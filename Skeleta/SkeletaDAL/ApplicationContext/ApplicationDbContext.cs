@@ -16,8 +16,6 @@ namespace SkeletaDAL.ApplicationContext
 		public DbSet<Customer> Customers { get; set; }
 		public DbSet<Order> Orders { get; set; }
 
-
-
 		public ApplicationDbContext(DbContextOptions options) : base(options)
 		{ }
 
@@ -46,20 +44,17 @@ namespace SkeletaDAL.ApplicationContext
 			return base.SaveChanges();
 		}
 
-
 		public override int SaveChanges(bool acceptAllChangesOnSuccess)
 		{
 			UpdateAuditEntities();
 			return base.SaveChanges(acceptAllChangesOnSuccess);
 		}
 
-
 		public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken))
 		{
 			UpdateAuditEntities();
 			return base.SaveChangesAsync(cancellationToken);
 		}
-
 
 		public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default(CancellationToken))
 		{
@@ -71,7 +66,6 @@ namespace SkeletaDAL.ApplicationContext
 		{
 			var modifiedEntries = ChangeTracker.Entries()
 				.Where(x => x.Entity is IAuditableEntity && (x.State == EntityState.Added || x.State == EntityState.Modified));
-
 
 			foreach (var entry in modifiedEntries)
 			{

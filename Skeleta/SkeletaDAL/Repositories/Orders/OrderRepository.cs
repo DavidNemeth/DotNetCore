@@ -11,10 +11,9 @@ namespace SkeletaDAL.Repositories.Orders
 		{
 			get { return (ApplicationDbContext)_context; }
 		}
+
 		public OrderRepository(DbContext context) : base(context)
 		{
 		}
-
-
 	}
 }

@@ -13,7 +13,6 @@ namespace SkeletaWeb.Services
 
 		public int GetAverageCustomerAge()
 		{
-
 			var customers = context.Customers.GetAll();
 			var totalAge = 0;
 			var totalCustomers = context.Customers.Count();

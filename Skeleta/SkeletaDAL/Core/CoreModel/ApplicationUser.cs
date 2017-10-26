@@ -21,7 +21,6 @@ namespace SkeletaDAL.Core.CoreModel
 			}
 		}
 
-
 		public string JobTitle { get; set; }
 		public string FullName { get; set; }
 		public string Configuration { get; set; }
@@ -32,8 +31,6 @@ namespace SkeletaDAL.Core.CoreModel
 		public string UpdatedBy { get; set; }
 		public DateTime CreatedDate { get; set; }
 		public DateTime UpdatedDate { get; set; }
-
-
 
 		/// <summary>
 		/// Navigation property for the roles this user belongs to.

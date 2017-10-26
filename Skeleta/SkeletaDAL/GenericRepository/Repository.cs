@@ -21,11 +21,6 @@ namespace SkeletaDAL.GenericRepository
 		public virtual void Add(TEntity entity) => _entities.Add(entity);
 		public virtual void AddRange(IEnumerable<TEntity> entities) => _entities.AddRange(entities);
 
-		public virtual int Count() => _entities.Count();
-		public bool Exists(Expression<Func<TEntity, bool>> predicate) => _entities.Any(predicate);
-
-		public virtual IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate) => _entities.Where(predicate);
-
 		public virtual TEntity Get(int id) => _entities.Find(id);
 		public virtual IEnumerable<TEntity> GetAll() => _entities.ToList();
 		public virtual TEntity GetSingleOrDefault(Expression<Func<TEntity, bool>> predicate) => _entities.SingleOrDefault(predicate);
@@ -35,5 +30,9 @@ namespace SkeletaDAL.GenericRepository
 
 		public virtual void Update(TEntity entity) => _entities.Update(entity);
 		public virtual void UpdateRange(IEnumerable<TEntity> entities) => _entities.UpdateRange(entities);
+
+		public virtual int Count() => _entities.Count();
+		public bool Exists(Expression<Func<TEntity, bool>> predicate) => _entities.Any(predicate);
+		public virtual IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate) => _entities.Where(predicate);
 	}
 }

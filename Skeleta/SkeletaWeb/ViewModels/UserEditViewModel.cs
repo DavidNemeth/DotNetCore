@@ -8,6 +8,7 @@ namespace SkeletaWeb.ViewModels
 
 		[MinLength(6, ErrorMessage = "New Password must be at least 6 characters")]
 		public string NewPassword { get; set; }
+
 		new private bool IsLockedOut { get; } //Hide base member
 	}
 }

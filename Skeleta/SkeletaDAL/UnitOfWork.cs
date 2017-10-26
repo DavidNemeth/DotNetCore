@@ -26,6 +26,7 @@ namespace SkeletaDAL
 				return _customers;
 			}
 		}
+
 		public IOrderRepository Orders
 		{
 			get
@@ -36,7 +37,6 @@ namespace SkeletaDAL
 				return _orders;
 			}
 		}
-
 
 		public int Complete()
 		{

@@ -6,22 +6,19 @@ namespace SkeletaWeb.Helpers
 {
 	public static class EmailTemplates
 	{
-		static IHostingEnvironment _hostingEnvironment;
-		static string testEmailTemplate;
-		static string plainTextTestEmailTemplate;
-
+		private static IHostingEnvironment _hostingEnvironment;
+		private static string testEmailTemplate;
+		private static string plainTextTestEmailTemplate;
 
 		public static void Initialize(IHostingEnvironment hostingEnvironment)
 		{
 			_hostingEnvironment = hostingEnvironment;
 		}
 
-
 		public static string GetTestEmail(string recepientName, DateTime testDate)
 		{
 			if (testEmailTemplate == null)
 				testEmailTemplate = ReadPhysicalFile("Helpers/Templates/TestEmail.template");
-
 
 			var emailMessage = testEmailTemplate
 				.Replace("{user}", recepientName)
@@ -30,22 +27,16 @@ namespace SkeletaWeb.Helpers
 			return emailMessage;
 		}
 
-
-
 		public static string GetPlainTextTestEmail(DateTime date)
 		{
 			if (plainTextTestEmailTemplate == null)
 				plainTextTestEmailTemplate = ReadPhysicalFile("Helpers/Templates/PlainTextTestEmail.template");
-
 
 			var emailMessage = plainTextTestEmailTemplate
 				.Replace("{date}", date.ToString());
 
 			return emailMessage;
 		}
-
-
-
 
 		private static string ReadPhysicalFile(string path)
 		{

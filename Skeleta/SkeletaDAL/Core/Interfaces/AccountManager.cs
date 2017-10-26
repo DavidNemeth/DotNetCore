@@ -16,16 +16,12 @@ namespace SkeletaDAL.Core.Interfaces
 		private readonly UserManager<ApplicationUser> _userManager;
 		private readonly RoleManager<ApplicationRole> _roleManager;
 
-
 		public AccountManager(ApplicationDbContext context, UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager)
 		{
 			_context = context;
 			_userManager = userManager;
 			_roleManager = roleManager;
 		}
-
-
-
 
 		public async Task<ApplicationUser> GetUserByIdAsync(string userId)
 		{
@@ -47,7 +43,6 @@ namespace SkeletaDAL.Core.Interfaces
 			return await _userManager.GetRolesAsync(user);
 		}
 
-
 		public async Task<Tuple<ApplicationUser, string[]>> GetUserAndRolesAsync(string userId)
 		{
 			var user = await _context.Users
@@ -67,7 +62,6 @@ namespace SkeletaDAL.Core.Interfaces
 
 			return Tuple.Create(user, roles);
 		}
-
 
 		public async Task<List<Tuple<ApplicationUser, string[]>>> GetUsersAndRolesAsync(int page, int pageSize)
 		{
@@ -94,13 +88,11 @@ namespace SkeletaDAL.Core.Interfaces
 				.ToList();
 		}
 
-
 		public async Task<Tuple<bool, string[]>> CreateUserAsync(ApplicationUser user, IEnumerable<string> roles, string password)
 		{
 			var result = await _userManager.CreateAsync(user, password);
 			if (!result.Succeeded)
 				return Tuple.Create(false, result.Errors.Select(e => e.Description).ToArray());
-
 
 			user = await _userManager.FindByNameAsync(user.UserName);
 
@@ -123,19 +115,16 @@ namespace SkeletaDAL.Core.Interfaces
 			return Tuple.Create(true, new string[] { });
 		}
 
-
 		public async Task<Tuple<bool, string[]>> UpdateUserAsync(ApplicationUser user)
 		{
 			return await UpdateUserAsync(user, null);
 		}
-
 
 		public async Task<Tuple<bool, string[]>> UpdateUserAsync(ApplicationUser user, IEnumerable<string> roles)
 		{
 			var result = await _userManager.UpdateAsync(user);
 			if (!result.Succeeded)
 				return Tuple.Create(false, result.Errors.Select(e => e.Description).ToArray());
-
 
 			if (roles != null)
 			{
@@ -161,7 +150,6 @@ namespace SkeletaDAL.Core.Interfaces
 
 			return Tuple.Create(true, new string[] { });
 		}
-
 
 		public async Task<Tuple<bool, string[]>> ResetPasswordAsync(ApplicationUser user, string newPassword)
 		{
@@ -196,7 +184,6 @@ namespace SkeletaDAL.Core.Interfaces
 			return true;
 		}
 
-
 		public async Task<bool> TestCanDeleteUserAsync(string userId)
 		{
 			if (await _context.Orders.Where(o => o.AppUserId == userId).AnyAsync())
@@ -206,7 +193,6 @@ namespace SkeletaDAL.Core.Interfaces
 
 			return true;
 		}
-
 
 		public async Task<Tuple<bool, string[]>> DeleteUserAsync(string userId)
 		{
@@ -218,29 +204,21 @@ namespace SkeletaDAL.Core.Interfaces
 			return Tuple.Create(true, new string[] { });
 		}
 
-
 		public async Task<Tuple<bool, string[]>> DeleteUserAsync(ApplicationUser user)
 		{
 			var result = await _userManager.DeleteAsync(user);
 			return Tuple.Create(result.Succeeded, result.Errors.Select(e => e.Description).ToArray());
 		}
 
-
-
-
-
-
 		public async Task<ApplicationRole> GetRoleByIdAsync(string roleId)
 		{
 			return await _roleManager.FindByIdAsync(roleId);
 		}
 
-
 		public async Task<ApplicationRole> GetRoleByNameAsync(string roleName)
 		{
 			return await _roleManager.FindByNameAsync(roleName);
 		}
-
 
 		public async Task<ApplicationRole> GetRoleLoadRelatedAsync(string roleName)
 		{
@@ -252,7 +230,6 @@ namespace SkeletaDAL.Core.Interfaces
 
 			return role;
 		}
-
 
 		public async Task<List<ApplicationRole>> GetRolesLoadRelatedAsync(int page, int pageSize)
 		{
@@ -272,7 +249,6 @@ namespace SkeletaDAL.Core.Interfaces
 			return roles;
 		}
 
-
 		public async Task<Tuple<bool, string[]>> CreateRoleAsync(ApplicationRole role, IEnumerable<string> claims)
 		{
 			if (claims == null)
@@ -282,11 +258,9 @@ namespace SkeletaDAL.Core.Interfaces
 			if (invalidClaims.Any())
 				return Tuple.Create(false, new string[] { "The following claim types are invalid: " + string.Join(", ", invalidClaims) });
 
-
 			var result = await _roleManager.CreateAsync(role);
 			if (!result.Succeeded)
 				return Tuple.Create(false, result.Errors.Select(e => e.Description).ToArray());
-
 
 			role = await _roleManager.FindByNameAsync(role.Name);
 
@@ -313,11 +287,9 @@ namespace SkeletaDAL.Core.Interfaces
 					return Tuple.Create(false, new string[] { "The following claim types are invalid: " + string.Join(", ", invalidClaims) });
 			}
 
-
 			var result = await _roleManager.UpdateAsync(role);
 			if (!result.Succeeded)
 				return Tuple.Create(false, result.Errors.Select(e => e.Description).ToArray());
-
 
 			if (claims != null)
 			{
@@ -351,12 +323,10 @@ namespace SkeletaDAL.Core.Interfaces
 			return Tuple.Create(true, new string[] { });
 		}
 
-
 		public async Task<bool> TestCanDeleteRoleAsync(string roleId)
 		{
 			return !await _context.UserRoles.Where(r => r.RoleId == roleId).AnyAsync();
 		}
-
 
 		public async Task<Tuple<bool, string[]>> DeleteRoleAsync(string roleName)
 		{
@@ -367,7 +337,6 @@ namespace SkeletaDAL.Core.Interfaces
 
 			return Tuple.Create(true, new string[] { });
 		}
-
 
 		public async Task<Tuple<bool, string[]>> DeleteRoleAsync(ApplicationRole role)
 		{

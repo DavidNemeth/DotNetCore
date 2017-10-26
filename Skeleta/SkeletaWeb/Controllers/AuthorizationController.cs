@@ -17,9 +17,9 @@ namespace SkeletaWeb.Controllers
 {
 	public class AuthorizationController : Controller
 	{
-		readonly IOptions<IdentityOptions> identityOptions;
-		readonly SignInManager<ApplicationUser> signInManager;
-		readonly UserManager<ApplicationUser> userManager;
+		private readonly IOptions<IdentityOptions> identityOptions;
+		private readonly SignInManager<ApplicationUser> signInManager;
+		private readonly UserManager<ApplicationUser> userManager;
 
 		public AuthorizationController(
 			IOptions<IdentityOptions> identityOptions,
@@ -64,7 +64,6 @@ namespace SkeletaWeb.Controllers
 					});
 				}
 
-
 				// Validate the username/password parameters and ensure the account is not locked out.
 				var result = await signInManager.CheckPasswordSignInAsync(user, request.Password, true);
 
@@ -106,8 +105,6 @@ namespace SkeletaWeb.Controllers
 						ErrorDescription = "Please check that your email and password is correct"
 					});
 				}
-
-
 
 				// Create a new authentication ticket.
 				var ticket = await CreateTicketAsync(request, user);
@@ -165,7 +162,6 @@ namespace SkeletaWeb.Controllers
 			// Create a new authentication ticket holding the user identity.
 			var ticket = new AuthenticationTicket(principal, new AuthenticationProperties(), OpenIdConnectServerDefaults.AuthenticationScheme);
 
-
 			//if (!request.IsRefreshTokenGrantType())
 			//{
 			// Set the list of scopes granted to the client application.
@@ -194,7 +190,6 @@ namespace SkeletaWeb.Controllers
 				if (claim.Type == identityOptions.Value.ClaimsIdentity.SecurityStampClaimType)
 					continue;
 
-
 				var destinations = new List<string> { OpenIdConnectConstants.Destinations.AccessToken };
 
 				// Only add the iterated claim to the id_token if the corresponding scope was granted to the client application.
@@ -207,13 +202,10 @@ namespace SkeletaWeb.Controllers
 					destinations.Add(OpenIdConnectConstants.Destinations.IdentityToken);
 				}
 
-
 				claim.SetDestinations(destinations);
 			}
 
-
 			var identity = principal.Identity as ClaimsIdentity;
-
 
 			if (ticket.HasScope(OpenIdConnectConstants.Scopes.Profile))
 			{
@@ -239,9 +231,7 @@ namespace SkeletaWeb.Controllers
 					identity.AddClaim(CustomClaimTypes.Phone, user.PhoneNumber, OpenIdConnectConstants.Destinations.IdentityToken);
 			}
 
-
 			return ticket;
 		}
 	}
 }
-

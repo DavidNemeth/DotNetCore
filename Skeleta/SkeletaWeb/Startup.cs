@@ -55,7 +55,6 @@ namespace SkeletaWeb
 			//add identity
 			services.AddIdentity<ApplicationUser, ApplicationRole>(c =>
 			{
-
 			})
 					.AddEntityFrameworkStores<ApplicationDbContext>()
 					.AddDefaultTokenProviders();
@@ -127,7 +126,6 @@ namespace SkeletaWeb
 			{
 				cfg.AddProfile<AutoMapperProfile>();
 			});
-
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

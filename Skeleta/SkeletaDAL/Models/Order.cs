@@ -12,7 +12,6 @@ namespace SkeletaDAL.Models
 		public DateTime DateCreated { get; set; }
 		public DateTime DateModified { get; set; }
 
-
 		public string AppUserId { get; set; }
 		public ApplicationUser AppUser { get; set; }
 

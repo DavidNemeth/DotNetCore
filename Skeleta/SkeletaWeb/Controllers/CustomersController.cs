@@ -14,8 +14,9 @@ namespace SkeletaWeb.Controllers
 {
 	public class CustomersController : Controller
 	{
-		readonly IUnitOfWork context;
-		readonly IServices services;
+		private readonly IUnitOfWork context;
+		private readonly IServices services;
+
 		public CustomersController(IUnitOfWork context, IServices services)
 		{
 			this.context = context;

@@ -9,14 +9,12 @@ namespace SkeletaWeb.Helpers
 {
 	public static class Utilities
 	{
-		static ILoggerFactory _loggerFactory;
-
+		private static ILoggerFactory _loggerFactory;
 
 		public static void ConfigureLogger(ILoggerFactory loggerFactory)
 		{
 			_loggerFactory = loggerFactory;
 		}
-
 
 		public static ILogger CreateLogger<T>()
 		{
@@ -28,7 +26,6 @@ namespace SkeletaWeb.Helpers
 
 			return _loggerFactory.CreateLogger<T>();
 		}
-
 
 		public static void QuickLog(string text, string filename)
 		{
@@ -43,14 +40,10 @@ namespace SkeletaWeb.Helpers
 			}
 		}
 
-
-
 		public static string GetUserId(ClaimsPrincipal user)
 		{
 			return user.FindFirst(OpenIdConnectConstants.Claims.Subject)?.Value?.Trim();
 		}
-
-
 
 		public static string[] GetRoles(ClaimsPrincipal identity)
 		{

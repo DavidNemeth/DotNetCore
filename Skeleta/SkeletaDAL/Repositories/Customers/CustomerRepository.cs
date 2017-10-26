@@ -12,6 +12,7 @@ namespace SkeletaDAL.Repositories.Customers
 	public class CustomerRepository : Repository<Customer>, ICustomerRepository
 	{
 		private ApplicationDbContext appContext => (ApplicationDbContext)_context;
+
 		public CustomerRepository(DbContext context) : base(context)
 		{
 		}

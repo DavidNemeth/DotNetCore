@@ -12,7 +12,6 @@ namespace SkeletaWeb.Helpers
 	{
 		internal static SmtpConfig Configuration;
 
-
 		public static async Task<(bool success, string errorMsg)> SendEmailAsync(string recepientName, string recepientEmail,
 			string subject, string body, SmtpConfig config = null, bool isHtml = true)
 		{
@@ -21,8 +20,6 @@ namespace SkeletaWeb.Helpers
 
 			return await EmailSender.SendEmailAsync(from, new MailboxAddress[] { to }, subject, body, config, isHtml);
 		}
-
-
 
 		public static async Task<(bool success, string errorMsg)> SendEmailAsync(string senderName, string senderEmail,
 			string recepientName, string recepientEmail,
@@ -33,8 +30,6 @@ namespace SkeletaWeb.Helpers
 
 			return await EmailSender.SendEmailAsync(from, new MailboxAddress[] { to }, subject, body, config, isHtml);
 		}
-
-
 
 		public static async Task<(bool success, string errorMsg)> SendEmailAsync(MailboxAddress sender, MailboxAddress[] recepients, string subject, string body, SmtpConfig config = null, bool isHtml = true)
 		{
@@ -74,8 +69,6 @@ namespace SkeletaWeb.Helpers
 			}
 		}
 	}
-
-
 
 	public class SmtpConfig
 	{

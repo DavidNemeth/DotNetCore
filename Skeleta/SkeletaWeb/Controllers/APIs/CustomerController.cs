@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace SkeletaWeb.Controllers.APIs
 {
-
 	[Route("api/[controller]")]
 	public class CustomerController : Controller
 	{

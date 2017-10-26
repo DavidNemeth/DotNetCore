@@ -15,7 +15,6 @@ namespace SkeletaDAL.Core.CoreModel
 		/// </remarks>
 		public ApplicationRole()
 		{
-
 		}
 
 		/// <summary>
@@ -27,9 +26,7 @@ namespace SkeletaDAL.Core.CoreModel
 		/// </remarks>
 		public ApplicationRole(string roleName) : base(roleName)
 		{
-
 		}
-
 
 		/// <summary>
 		/// Initializes a new instance of <see cref="ApplicationRole"/>.
@@ -44,20 +41,15 @@ namespace SkeletaDAL.Core.CoreModel
 			Description = description;
 		}
 
-
-
-
-
 		/// <summary>
 		/// Gets or sets the description for this role.
 		/// </summary>
 		public string Description { get; set; }
+
 		public string CreatedBy { get; set; }
 		public string UpdatedBy { get; set; }
 		public DateTime CreatedDate { get; set; }
 		public DateTime UpdatedDate { get; set; }
-
-
 
 		/// <summary>
 		/// Navigation property for the users in this role.

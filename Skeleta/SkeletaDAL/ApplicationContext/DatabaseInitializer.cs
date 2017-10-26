@@ -48,8 +48,6 @@ namespace SkeletaDAL.ApplicationContext
 				_logger.LogInformation("Inbuilt account generation completed");
 			}
 
-
-
 			if (!await _context.Customers.AnyAsync())
 			{
 				_logger.LogInformation("Seeding initial data");
@@ -114,7 +112,6 @@ namespace SkeletaDAL.ApplicationContext
 					Description = "ugly tshirt from china",
 					CreatedDate = DateTime.Now,
 					UpdatedDate = DateTime.Now
-
 				};
 
 				var testOrder2 = new Order
@@ -126,7 +123,6 @@ namespace SkeletaDAL.ApplicationContext
 					CreatedDate = DateTime.Now,
 					UpdatedDate = DateTime.Now
 				};
-
 
 				_context.Customers.Add(testCustomer1);
 				_context.Customers.Add(testCustomer2);
@@ -141,8 +137,6 @@ namespace SkeletaDAL.ApplicationContext
 				_logger.LogInformation("Seeding initial data completed");
 			}
 		}
-
-
 
 		private async Task ensureRoleAsync(string roleName, string description, string[] claims)
 		{
@@ -173,7 +167,6 @@ namespace SkeletaDAL.ApplicationContext
 
 			if (!result.Item1)
 				throw new Exception($"Seeding \"{userName}\" user failed. Errors: {string.Join(Environment.NewLine, result.Item2)}");
-
 
 			return applicationUser;
 		}
