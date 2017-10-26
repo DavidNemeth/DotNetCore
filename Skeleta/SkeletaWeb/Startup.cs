@@ -53,7 +53,10 @@ namespace SkeletaWeb
 			services.AddScoped<IServices, AppServices>();
 
 			//add identity
-			services.AddIdentity<ApplicationUser, ApplicationRole>()
+			services.AddIdentity<ApplicationUser, ApplicationRole>(c =>
+			{
+
+			})
 					.AddEntityFrameworkStores<ApplicationDbContext>()
 					.AddDefaultTokenProviders();
 
@@ -62,7 +65,6 @@ namespace SkeletaWeb
 			{
 				// User settings
 				options.User.RequireUniqueEmail = true;
-
 				//    //// Password settings
 				//    //options.Password.RequireDigit = true;
 				//    //options.Password.RequiredLength = 8;

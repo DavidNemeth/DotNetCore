@@ -11,21 +11,15 @@ namespace SkeletaDAL.Repositories.Customers
 {
 	public class CustomerRepository : Repository<Customer>, ICustomerRepository
 	{
-		private ApplicationDbContext appContext
-		{
-			get { return (ApplicationDbContext)_context; }
-		}
+		private ApplicationDbContext appContext => (ApplicationDbContext)_context;
 		public CustomerRepository(DbContext context) : base(context)
 		{
 		}
 
-		public async Task<List<Customer>> GetAllCustomerDataAsync()
-		{
-			return await appContext.Customers
+		public async Task<List<Customer>> GetAllCustomerDataAsync() => await appContext.Customers
 				.OrderBy(c => c.LastName)
 				.Include(c => c.Orders).ThenInclude(c => c.AppUser)
 				.ToListAsync();
-		}
 
 		public async Task<PagingResult<Customer>> GetCustomersPageAsync(int skip, int take)
 		{

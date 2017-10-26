@@ -16,7 +16,6 @@ namespace SkeletaDAL
 			_context = context;
 		}
 
-
 		public ICustomerRepository Customers
 		{
 			get

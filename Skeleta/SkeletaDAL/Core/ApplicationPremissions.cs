@@ -27,7 +27,6 @@ namespace SkeletaDAL.Core
 			{
 				ViewUsers,
 				ManageUsers,
-
 				ViewRoles,
 				ManageRoles,
 				AssignRoles
@@ -36,29 +35,12 @@ namespace SkeletaDAL.Core
 			AllPermissions = allPermissions.AsReadOnly();
 		}
 
-		public static ApplicationPermission GetPermissionByName(string permissionName)
-		{
-			return AllPermissions.FirstOrDefault(p => p.Name == permissionName);
-		}
+		public static ApplicationPermission GetPermissionByName(string permissionName) => AllPermissions.FirstOrDefault(p => p.Name == permissionName);
+		public static ApplicationPermission GetPermissionByValue(string permissionValue) => AllPermissions.FirstOrDefault(p => p.Value == permissionValue);
 
-		public static ApplicationPermission GetPermissionByValue(string permissionValue)
-		{
-			return AllPermissions.FirstOrDefault(p => p.Value == permissionValue);
-		}
-
-		public static string[] GetAllPermissionValues()
-		{
-			return AllPermissions.Select(p => p.Value).ToArray();
-		}
-
-		public static string[] GetAdministrativePermissionValues()
-		{
-			return new string[] { ManageUsers, ManageRoles, AssignRoles };
-		}
+		public static string[] GetAllPermissionValues() => AllPermissions.Select(p => p.Value).ToArray();
+		public static string[] GetAdministrativePermissionValues() => new string[] { ManageUsers, ManageRoles, AssignRoles };
 	}
-
-
-
 
 
 	public class ApplicationPermission
@@ -82,15 +64,8 @@ namespace SkeletaDAL.Core
 		public string Description { get; set; }
 
 
-		public override string ToString()
-		{
-			return Value;
-		}
+		public override string ToString() => Value;
 
-
-		public static implicit operator string(ApplicationPermission permission)
-		{
-			return permission.Value;
-		}
+		public static implicit operator string(ApplicationPermission permission) => permission.Value;
 	}
 }

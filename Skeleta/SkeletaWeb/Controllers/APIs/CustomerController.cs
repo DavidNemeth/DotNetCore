@@ -31,15 +31,12 @@ namespace SkeletaWeb.Controllers.APIs
 		{
 			try
 			{
-				var model = await context.Customers.GetAllCustomerDataAsync();
-				var customers = Mapper.Map<List<CustomerViewModel>>(model);
-
+				var customers = Mapper.Map<List<CustomerViewModel>>(await context.Customers.GetAllCustomerDataAsync());
 				return Ok(customers);
 			}
 			catch (Exception ex)
 			{
 				logger.LogError($"failed to get all customers: {ex}");
-
 				return BadRequest("Could not connect to Database");
 			}
 		}

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SkeletaDAL;
 using SkeletaDAL.Models;
+using SkeletaWeb.Services;
 using SkeletaWeb.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -13,15 +14,15 @@ namespace SkeletaWeb.Controllers
 {
 	public class CustomersController : Controller
 	{
-		private readonly IUnitOfWork context;
-
-		public CustomersController(IUnitOfWork context)
+		readonly IUnitOfWork context;
+		readonly IServices services;
+		public CustomersController(IUnitOfWork context, IServices services)
 		{
 			this.context = context;
+			this.services = services;
 		}
 
-		// GET: Customers
-		[Authorize]
+		// GET: Customers		
 		public async Task<IActionResult> Index()
 		{
 			var model = await context.Customers.GetAllCustomerDataAsync();
@@ -75,6 +76,7 @@ namespace SkeletaWeb.Controllers
 		}
 
 		// GET: Customers/Edit/5
+		[Authorize]
 		public IActionResult Edit(int? id)
 		{
 			if (id == null)
@@ -150,7 +152,7 @@ namespace SkeletaWeb.Controllers
 		}
 
 		// POST: Customers/Delete/5
-		[HttpPost, ActionName("Delete")]
+		[HttpPost, ActionName(nameof(Delete))]
 		[ValidateAntiForgeryToken]
 		public IActionResult DeleteConfirmed(int id)
 		{
