@@ -17,9 +17,9 @@ namespace SkeletaWeb.Controllers
 {
 	public class AuthorizationController : Controller
 	{
-		private IOptions<IdentityOptions> identityOptions;
-		private SignInManager<ApplicationUser> signInManager;
-		private UserManager<ApplicationUser> userManager;
+		readonly IOptions<IdentityOptions> identityOptions;
+		readonly SignInManager<ApplicationUser> signInManager;
+		readonly UserManager<ApplicationUser> userManager;
 
 		public AuthorizationController(
 			IOptions<IdentityOptions> identityOptions,
@@ -34,15 +34,13 @@ namespace SkeletaWeb.Controllers
 		public IActionResult Login()
 		{
 			if (User.Identity.IsAuthenticated)
-			{
 				return RedirectToAction("Index", "Customers");
-			}
 
 			return View();
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Login(OpenIdConnectRequest request)
+		public async Task<IActionResult> LoginAsync(OpenIdConnectRequest request)
 		{
 			if (request.IsPasswordGrantType())
 			{

@@ -22,32 +22,25 @@ namespace SkeletaWeb.Controllers
 			this.services = services;
 		}
 
-		// GET: Customers		
-		public async Task<IActionResult> Index()
+		// GET: Customers
+		public async Task<IActionResult> IndexAsync()
 		{
-			var model = await context.Customers.GetAllCustomerDataAsync();
-			var customers = Mapper.Map<List<CustomerViewModel>>(model);
-
-			return View(customers);
+			var customersVM = Mapper.Map<List<CustomerViewModel>>((await context.Customers.GetAllCustomerDataAsync()));
+			return View(customersVM);
 		}
 
 		// GET: Customers/Details/5
 		public IActionResult Details(int? id)
 		{
 			if (id == null)
-			{
 				return NotFound();
-			}
 
-			var model = context.Customers.GetSingleOrDefault(c => c.Id == id);
-			var customer = Mapper.Map<CustomerViewModel>(model);
+			var customerVM = Mapper.Map<CustomerViewModel>(context.Customers.GetSingleOrDefault(c => c.Id == id));
 
-			if (customer == null)
-			{
+			if (customerVM == null)
 				return NotFound();
-			}
 
-			return View(customer);
+			return View(customerVM);
 		}
 
 		// GET: Customers/Create
@@ -60,19 +53,19 @@ namespace SkeletaWeb.Controllers
 		// POST: Customers/Create
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public IActionResult Create([Bind("Id,FirstName,LastName,Email")] CustomerViewModel model)
+		public IActionResult Create([Bind("Id,FirstName,LastName,Email")] CustomerViewModel customerVM)
 		{
 			if (ModelState.IsValid)
 			{
-				var customer = Mapper.Map<Customer>(model);
-				customer.CreatedBy = model.FirstName + model.LastName;
+				var customer = Mapper.Map<Customer>(customerVM);
+				customer.CreatedBy = customerVM.FirstName + customerVM.LastName;
 				customer.CreatedDate = DateTime.Now;
 				context.Customers.Add(customer);
 				context.Complete();
 
-				return RedirectToAction(nameof(Index));
+				return RedirectToAction(nameof(IndexAsync));
 			}
-			return View(model);
+			return View(customerVM);
 		}
 
 		// GET: Customers/Edit/5
@@ -80,32 +73,25 @@ namespace SkeletaWeb.Controllers
 		public IActionResult Edit(int? id)
 		{
 			if (id == null)
-			{
 				return NotFound();
-			}
 
-			var model = context.Customers.GetSingleOrDefault(c => c.Id == id);
-			var customer = Mapper.Map<CustomerViewModel>(model);
+			var customerVM = Mapper.Map<CustomerViewModel>(context.Customers.GetSingleOrDefault(c => c.Id == id));
 
-
-			if (customer == null)
-			{
+			if (customerVM == null)
 				return NotFound();
-			}
-			return View(customer);
+
+			return View(customerVM);
 		}
 
 		// POST: Customers/Edit/5
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public IActionResult Edit(int id, [Bind("Id,FirstName,LastName,Email,CreatedDate,CreatedBy")] CustomerViewModel model)
+		public IActionResult Edit(int id, [Bind("Id,FirstName,LastName,Email,CreatedDate,CreatedBy")] CustomerViewModel customerVM)
 		{
-			if (id != model.Id)
-			{
+			if (id != customerVM.Id)
 				return NotFound();
-			}
 
-			var customer = Mapper.Map<Customer>(model);
+			var customer = Mapper.Map<Customer>(customerVM);
 
 			if (ModelState.IsValid)
 			{
@@ -119,36 +105,28 @@ namespace SkeletaWeb.Controllers
 				}
 				catch (DbUpdateConcurrencyException)
 				{
-					if (!CustomerExists(model.Id))
-					{
+					if (!CustomerExists(customerVM.Id))
 						return NotFound();
-					}
 					else
-					{
 						throw;
-					}
 				}
-				return RedirectToAction(nameof(Index));
+				return RedirectToAction(nameof(IndexAsync));
 			}
-			return View(customer);
+			return View(customerVM);
 		}
 
 		// GET: Customers/Delete/5
 		public IActionResult Delete(int? id)
 		{
 			if (id == null)
-			{
 				return NotFound();
-			}
 
-			var model = context.Customers.GetSingleOrDefault(c => c.Id == id);
-			if (model == null)
-			{
+			var customer = context.Customers.GetSingleOrDefault(c => c.Id == id);
+			if (customer == null)
 				return NotFound();
-			}
-			var customer = Mapper.Map<CustomerViewModel>(model);
 
-			return View(customer);
+			var customerVM = Mapper.Map<CustomerViewModel>(customer);
+			return View(customerVM);
 		}
 
 		// POST: Customers/Delete/5
@@ -159,12 +137,9 @@ namespace SkeletaWeb.Controllers
 			var customer = context.Customers.GetSingleOrDefault(m => m.Id == id);
 			context.Customers.Remove(customer);
 			context.Complete();
-			return RedirectToAction(nameof(Index));
+			return RedirectToAction(nameof(IndexAsync));
 		}
 
-		private bool CustomerExists(int id)
-		{
-			return context.Customers.Exists(c => c.Id == id);
-		}
+		private bool CustomerExists(int id) => context.Customers.Exists(c => c.Id == id);
 	}
 }

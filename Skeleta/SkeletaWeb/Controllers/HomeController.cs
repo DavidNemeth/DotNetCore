@@ -17,11 +17,9 @@ namespace SkeletaWeb.Controllers
 			this.context = context;
 		}
 
-		public async Task<IActionResult> Index()
+		public async Task<IActionResult> IndexAsync()
 		{
-			var model = await context.Customers.GetAllCustomerDataAsync();
-			var customers = Mapper.Map<List<CustomerViewModel>>(model);
-
+			var customers = Mapper.Map<List<CustomerViewModel>>((await context.Customers.GetAllCustomerDataAsync()));
 			return View(customers);
 		}
 

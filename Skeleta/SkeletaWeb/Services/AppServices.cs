@@ -25,6 +25,5 @@ namespace SkeletaWeb.Services
 
 			return totalAge / totalCustomers;
 		}
-
 	}
 }
