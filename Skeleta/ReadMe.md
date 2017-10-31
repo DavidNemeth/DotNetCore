@@ -4,8 +4,8 @@ ChangeSets:
 
 
 **2017.10.31:**  
-**-Updated db with products**
-**-Sample MVC views and angular view**
+**-Updated db with products**  
+**-Sample MVC views and angular view**  
 **-Test APIs and Controllers**
   
 **2017.10.19:**  
