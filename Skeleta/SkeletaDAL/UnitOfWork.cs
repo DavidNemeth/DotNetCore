@@ -1,6 +1,7 @@
 ﻿using SkeletaDAL.ApplicationContext;
 using SkeletaDAL.Repositories.Customers;
 using SkeletaDAL.Repositories.Orders;
+using SkeletaDAL.Repositories.Products;
 
 namespace SkeletaDAL
 {
@@ -8,12 +9,24 @@ namespace SkeletaDAL
 	{
 		private ApplicationDbContext _context;
 
+		private IProductRepository _products;
 		private ICustomerRepository _customers;
 		private IOrderRepository _orders;
 
 		public UnitOfWork(ApplicationDbContext context)
 		{
 			_context = context;
+		}
+
+		public IProductRepository Products
+		{
+			get
+			{
+				if (_products == null)
+					_products = new ProductRepository(_context);
+
+				return _products;
+			}
 		}
 
 		public ICustomerRepository Customers

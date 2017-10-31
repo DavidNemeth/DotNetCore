@@ -1,5 +1,6 @@
 ﻿using SkeletaDAL.Repositories.Customers;
 using SkeletaDAL.Repositories.Orders;
+using SkeletaDAL.Repositories.Products;
 
 namespace SkeletaDAL
 {
@@ -7,6 +8,7 @@ namespace SkeletaDAL
 	{
 		ICustomerRepository Customers { get; }
 		IOrderRepository Orders { get; }
+		IProductRepository Products { get; }
 
 		int Complete();
 	}

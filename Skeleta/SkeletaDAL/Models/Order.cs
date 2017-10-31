@@ -1,6 +1,7 @@
 ﻿using SkeletaDAL.Core.CoreModel;
 using SkeletaDAL.Models.Interfaces;
 using System;
+using System.Collections.Generic;
 
 namespace SkeletaDAL.Models
 {
@@ -17,5 +18,7 @@ namespace SkeletaDAL.Models
 
 		public int CustomerId { get; set; }
 		public Customer Customer { get; set; }
+
+		public IEnumerable<Product> Products { get; set; }
 	}
 }

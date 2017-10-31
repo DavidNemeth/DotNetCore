@@ -2,13 +2,8 @@
 	ViewData["Title"] = "Home Page";
 }
 
-<div class="row">
-	<div class="col-md-12">
-		<h1>Test MVC view</h1>
-		<p>This is the static multi page test for views.</p>
-		<a asp-controller="Customers" asp-action="Index">Customers Page</a>
-	</div>
-</div>
+<app asp-prerender-module="ClientApp/dist/main-server">Loading...</app>
+
 <script src="~/dist/vendor.js" asp-append-version="true"></script>
 @section scripts {
 	<script src="~/dist/main-client.js" asp-append-version="true"></script>

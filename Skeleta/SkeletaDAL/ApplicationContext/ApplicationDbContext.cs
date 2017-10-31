@@ -15,6 +15,7 @@ namespace SkeletaDAL.ApplicationContext
 		public string CurrentUserId { get; set; }
 		public DbSet<Customer> Customers { get; set; }
 		public DbSet<Order> Orders { get; set; }
+		public DbSet<Product> Products { get; set; }
 
 		public ApplicationDbContext(DbContextOptions options) : base(options)
 		{ }
@@ -36,6 +37,9 @@ namespace SkeletaDAL.ApplicationContext
 
 			builder.Entity<Order>().Property(o => o.Description).HasMaxLength(500);
 			builder.Entity<Order>().ToTable($"App{nameof(this.Orders)}");
+
+			builder.Entity<Product>().Property(p => p.Description).HasMaxLength(500);
+			builder.Entity<Product>().ToTable($"App{nameof(this.Products)}");
 		}
 
 		public override int SaveChanges()
