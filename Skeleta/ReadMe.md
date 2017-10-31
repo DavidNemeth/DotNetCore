@@ -19,7 +19,7 @@ ChangeSets:
 **-Added ViewModels and AutoMapper**  
 **2017.10.20:**  
 **-Model Update**  
-**-Added Sample API, paging, and sample services**
+**-Added Sample API, paging, and sample services**  
 
 **2017.10.18:**  
 **-DataAccesLayer with UnitOfWork and Repository pattern implemented.**  
