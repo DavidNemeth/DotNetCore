@@ -7,8 +7,8 @@
 export class ProductListComponent {
 	pageTitle: string = 'Product List';
 
-
-
+	filterBox: string = '';
+	showImage: boolean = false;
 	imageWidth: number = 50;
 	imageMargin: number = 2;
 	products: any[] = [
@@ -49,4 +49,8 @@ export class ProductListComponent {
 			"imageUrl": "https://openclipart.org/download/20578/maidis-snowboard-1.svg"
 		}
 	];
+
+	ToggleImage(): void{
+		this.showImage = !this.showImage;	
+	}
 }
