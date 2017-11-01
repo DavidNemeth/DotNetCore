@@ -7,14 +7,18 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './components/app/app.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
-import { ProductListComponent } from './components/product/product-list.component';
+import { ProductsComponent } from './components/products/products.component';
+import { ConvertToSpacePipe } from "./pipes/convert-to-space.pipe";
+import { GroupByPipe } from './pipes/group-by.pipe';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		NavMenuComponent,
 		HomeComponent,
-		ProductListComponent
+		ProductsComponent,
+		GroupByPipe,
+		ConvertToSpacePipe
 	],
 	imports: [
 		CommonModule,
@@ -23,7 +27,7 @@ import { ProductListComponent } from './components/product/product-list.componen
 		RouterModule.forRoot([
 			{ path: '', redirectTo: 'home', pathMatch: 'full' },
 			{ path: 'home', component: HomeComponent },			
-			{ path: 'products', component: ProductListComponent },
+			{ path: 'products', component: ProductsComponent },
 			{ path: '**', redirectTo: 'home' }
 			
 		])
