@@ -3,10 +3,15 @@ Skeleton application to serve as a starting point for building well structured, 
 ChangeSets:
 
 
-**2017.10.18:**  
-**-DataAccesLayer with UnitOfWork and Repository pattern implemented.**  
-**-User and premission based role management on backend implemented.(Able to create and manage roles, premissions etc so you can make it fit with different business requirements)**  
-  
+**2017.10.31:**  
+**-Updated db with products**  
+**-Sample MVC views and angular view**  
+**-Test APIs and Controllers**
+
+**2017.10.20:**  
+**-Model Update**  
+**-Added Sample API, paging, and sample services**  
+
 **2017.10.19:**  
 **-Setup Db creation and seeding**  
 **-Configured Email sender, and implemented helper class**  
@@ -16,11 +21,10 @@ ChangeSets:
 **-Configured Identity**  
 **-Seeded database, fixed setup config**  
 **-Added ViewModels and AutoMapper**  
-**2017.10.20:**  
-**-Model Update**  
-**-Added Sample API, paging, and sample services**
 
-
+**2017.10.18:**  
+**-DataAccesLayer with UnitOfWork and Repository pattern implemented.**  
+**-User and premission based role management on backend implemented.(Able to create and manage roles, premissions etc so you can make it fit with different business requirements)**  
   
   
   
