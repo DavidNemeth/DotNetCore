@@ -4,9 +4,9 @@ namespace SkeletaWeb.Services
 {
 	public class AppServices : IServices
 	{
-		private IUnitOfWork context;
+		private IRepository context;
 
-		public AppServices(IUnitOfWork context)
+		public AppServices(IRepository context)
 		{
 			this.context = context;
 		}

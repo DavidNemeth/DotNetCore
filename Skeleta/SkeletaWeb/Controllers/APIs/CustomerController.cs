@@ -13,11 +13,11 @@ namespace SkeletaWeb.Controllers.APIs
 	[Route("api/[controller]")]
 	public class CustomerController : Controller
 	{
-		private readonly IUnitOfWork context;
+		private readonly IRepository context;
 		private readonly IServices services;
 		private readonly ILogger logger;
 
-		public CustomerController(IUnitOfWork context, IServices services, ILogger<CustomerController> logger)
+		public CustomerController(IRepository context, IServices services, ILogger<CustomerController> logger)
 		{
 			this.context = context;
 			this.services = services;
