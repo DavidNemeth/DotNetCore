@@ -1,7 +1,12 @@
 Skeleton application to serve as a starting point for building well structured, reusable and robust multilayer enterprise solutions.
 
-ChangeSets:
-
+ChangeSets:  
+  
+  
+**2017.11.02:**    
+**-Updated Repository and UoW to Async methods**    
+**-Added Rest Controller for products**    
+**-Added products service to angular**  
 
 **2017.10.31:**  
 **-Updated db with products**  
