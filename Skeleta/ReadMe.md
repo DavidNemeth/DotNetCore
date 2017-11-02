@@ -7,6 +7,7 @@ ChangeSets:
 **-Updated Repository and UoW to Async methods**    
 **-Added Rest Controller for products**    
 **-Added products service to angular**  
+**-Added Base Controller**  
 
 **2017.10.31:**  
 **-Updated db with products**  
