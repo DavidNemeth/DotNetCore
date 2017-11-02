@@ -2,6 +2,7 @@
 using SkeletaDAL.Repositories.Customers;
 using SkeletaDAL.Repositories.Orders;
 using SkeletaDAL.Repositories.Products;
+using System.Threading.Tasks;
 
 namespace SkeletaDAL
 {
@@ -51,9 +52,9 @@ namespace SkeletaDAL
 			}
 		}
 
-		public int Complete()
+		public async Task<int> SaveChangesAsync()
 		{
-			return _context.SaveChanges();
+			return await _context.SaveChangesAsync();
 		}
 	}
 }

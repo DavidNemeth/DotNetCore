@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace SkeletaDAL.GenericRepository
 {
@@ -21,9 +22,9 @@ namespace SkeletaDAL.GenericRepository
 		public virtual void Add(TEntity entity) => _entities.Add(entity);
 		public virtual void AddRange(IEnumerable<TEntity> entities) => _entities.AddRange(entities);
 
-		public virtual TEntity Get(int id) => _entities.Find(id);
-		public virtual IEnumerable<TEntity> GetAll() => _entities.ToList();
-		public virtual TEntity GetSingleOrDefault(Expression<Func<TEntity, bool>> predicate) => _entities.SingleOrDefault(predicate);
+		public virtual async Task<TEntity> GetAsync(int id) => await _entities.FindAsync(id);
+		public virtual async Task<IEnumerable<TEntity>> GetAllAsync() => await _entities.ToListAsync();
+		public virtual async Task<TEntity> GetSingleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate) => await _entities.SingleOrDefaultAsync(predicate);
 
 		public virtual void Remove(TEntity entity) => _entities.Remove(entity);
 		public virtual void RemoveRange(IEnumerable<TEntity> entities) => _entities.RemoveRange(entities);
@@ -31,8 +32,8 @@ namespace SkeletaDAL.GenericRepository
 		public virtual void Update(TEntity entity) => _entities.Update(entity);
 		public virtual void UpdateRange(IEnumerable<TEntity> entities) => _entities.UpdateRange(entities);
 
-		public virtual int Count() => _entities.Count();
-		public bool Exists(Expression<Func<TEntity, bool>> predicate) => _entities.Any(predicate);
-		public virtual IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate) => _entities.Where(predicate);
+		public virtual async Task<int> CountAsync() => await _entities.CountAsync();
+		public async Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> predicate) => await _entities.AnyAsync(predicate);
+		public virtual async Task<IEnumerable<TEntity>> FindAllAsync(Expression<Func<TEntity, bool>> predicate) => await _entities.Where(predicate).ToListAsync();
 	}
 }

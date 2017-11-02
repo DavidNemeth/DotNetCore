@@ -1,6 +1,7 @@
 ﻿using SkeletaDAL.Repositories.Customers;
 using SkeletaDAL.Repositories.Orders;
 using SkeletaDAL.Repositories.Products;
+using System.Threading.Tasks;
 
 namespace SkeletaDAL
 {
@@ -10,6 +11,6 @@ namespace SkeletaDAL
 		IOrderRepository Orders { get; }
 		IProductRepository Products { get; }
 
-		int Complete();
+		Task<int> SaveChangesAsync();
 	}
 }

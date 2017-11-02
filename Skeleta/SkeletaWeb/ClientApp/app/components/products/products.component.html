@@ -42,7 +42,10 @@
 						<td>{{product.Name}}</td>
 						<td>{{product.Description}}</td>
 						<td>{{product.Price}}</td>
-						<td>{{product.Rating}}</td>
+						<td><sk-star [rating]="product.Rating"
+									 (ratingClicked)="onRatingClicked($event)">
+							</sk-star>
+						</td>
 					</tr>
 				</tbody>
 			</table>

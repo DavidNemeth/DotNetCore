@@ -10,6 +10,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ProductsComponent } from './components/products/products.component';
 import { ConvertToSpacePipe } from "./pipes/convert-to-space.pipe";
 import { GroupByPipe } from './pipes/group-by.pipe';
+import { StarComponent } from './components/shared/star.component';
 
 @NgModule({
 	declarations: [
@@ -18,7 +19,8 @@ import { GroupByPipe } from './pipes/group-by.pipe';
 		HomeComponent,
 		ProductsComponent,
 		GroupByPipe,
-		ConvertToSpacePipe
+		ConvertToSpacePipe,
+		StarComponent
 	],
 	imports: [
 		CommonModule,

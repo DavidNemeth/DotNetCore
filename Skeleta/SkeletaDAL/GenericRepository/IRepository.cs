@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace SkeletaDAL.GenericRepository
 {
@@ -11,8 +12,8 @@ namespace SkeletaDAL.GenericRepository
 		void AddRange(IEnumerable<TEntity> entities);
 
 		//Read
-		TEntity Get(int id);
-		IEnumerable<TEntity> GetAll();
+		Task<TEntity> GetAsync(int id);
+		Task<IEnumerable<TEntity>> GetAllAsync();
 
 		//Update
 		void Update(TEntity entity);
@@ -23,10 +24,10 @@ namespace SkeletaDAL.GenericRepository
 		void RemoveRange(IEnumerable<TEntity> entities);
 
 		//search
-		IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
-		TEntity GetSingleOrDefault(Expression<Func<TEntity, bool>> predicate);
-		bool Exists(Expression<Func<TEntity, bool>> predicate);
+		Task<IEnumerable<TEntity>> FindAllAsync(Expression<Func<TEntity, bool>> predicate);
+		Task<TEntity> GetSingleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate);
+		Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> predicate);
 
-		int Count();
+		Task<int> CountAsync();
 	}
 }

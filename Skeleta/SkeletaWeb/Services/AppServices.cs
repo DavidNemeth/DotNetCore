@@ -13,9 +13,9 @@ namespace SkeletaWeb.Services
 
 		public int GetAverageCustomerAge()
 		{
-			var customers = context.Customers.GetAll();
+			var customers = context.Customers.GetAllAsync();
 			var totalAge = 0;
-			var totalCustomers = context.Customers.Count();
+			var totalCustomers = context.Customers.CountAsync();
 
 			foreach (var customer in customers)
 			{
