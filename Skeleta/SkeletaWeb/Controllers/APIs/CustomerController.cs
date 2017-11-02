@@ -11,18 +11,15 @@ using System.Threading.Tasks;
 namespace SkeletaWeb.Controllers.APIs
 {
 	[Route("api/[controller]")]
-	public class CustomerController : Controller
+	public class CustomerController : BaseController
 	{
-		private readonly IRepository context;
-		private readonly IServices services;
-		private readonly ILogger logger;
+		private readonly ILogger<CustomerController> logger;
 
-		public CustomerController(IRepository context, IServices services, ILogger<CustomerController> logger)
+		protected CustomerController(IUnitOfWork context, IServices services, ILogger<CustomerController> logger) : base(context, services)
 		{
-			this.context = context;
-			this.services = services;
 			this.logger = logger;
 		}
+
 
 		// GET api/customers
 		[HttpGet("")]
