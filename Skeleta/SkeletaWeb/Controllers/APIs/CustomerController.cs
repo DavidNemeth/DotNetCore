@@ -15,7 +15,7 @@ namespace SkeletaWeb.Controllers.APIs
 	{
 		private readonly ILogger<CustomerController> logger;
 
-		protected CustomerController(IUnitOfWork context, IServices services, ILogger<CustomerController> logger) : base(context, services)
+		public CustomerController(ILogger<CustomerController> logger, IUnitOfWork context, IServices services) : base(context, services)
 		{
 			this.logger = logger;
 		}

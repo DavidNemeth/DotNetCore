@@ -1,21 +1,22 @@
 ﻿using SkeletaDAL;
+using System.Threading.Tasks;
 
 namespace SkeletaWeb.Services
 {
 	public class AppServices : IServices
 	{
-		private IRepository context;
+		private IUnitOfWork context;
 
-		public AppServices(IRepository context)
+		public AppServices(IUnitOfWork context)
 		{
 			this.context = context;
 		}
 
-		public int GetAverageCustomerAge()
+		public async Task<int> GetAverageCustomerAge()
 		{
-			var customers = context.Customers.GetAllAsync();
+			var customers = await context.Customers.GetAllAsync();
 			var totalAge = 0;
-			var totalCustomers = context.Customers.CountAsync();
+			var totalCustomers = await context.Customers.CountAsync();
 
 			foreach (var customer in customers)
 			{

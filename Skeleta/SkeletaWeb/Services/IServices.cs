@@ -1,7 +1,9 @@
-﻿namespace SkeletaWeb.Services
+﻿using System.Threading.Tasks;
+
+namespace SkeletaWeb.Services
 {
 	public interface IServices
 	{
-		int GetAverageCustomerAge();
+		Task<int> GetAverageCustomerAge();
 	}
 }

@@ -48,7 +48,7 @@ namespace SkeletaWeb
 			services.AddTransient<IDatabaseInitializer, DatabaseInitializer>();
 
 			// Repositories
-			services.AddScoped<IRepository, UnitOfWork>();
+			services.AddScoped<IUnitOfWork, UnitOfWork>();
 			services.AddScoped<IAccountManager, AccountManager>();
 			services.AddScoped<IServices, AppServices>();
 

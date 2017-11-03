@@ -1,21 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SkeletaDAL;
 using SkeletaDAL.Models;
+using SkeletaWeb.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace SkeletaWeb.Controllers.APIs
 {
 	[Produces("application/json")]
-	[Route("api/Products")]
-	public class ProductsController : Controller
+	[Route("api/products")]
+	public class ProductsController : BaseController
 	{
-		private readonly IUnitOfWork context;
-
-		public ProductsController(IUnitOfWork context)
+		public ProductsController(IUnitOfWork context, IServices services) : base(context, services)
 		{
-			this.context = context;
 		}
+
 
 		// GET: api/Products
 		[HttpGet]
@@ -72,6 +71,6 @@ namespace SkeletaWeb.Controllers.APIs
 			return Ok(product);
 		}
 
-		private async Task<bool> ProductExists(int id) => await context.Products.ExistsAsync(e => e.Id == id);
+		private async Task<bool> ProductExistsAsync(int id) => await context.Products.ExistsAsync(e => e.Id == id);
 	}
 }

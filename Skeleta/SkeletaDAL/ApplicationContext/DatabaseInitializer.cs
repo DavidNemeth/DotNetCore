@@ -5,7 +5,6 @@ using SkeletaDAL.Core.CoreModel;
 using SkeletaDAL.Core.Interfaces;
 using SkeletaDAL.Models;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using static SkeletaDAL.Core.Enums;
 
@@ -105,54 +104,6 @@ namespace SkeletaDAL.ApplicationContext
 					UpdatedBy = "No Update since Creation"
 				};
 
-				var testProduct1 = new Product
-				{
-					Name = "Produt1",
-					Description = "test description1",
-					Code = "tstcd-123",
-					Price = 199.9,
-					Rating = 4.1,
-					UnitsInStock = 32,
-					IsActive = true,
-					IsDiscontinued = false
-				};
-
-				var testProduct2 = new Product
-				{
-					Name = "Produt2",
-					Description = "test description2",
-					Code = "tstcd-123",
-					Price = 199.9,
-					Rating = 4.1,
-					UnitsInStock = 32,
-					IsActive = true,
-					IsDiscontinued = false
-				};
-
-				var testProduct3 = new Product
-				{
-					Name = "Produt3",
-					Description = "test description3",
-					Code = "tstcd-123",
-					Price = 199.9,
-					Rating = 4.0,
-					UnitsInStock = 32,
-					IsActive = true,
-					IsDiscontinued = false
-				};
-
-				var testProduct4 = new Product
-				{
-					Name = "Produt4",
-					Description = "test description4",
-					Code = "tstcd-123",
-					Price = 199.9,
-					Rating = 2.1,
-					UnitsInStock = 32,
-					IsActive = true,
-					IsDiscontinued = false
-				};
-
 				var testOrder1 = new Order
 				{
 					AppUser = await _context.Users.FirstAsync(),
@@ -160,12 +111,7 @@ namespace SkeletaDAL.ApplicationContext
 					Price = 2500,
 					Description = "ugly tshirt from china",
 					CreatedDate = DateTime.Now,
-					UpdatedDate = DateTime.Now,
-					Products = new List<Product>
-					{
-						testProduct1,
-						testProduct2
-					}
+					UpdatedDate = DateTime.Now
 				};
 
 				var testOrder2 = new Order
@@ -175,12 +121,7 @@ namespace SkeletaDAL.ApplicationContext
 					Price = 2500,
 					Description = "Big ass TeLieVision",
 					CreatedDate = DateTime.Now,
-					UpdatedDate = DateTime.Now,
-					Products = new List<Product>
-					{
-						testProduct3,
-						testProduct4
-					}
+					UpdatedDate = DateTime.Now
 				};
 
 				_context.Customers.Add(testCustomer1);
@@ -190,11 +131,6 @@ namespace SkeletaDAL.ApplicationContext
 
 				_context.Orders.Add(testOrder1);
 				_context.Orders.Add(testOrder2);
-
-				_context.Products.Add(testProduct1);
-				_context.Products.Add(testProduct2);
-				_context.Products.Add(testProduct3);
-				_context.Products.Add(testProduct4);
 
 
 				await _context.SaveChangesAsync();

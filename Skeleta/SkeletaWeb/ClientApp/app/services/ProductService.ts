@@ -1,47 +1,16 @@
 ﻿import { IProduct } from "../components/products/product";
 import { Injectable } from "@angular/core";
+//import { HttpClientModule } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class ProductService {
+	private readonly _productsUrl: string = "/api/products";
 
-	getProducts(): IProduct[] {
-		return [
-			{
-				"Id": 5,
-				"Name": "GNU Dany Monster",
-				"Code": "GNU-9231",
-				"Description": "We payed Dany a lot to sponsor this, so please buy it.",
-				"Price": 423.99,
-				"Rating": 4.9,
-				"imageUrl": "https://openclipart.org/download/20579/maidis-snowboard-2.svg"
-			},
-			{
-				"Id": 7,
-				"Name": "Nitro Women Secret",
-				"Code": "NTR-1123",
-				"Description": "Rocker freestyle, anti catch edge",
-				"Price": 573.99,
-				"Rating": 3.7,
-				"imageUrl": "https://openclipart.org/download/20580/maidis-snowboard-3.svg"
-			},
-			{
-				"Id": 11,
-				"Name": "Rossignol Retox Amptek",
-				"Code": "ROS-0023",
-				"Description": "Hyibrid camber with Amptek Tech.",
-				"Price": 399.99,
-				"Rating": 4.4,
-				"imageUrl": "https://openclipart.org/download/20581/maidis-snowboard-4.svg"
-			},
-			{
-				"Id": 2,
-				"Name": "Burton Custom Flying V",
-				"Code": "BTN-0143",
-				"Description": "Hybrid High-end with channel binding slot.",
-				"Price": 623.99,
-				"Rating": 2.4,
-				"imageUrl": "https://openclipart.org/download/20578/maidis-snowboard-1.svg"
-			}
-		]
-	}
-}
+	//constructor(private httpClient: HttpClientModule) { }
+
+	//getProducts(): Observable<IProduct[]> {
+	//	return this.httpClient.get<IProduct[]>(this._productsUrl);
+	//}
+}; 

@@ -15,8 +15,8 @@ export class ProductsComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.products = this._productService.getProducts();
-		this.filteredProducts = this.products;
+		//this.products = this._productService.getProducts();
+		//this.filteredProducts = this.products;
 	}
 
 	onRatingClicked(message: string): void {

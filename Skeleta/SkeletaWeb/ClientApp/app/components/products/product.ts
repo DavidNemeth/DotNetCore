@@ -5,5 +5,5 @@
 	Description: string;
 	Price: number;
 	Rating: number;
-	imageUrl: string;
+	ImageUrl: string;	
 }
