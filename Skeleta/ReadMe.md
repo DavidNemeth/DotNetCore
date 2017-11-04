@@ -2,7 +2,7 @@ Skeleton application to serve as a starting point for building well structured, 
 
 ChangeSets:   
   
-**2017.11.02:**  
+**2017.11.03:**  
 **-Packages updated**  
 **-Added angular get for sample list.**  
 **-Added viewmodel and mapping**  
