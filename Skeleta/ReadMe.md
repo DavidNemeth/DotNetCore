@@ -1,7 +1,11 @@
 Skeleton application to serve as a starting point for building well structured, reusable and robust multilayer enterprise solutions.
 
-ChangeSets:  
+ChangeSets:   
   
+**2017.11.02:**  
+**-Packages updated**  
+**-Added angular get for sample list.**  
+**-Added viewmodel and mapping**  
   
 **2017.11.02:**    
 **-Updated Repository and UoW to Async methods**    
