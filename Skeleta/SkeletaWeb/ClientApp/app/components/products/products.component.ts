@@ -11,24 +11,29 @@ import { ProductService } from "../../services/ProductService";
 })
 export class ProductsComponent implements OnInit {
 
-	constructor(private _productService: ProductService) {		
-	}
-
-	ngOnInit(): void {
-		//this.products = this._productService.getProducts();
-		//this.filteredProducts = this.products;
-	}
-
-	onRatingClicked(message: string): void {
-		this.pageTitle = 'Product List:' + message;
+	constructor(private _productService: ProductService) {
 	}
 
 	pageTitle: string = 'Product List';
 	showImage: boolean = false;
 	imageWidth: number = 50;
 	imageMargin: number = 2;
-
+	errorMessage: string;
 	_listFilter: string;
+
+	ngOnInit(): void {
+		this._productService.getProducts()
+			.subscribe(products => {
+				this.products = products;
+				this.filteredProducts = this.products;
+			},
+			error => this.errorMessage = <any>error);
+	}
+
+	onRatingClicked(message: string): void {
+		this.pageTitle = 'Product List:' + message;
+	}
+	
 	get listFilter(): string {
 		return this._listFilter
 	}
@@ -43,10 +48,10 @@ export class ProductsComponent implements OnInit {
 	performFilter(filterBy: string): IProduct[] {
 		filterBy = filterBy.toLocaleLowerCase();
 		return this.products.filter((product: IProduct) =>
-			product.Name.toLocaleLowerCase().indexOf(filterBy) !== -1);		
+			product.name.toLocaleLowerCase().indexOf(filterBy) !== -1);
 	}
 
-	ToggleImage(): void{
-		this.showImage = !this.showImage;	
-	}	
+	ToggleImage(): void {
+		this.showImage = !this.showImage;
+	}
 }

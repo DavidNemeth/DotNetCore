@@ -45,6 +45,9 @@ namespace SkeletaWeb.ViewModels
 
 			CreateMap<Order, OrderViewModel>()
 				.ReverseMap();
+
+			CreateMap<Product, ProductViewModel>()
+				.ReverseMap();
 		}
 	}
 }

@@ -39,10 +39,10 @@
 								 [style.width.px] ="imageWidth"
 								 [style.margin.px]="imageMargin">
 						</td>
-						<td>{{product.Name}}</td>
-						<td>{{product.Description}}</td>
-						<td>{{product.Price}}</td>
-						<td><sk-star [rating]="product.Rating"
+						<td>{{product.name}}</td>
+						<td>{{product.description}}</td>
+						<td>{{product.price}}</td>
+						<td><sk-star [rating]="product.rating"
 									 (ratingClicked)="onRatingClicked($event)">
 							</sk-star>
 						</td>

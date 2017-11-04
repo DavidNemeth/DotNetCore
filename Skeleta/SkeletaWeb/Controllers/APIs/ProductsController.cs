@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using SkeletaDAL;
 using SkeletaDAL.Models;
 using SkeletaWeb.Services;
+using SkeletaWeb.ViewModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -18,9 +20,10 @@ namespace SkeletaWeb.Controllers.APIs
 
 		// GET: api/Products
 		[HttpGet]
-		public async Task<IEnumerable<Product>> GetProductsAsync()
+		public async Task<IList<ProductViewModel>> GetProductsAsync()
 		{
-			return await context.Products.GetAllAsync();
+			var products = Mapper.Map<List<ProductViewModel>>(await context.Products.GetAllAsync());
+			return products;
 		}
 
 		// GET: api/Products/5
