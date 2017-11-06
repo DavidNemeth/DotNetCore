@@ -1,0 +1,39 @@
+﻿<div class="panel panel-primary" *ngIf="product">
+	<div class="panel-heading">
+		{{pageTitle + ': ' + product.name}}
+	</div>
+	<div class="panel-body">
+		<table class="table">
+			<thead>
+				<tr>
+					<td></td>
+					<td>Description</td>
+					<td>Price</td>
+					<td>Rating</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						<img [src]='product.imageUrl'
+							 [title]="product.Name"
+							 [style.width.px]="80"
+							 [style.margin.px]="0">
+					</td>
+					<td>
+						<p style="margin-bottom:50px">Its shiny and expensive, must be really good please buy it.</p>
+						<iframe width="654" height="380" src="https://www.youtube.com/embed/EsVAIl6AE0w" frameborder="0" gesture="media" allowfullscreen></iframe>
+					</td>
+					<td>{{product.price}}</td>
+					<td>
+						<sk-star [rating]="product.rating">
+						</sk-star>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="panel-footer">
+		<a class="btn btn-default" (click)="onBack()" style="width:80px"><i class="glyphicon glyphicon-chevron-left"></i>Back</a>
+	</div>
+</div>

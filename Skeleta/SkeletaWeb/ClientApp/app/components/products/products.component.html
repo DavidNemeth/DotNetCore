@@ -19,9 +19,9 @@
 				<thead>
 					<tr>
 						<td>
-						<button class="btn btn-primary"
-								(click)="ToggleImage()">
-							{{showImage ? 'Hide' : 'Show'}} Image
+							<button class="btn btn-primary"
+									(click)="ToggleImage()">
+								{{showImage ? 'Hide' : 'Show'}} Image
 							</button>
 						</td>
 						<td>Product</td>
@@ -36,13 +36,18 @@
 							<img *ngIf="showImage"
 								 [src]='product.imageUrl'
 								 [title]="product.Name"
-								 [style.width.px] ="imageWidth"
+								 [style.width.px]="imageWidth"
 								 [style.margin.px]="imageMargin">
 						</td>
-						<td>{{product.name}}</td>
+						<td>
+							<a [routerLink]="['/products', product.id]">
+								{{product.name}}
+							</a>
+						</td>
 						<td>{{product.description}}</td>
 						<td>{{product.price}}</td>
-						<td><sk-star [rating]="product.rating"
+						<td>
+							<sk-star [rating]="product.rating"
 									 (ratingClicked)="onRatingClicked($event)">
 							</sk-star>
 						</td>

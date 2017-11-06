@@ -8,6 +8,7 @@ import { AppComponent } from './components/app/app.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProductsComponent } from './components/products/products.component';
+import { ProductDetailComponent } from './components/products/product-detail.component';
 import { ConvertToSpacePipe } from "./pipes/convert-to-space.pipe";
 import { GroupByPipe } from './pipes/group-by.pipe';
 import { StarComponent } from './components/shared/star.component';
@@ -18,9 +19,10 @@ import { StarComponent } from './components/shared/star.component';
 		NavMenuComponent,
 		HomeComponent,
 		ProductsComponent,
+		ProductDetailComponent,
 		GroupByPipe,
 		ConvertToSpacePipe,
-		StarComponent
+		StarComponent		
 	],
 	imports: [
 		CommonModule,
@@ -30,6 +32,7 @@ import { StarComponent } from './components/shared/star.component';
 			{ path: '', redirectTo: 'home', pathMatch: 'full' },
 			{ path: 'home', component: HomeComponent },			
 			{ path: 'products', component: ProductsComponent },
+			{ path: 'products/:id', component: ProductDetailComponent },
 			{ path: '**', redirectTo: 'home' }
 			
 		])

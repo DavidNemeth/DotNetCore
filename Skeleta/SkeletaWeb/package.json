@@ -4,7 +4,7 @@
 	"description": ".net core angular skeleton application for enterprise and wide scale projects",
 	"author": {
 		"name": "David Nemeth",
-		"email": "david.nemeth@mail.com",
+		"email": "davidnemeth@mail.com",
 		"url": "https://github.com/DavidNemeth"
 	},
 	"license": "MIT",

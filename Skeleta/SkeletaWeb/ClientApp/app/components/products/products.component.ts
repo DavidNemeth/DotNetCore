@@ -1,17 +1,18 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { fadeInOut } from '../../services/animations';
-import { IProduct } from "./product";
-import { ProductService } from "../../services/ProductService";
+import { ProductService, IProduct } from "../../services/ProductService";
 
 @Component({
-	selector: 'products',
+	selector: 'app-products',
 	templateUrl: './products.component.html',
 	styleUrls: ['./products.component.css'],
 	animations: [fadeInOut]
 })
+/** products component*/
 export class ProductsComponent implements OnInit {
 
 	constructor(private _productService: ProductService) {
+
 	}
 
 	pageTitle: string = 'Product List';
@@ -33,10 +34,11 @@ export class ProductsComponent implements OnInit {
 	onRatingClicked(message: string): void {
 		this.pageTitle = 'Product List:' + message;
 	}
-	
+
 	get listFilter(): string {
 		return this._listFilter
 	}
+
 	set listFilter(value: string) {
 		this._listFilter = value;
 		this.filteredProducts = this.listFilter ? this.performFilter(this.listFilter) : this.products;

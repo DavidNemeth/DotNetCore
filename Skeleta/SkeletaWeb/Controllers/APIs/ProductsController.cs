@@ -18,12 +18,12 @@ namespace SkeletaWeb.Controllers.APIs
 		}
 
 
-		// GET: api/Products
+		// GET: api/products
 		[HttpGet]
-		public async Task<IList<ProductViewModel>> GetProductsAsync()
+		public async Task<IEnumerable<Product>> GetProductsAsync()
 		{
 			var products = Mapper.Map<List<ProductViewModel>>(await context.Products.GetAllAsync());
-			return products;
+			return await context.Products.GetAllAsync();
 		}
 
 		// GET: api/Products/5

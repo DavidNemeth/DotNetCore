@@ -40,6 +40,42 @@
     <Folder Include="Logs\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="ClientApp\app\components\app\app.component.css">
+      <DependentUpon>app.component.html</DependentUpon>
+    </None>
+    <None Update="ClientApp\app\components\app\app.component.ts">
+      <DependentUpon>app.component.html</DependentUpon>
+    </None>
+    <None Update="ClientApp\app\components\home\home.component.ts">
+      <DependentUpon>home.component.html</DependentUpon>
+    </None>
+    <None Update="ClientApp\app\components\navmenu\navmenu.component.css">
+      <DependentUpon>navmenu.component.html</DependentUpon>
+    </None>
+    <None Update="ClientApp\app\components\navmenu\navmenu.component.ts">
+      <DependentUpon>navmenu.component.html</DependentUpon>
+    </None>
+    <None Update="ClientApp\app\components\products\product-detail.component.css">
+      <DependentUpon>product-detail.component.html</DependentUpon>
+    </None>
+    <None Update="ClientApp\app\components\products\product-detail.component.ts">
+      <DependentUpon>product-detail.component.html</DependentUpon>
+    </None>
+    <None Update="ClientApp\app\components\products\products.component.css">
+      <DependentUpon>products.component.html</DependentUpon>
+    </None>
+    <None Update="ClientApp\app\components\products\products.component.ts">
+      <DependentUpon>products.component.html</DependentUpon>
+    </None>
+    <None Update="ClientApp\app\components\shared\star.component.css">
+      <DependentUpon>star.component.html</DependentUpon>
+    </None>
+    <None Update="ClientApp\app\components\shared\star.component.ts">
+      <DependentUpon>star.component.html</DependentUpon>
+    </None>
+  </ItemGroup>
+
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">
     <!-- Ensure Node.js is installed -->
     <Exec Command="node --version" ContinueOnError="true">
