@@ -34,7 +34,7 @@ ChangeSets:
 
 **2017.10.18:**  
 **-DataAccesLayer with UnitOfWork and Repository pattern implemented.**  
-**-User and premission based role management on backend implemented.(Able to create and manage roles, premissions etc so you can make it fit with different business requirements)**  
+**-User and premission based role management on backend implemented.(Able to create and manage roles, premissions etc so it is configurable for any business requirement)**  
   
   
   
