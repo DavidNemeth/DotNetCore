@@ -7,15 +7,24 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class ProductService {
-	private readonly _productsUrl: string = "/api/products";
+	private readonly _baseUrl: string = "/api/products";
 
 	constructor(private http: HttpClient) { }
 
 	getProducts(): Observable<IProduct[]> {
-		return this.http.get<IProduct[]>(this._productsUrl)
+		return this.http.get<IProduct[]>(this._baseUrl)
 			.do(data => console.log('All: ' + JSON.stringify(data)))
 			.catch(this.handleError);
 	}
+
+	getProduct(id: number): Observable<IProduct> {		
+		const url = `${this._baseUrl}/${id}`;
+		return this.http.get<IProduct>(url)
+			.catch(this.handleError);
+	}
+
+
+
 
 	private handleError(err: HttpErrorResponse) {
 		console.log(err.message);

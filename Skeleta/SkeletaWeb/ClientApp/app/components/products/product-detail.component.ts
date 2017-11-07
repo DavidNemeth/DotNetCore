@@ -1,5 +1,5 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { IProduct } from "../../services/ProductService";
+import { IProduct, ProductService } from "../../services/ProductService";
 import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
@@ -8,27 +8,23 @@ import { ActivatedRoute, Router } from "@angular/router";
 	styleUrls: ['./product-detail.component.css']
 })
 /** product-detail component*/
-export class ProductDetailComponent implements OnInit {	
+export class ProductDetailComponent implements OnInit {
+	errorMessage: any;
 	pageTitle: string = 'Product Detail';
 	product: IProduct;
-	constructor(private _route: ActivatedRoute, private _router: Router) { }
+	constructor(private _productService: ProductService, private _route: ActivatedRoute, private _router: Router) { }
 
 	ngOnInit(): void {
 		let id = +this._route.snapshot.paramMap.get('id');
-		this.pageTitle += `: ${id}`;
-		this.product = {
-			"id": id,
-			"name": "GNU Dany Monster",
-			"code": "GNU-2132",
-			"description": "Its shiny and expensive, must be really good please buy it.",
-			"price": 423.99,
-			"rating": 4.6,
-			"imageUrl": "https://openclipart.org/download/20579/maidis-snowboard-2.svg"
-		}
+		this._productService.getProduct(id)
+			.subscribe(product => {
+				this.product = product;
+			},
+			error => this.errorMessage = <any>error);
 	}
 
 	onBack(): void {
 		this._router.navigate(['/products']);
 	}
-	
+
 }
