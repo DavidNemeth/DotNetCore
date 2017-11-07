@@ -2,9 +2,13 @@ Skeleton application to serve as a starting point for building well structured, 
 
 ChangeSets:   
   
+**2017.11.06:**  
+**-Added product-detail page**  
+**-Configured angular routing**  
+  
 **2017.11.03:**  
 **-Packages updated**  
-**-Added angular get for sample list.**  
+**-Added angular get for sample list**  
 **-Added viewmodel and mapping**  
   
 **2017.11.02:**    
