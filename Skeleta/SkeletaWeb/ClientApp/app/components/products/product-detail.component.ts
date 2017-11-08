@@ -27,4 +27,12 @@ export class ProductDetailComponent implements OnInit {
 		this._router.navigate(['/products']);
 	}
 
+	onDelete(): void {
+		let id = +this._route.snapshot.paramMap.get('id');
+		if (confirm("Are you sure to delete " + this.product.name + "?")) {
+			this._productService.deleteProduct(id)
+				.subscribe(error => this.errorMessage = <any>error);
+			this._router.navigate(['/products']);
+		}
+	}
 }

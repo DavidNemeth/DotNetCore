@@ -43,13 +43,13 @@ namespace SkeletaWeb.Controllers.APIs
 
 		// POST: api/Products
 		[HttpPost]
-		public async Task<IActionResult> PostProductAsync([FromBody] Product product)
+		public async Task<IActionResult> PostProductAsync([FromBody] ProductViewModel product)
 		{
 			if (!ModelState.IsValid)
 				return BadRequest(ModelState);
+			var itemToAdd = Mapper.Map<Product>(product);
 
-
-			context.Products.Add(product);
+			context.Products.Add(itemToAdd);
 			await context.SaveChangesAsync();
 
 			return CreatedAtAction("GetProduct", new { id = product.Id }, product);

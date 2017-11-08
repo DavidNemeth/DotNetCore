@@ -12,6 +12,7 @@ import { ProductDetailComponent } from './components/products/product-detail.com
 import { ConvertToSpacePipe } from "./pipes/convert-to-space.pipe";
 import { GroupByPipe } from './pipes/group-by.pipe';
 import { StarComponent } from './components/shared/star.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
 	declarations: [
@@ -25,6 +26,7 @@ import { StarComponent } from './components/shared/star.component';
 		StarComponent		
 	],
 	imports: [
+		ModalModule.forRoot(),
 		CommonModule,
 		HttpClientModule,
 		FormsModule,

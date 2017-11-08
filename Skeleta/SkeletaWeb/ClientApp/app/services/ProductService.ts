@@ -17,14 +17,32 @@ export class ProductService {
 			.catch(this.handleError);
 	}
 
-	getProduct(id: number): Observable<IProduct> {		
+	getPagedProducts() {
+		//todo
+	}
+
+	getProduct(id: number): Observable<IProduct> {
 		const url = `${this._baseUrl}/${id}`;
 		return this.http.get<IProduct>(url)
 			.catch(this.handleError);
 	}
 
+	updateProduct(product: IProduct): Observable<IProduct> {
+		const url = `${this._baseUrl}/${product.id}`;
+		return this.http.put(url, product)
+			.catch(this.handleError);
+	}
 
+	addProduct(product: IProduct) {
+		return this.http.post<IProduct>(this._baseUrl, product)
+			.catch(this.handleError);
+	}
 
+	deleteProduct(id: number): Observable<IProduct> {
+		const url = `${this._baseUrl}/${id}`;
+		return this.http.delete<IProduct>(url)
+			.catch(this.handleError);
+	}
 
 	private handleError(err: HttpErrorResponse) {
 		console.log(err.message);
