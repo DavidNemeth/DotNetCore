@@ -1,5 +1,5 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { IProduct, ProductService } from "../../services/ProductService";
+import { Product, ProductService } from "../../services/ProductService";
 import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 export class ProductDetailComponent implements OnInit {
 	errorMessage: any;
 	pageTitle: string = 'Product Detail';
-	product: IProduct;
+	product: Product;
 	constructor(private _productService: ProductService, private _route: ActivatedRoute, private _router: Router) { }
 
 	ngOnInit(): void {

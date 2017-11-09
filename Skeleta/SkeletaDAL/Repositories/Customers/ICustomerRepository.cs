@@ -8,7 +8,7 @@ namespace SkeletaDAL.Repositories.Customers
 {
 	public interface ICustomerRepository : IRepository<Customer>
 	{
-		Task<List<Customer>> GetAllCustomerDataAsync();
+		Task<IEnumerable<Customer>> GetAllCustomerDataAsync();
 
 		Task<PagingResult<Customer>> GetCustomersPageAsync(int skip, int take);
 	}

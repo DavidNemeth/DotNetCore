@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
@@ -13,6 +13,8 @@ import { ConvertToSpacePipe } from "./pipes/convert-to-space.pipe";
 import { GroupByPipe } from './pipes/group-by.pipe';
 import { StarComponent } from './components/shared/star.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { CustomerComponent } from "./components/customer/customer.component";
+import { ProductFormComponent } from "./components/products/product-form.component";
 
 @NgModule({
 	declarations: [
@@ -20,6 +22,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 		NavMenuComponent,
 		HomeComponent,
 		ProductsComponent,
+		CustomerComponent,
+		ProductFormComponent,
 		ProductDetailComponent,
 		GroupByPipe,
 		ConvertToSpacePipe,
@@ -27,6 +31,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 	],
 	imports: [
 		ModalModule.forRoot(),
+		ReactiveFormsModule,
 		CommonModule,
 		HttpClientModule,
 		FormsModule,
@@ -35,6 +40,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 			{ path: 'home', component: HomeComponent },			
 			{ path: 'products', component: ProductsComponent },
 			{ path: 'products/:id', component: ProductDetailComponent },
+			{ path: 'customer', component: CustomerComponent },
+			{ path: 'productForm', component: ProductFormComponent },
 			{ path: '**', redirectTo: 'home' }
 			
 		])

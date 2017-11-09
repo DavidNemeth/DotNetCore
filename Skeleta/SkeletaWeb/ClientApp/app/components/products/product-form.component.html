@@ -1,0 +1,78 @@
+﻿<h1>{{message}}</h1>
+<hr>
+<input type="button" value="Add" class="btn btn-default" (click)="addProduct()" />
+<div style="overflow:auto">
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<td>Id</td>
+				<td>Name</td>
+				<td>Code</td>
+				<td>Description</td>
+				<td>Price</td>
+				<td>Rating</td>
+				<td>ImageUrl</td>
+				<td></td>
+				<td></td>
+			</tr>
+		</thead>
+		<tbody>
+
+			<tr *ngFor="let product of products;let i=idx">
+				<ng-template [ngTemplateOutlet]="loadTemplate(product)" [ngTemplateOutletContext]="{ $implicit: product, idx: i }"></ng-template>
+			</tr>
+
+		</tbody>
+	</table>
+</div>
+<div>{{statusMessage}}</div>
+
+
+<!--The Html Template for Read-Only Rows-->
+<ng-template #readOnlyTemplate let-product>
+	<td>{{product.id}}</td>
+	<td>{{product.name}}</td>
+	<td>{{product.code}}</td>
+	<td>{{product.description}}</td>
+	<td>{{product.price}}</td>
+	<td>{{product.rating}}</td>
+	<td>{{product.imageUrl}}</td>
+	<td>
+		<input type="button" value="Edit" class="btn btn-default" (click)="editProduct(product)" />
+	</td>
+	<td>
+		<input type="button" value="Delete" (click)="deleteProduct(product)" class="btn btn-danger" />
+	</td>
+</ng-template>
+<!--Ends Here-->
+<!--The Html Template for Editable Rows-->
+<ng-template #editTemplate>
+	<td>
+		<input type="text" [(ngModel)]="selProduct.id" readonly disabled />
+	</td>
+	<td>
+		<input type="text" [(ngModel)]="selProduct.name" />
+	</td>
+	<td>
+		<input type="text" [(ngModel)]="selProduct.code" />
+	</td>
+	<td>
+		<input type="text" [(ngModel)]="selProduct.description" />
+	</td>
+	<td>
+		<input type="text" [(ngModel)]="selProduct.price" />
+	</td>
+	<td>
+		<input type="text" [(ngModel)]="selProduct.rating" />
+	</td>
+	<td>
+		<input type="text" [(ngModel)]="selProduct.imageUrl" />
+	</td>
+	<td>
+		<input type="button" value="Save" (click)="saveProduct()" class="btn btn-success" />
+	</td>
+	<td>
+		<input type="button" value="Cancel" (click)="cancel()" class="btn btn-warning" />
+	</td>
+
+</ng-template>

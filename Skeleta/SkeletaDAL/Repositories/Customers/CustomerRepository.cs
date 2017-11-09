@@ -17,7 +17,7 @@ namespace SkeletaDAL.Repositories.Customers
 		{
 		}
 
-		public async Task<List<Customer>> GetAllCustomerDataAsync() => await appContext.Customers
+		public async Task<IEnumerable<Customer>> GetAllCustomerDataAsync() => await appContext.Customers
 				.OrderBy(c => c.LastName)
 				.Include(c => c.Orders).ThenInclude(c => c.AppUser)
 				.ToListAsync();

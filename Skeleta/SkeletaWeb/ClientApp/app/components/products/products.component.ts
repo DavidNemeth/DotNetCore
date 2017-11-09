@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { fadeInOut } from '../../services/animations';
-import { ProductService, IProduct } from "../../services/ProductService";
+import { ProductService, Product } from "../../services/ProductService";
 
 @Component({
 	selector: 'app-products',
@@ -44,12 +44,12 @@ export class ProductsComponent implements OnInit {
 		this.filteredProducts = this.listFilter ? this.performFilter(this.listFilter) : this.products;
 	}
 
-	filteredProducts: IProduct[];
-	products: IProduct[] = [];
+	filteredProducts: Product[];
+	products: Product[] = [];
 
-	performFilter(filterBy: string): IProduct[] {
+	performFilter(filterBy: string): Product[] {
 		filterBy = filterBy.toLocaleLowerCase();
-		return this.products.filter((product: IProduct) =>
+		return this.products.filter((product: Product) =>
 			product.name.toLocaleLowerCase().indexOf(filterBy) !== -1);
 	}
 

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SkeletaDAL;
 using SkeletaDAL.Models;
 using SkeletaWeb.Services;
@@ -20,13 +21,13 @@ namespace SkeletaWeb.Controllers.APIs
 
 		// GET: api/products
 		[HttpGet]
-		public async Task<IEnumerable<Product>> GetProductsAsync()
+		public async Task<IEnumerable<ProductViewModel>> GetProductsAsync()
 		{
 			var products = Mapper.Map<List<ProductViewModel>>(await context.Products.GetAllAsync());
-			return await context.Products.GetAllAsync();
+			return products;
 		}
 
-		// GET: api/Products/5
+		// GET: api/products/5
 		[HttpGet("{id}")]
 		public async Task<IActionResult> GetProductAsync([FromRoute] int id)
 		{
@@ -41,7 +42,7 @@ namespace SkeletaWeb.Controllers.APIs
 			return Ok(product);
 		}
 
-		// POST: api/Products
+		// POST: api/products
 		[HttpPost]
 		public async Task<IActionResult> PostProductAsync([FromBody] ProductViewModel product)
 		{
@@ -54,8 +55,42 @@ namespace SkeletaWeb.Controllers.APIs
 
 			return CreatedAtAction("GetProduct", new { id = product.Id }, product);
 		}
+		// PUT: api/products/5
+		[HttpPut("{id}")]
+		public async Task<IActionResult> PutProductAsync([FromRoute] int id, [FromBody] ProductViewModel product)
+		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
 
-		// DELETE: api/Products/5
+			if (id != product.Id)
+			{
+				return BadRequest();
+			}
+
+			context.Products.Update(Mapper.Map<Product>(product));
+
+			try
+			{
+				await context.SaveChangesAsync();
+			}
+			catch (DbUpdateConcurrencyException)
+			{
+				if (!await ProductExistsAsync(id))
+				{
+					return NotFound();
+				}
+				else
+				{
+					throw;
+				}
+			}
+
+			return NoContent();
+		}
+
+		// DELETE: api/products/5
 		[HttpDelete("{id}")]
 		public async Task<IActionResult> DeleteProductAsync([FromRoute] int id)
 		{

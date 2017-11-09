@@ -47,6 +47,12 @@
     <None Update="ClientApp\app\components\app\app.component.ts">
       <DependentUpon>app.component.html</DependentUpon>
     </None>
+    <None Update="ClientApp\app\components\customer\customer.component.css">
+      <DependentUpon>customer.component.html</DependentUpon>
+    </None>
+    <None Update="ClientApp\app\components\customer\customer.component.ts">
+      <DependentUpon>customer.component.html</DependentUpon>
+    </None>
     <None Update="ClientApp\app\components\home\home.component.ts">
       <DependentUpon>home.component.html</DependentUpon>
     </None>
@@ -61,6 +67,9 @@
     </None>
     <None Update="ClientApp\app\components\products\product-detail.component.ts">
       <DependentUpon>product-detail.component.html</DependentUpon>
+    </None>
+    <None Update="ClientApp\app\components\products\product-form.component.ts">
+      <DependentUpon>product-form.component.html</DependentUpon>
     </None>
     <None Update="ClientApp\app\components\products\products.component.css">
       <DependentUpon>products.component.html</DependentUpon>
