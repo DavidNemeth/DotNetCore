@@ -7,7 +7,7 @@
 		   style='padding:8px;margin:15px auto;width:30%;'
 		   placeholder='Type to filter the name column...'
 		   (keyup)='updateFilter($event)' />
-		
+
 	<table class="table table-bordered table-striped">
 		<thead>
 			<tr>
@@ -23,11 +23,9 @@
 			</tr>
 		</thead>
 		<tbody>
-
 			<tr *ngFor="let product of products;let i=idx">
 				<ng-template [ngTemplateOutlet]="loadTemplate(product)" [ngTemplateOutletContext]="{ $implicit: product, idx: i }"></ng-template>
 			</tr>
-
 		</tbody>
 	</table>
 </div>

@@ -6,7 +6,7 @@
 		   style='padding:8px;margin:15px auto;width:30%;'
 		   placeholder='Type to filter the name column...'
 		   (keyup)='updateFilter($event)' />
-	<ngx-datatable #table
+	<ngx-datatable #table #readOnlyTemplate
 				   class='material'
 				   [columns]="columns"
 				   [columnMode]="'force'"

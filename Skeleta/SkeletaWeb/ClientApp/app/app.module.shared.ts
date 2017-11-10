@@ -16,6 +16,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { CustomerComponent } from "./components/customer/customer.component";
 import { ProductFormComponent } from "./components/products/product-form.component";
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -33,7 +35,9 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 	],
 	imports: [
 		ModalModule.forRoot(),
+		BrowserAnimationsModule,		
 		ReactiveFormsModule,
+		NoopAnimationsModule,
 		NgxDatatableModule,
 		CommonModule,
 		HttpClientModule,

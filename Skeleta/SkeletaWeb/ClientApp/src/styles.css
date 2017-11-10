@@ -1,5 +1,5 @@
 ﻿@import url('https://fonts.googleapis.com/css?family=Muli:400,700');
-
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 body {
 	background: #e8e8e8;
 	font-family: 'Muli';
