@@ -15,6 +15,8 @@ import { StarComponent } from './components/shared/star.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { CustomerComponent } from "./components/customer/customer.component";
 import { ProductFormComponent } from "./components/products/product-form.component";
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+
 
 @NgModule({
 	declarations: [
@@ -32,6 +34,7 @@ import { ProductFormComponent } from "./components/products/product-form.compone
 	imports: [
 		ModalModule.forRoot(),
 		ReactiveFormsModule,
+		NgxDatatableModule,
 		CommonModule,
 		HttpClientModule,
 		FormsModule,

@@ -6,8 +6,8 @@ import { AppComponent } from './components/app/app.component';
 @NgModule({
 	bootstrap: [AppComponent],
 	imports: [
-		BrowserModule,
-		AppModuleShared
+		BrowserModule,		
+		AppModuleShared		
 	],
 	providers: [
 		{ provide: 'BASE_URL', useFactory: getBaseUrl }

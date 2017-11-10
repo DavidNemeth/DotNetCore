@@ -2,6 +2,12 @@
 <hr>
 <input type="button" value="Add" class="btn btn-default" (click)="addProduct()" />
 <div style="overflow:auto">
+
+	<input type='text'
+		   style='padding:8px;margin:15px auto;width:30%;'
+		   placeholder='Type to filter the name column...'
+		   (keyup)='updateFilter($event)' />
+		
 	<table class="table table-bordered table-striped">
 		<thead>
 			<tr>

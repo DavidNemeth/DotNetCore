@@ -1,11 +1,14 @@
-﻿import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
+﻿import { Component, OnInit, ViewChild, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
 import { Product, ProductService } from "../../services/ProductService";
 import { Observable } from 'rxjs/Observable';
+import { DatatableComponent } from "@swimlane/ngx-datatable/release";
 
 @Component({
 	selector: 'app-product-form',
-	templateUrl: './product-form.component.html'
+	templateUrl: './product-testForm.html',
+	styleUrls: ['./product-form.component.css'],
+	encapsulation: ViewEncapsulation.None
 })
 /** product-form component*/
 export class ProductFormComponent implements OnInit {
@@ -16,6 +19,17 @@ export class ProductFormComponent implements OnInit {
 	products: Array<Product>;
 	isNewRecord: boolean;
 	statusMessage: string;
+	loadingIndicator: boolean = true;
+	reorderable: boolean = true;
+	rows: Product[];
+	filteredByName: Product[];
+	columns = [
+		{ name: 'Name' },
+		{ name: 'Code' },
+		{ name: 'Price' },
+		{ name: 'Rating' }
+	];
+	@ViewChild(DatatableComponent) table: DatatableComponent;
 
 	constructor(private service: ProductService) {
 		this.products = new Array<Product>();
@@ -28,8 +42,23 @@ export class ProductFormComponent implements OnInit {
 	private loadProducts() {
 		this.service.getProducts()
 			.subscribe(products => {
+				this.filteredByName = [...products];
+				this.rows = products;				
 				this.products = products;
 			});
+	}
+
+	updateFilter(event) {
+		const val = event.target.value.toLowerCase();
+
+		// filter data
+		const filteredByName = this.filteredByName.filter(function (d) {
+			return d.name.toLowerCase().indexOf(val) !== -1 || !val;
+		});
+		// update the rows
+		this.rows = filteredByName;
+		// Whenever the filter changes, always go back to the first page
+		this.table.offset = 0;
 	}
 
 	addProduct() {
@@ -80,7 +109,7 @@ export class ProductFormComponent implements OnInit {
 				this.loadProducts();
 		}, error => {
 			this.statusMessage = 'Server offline, try saving changes later.',
-				this.products.splice(this.products.indexOf(product),1);
+				this.products.splice(this.products.indexOf(product), 1);
 		});
 
 	}

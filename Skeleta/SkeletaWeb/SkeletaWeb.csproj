@@ -68,8 +68,11 @@
     <None Update="ClientApp\app\components\products\product-detail.component.ts">
       <DependentUpon>product-detail.component.html</DependentUpon>
     </None>
+    <None Update="ClientApp\app\components\products\product-form.component.css">
+      <DependentUpon>product-testForm.html</DependentUpon>
+    </None>
     <None Update="ClientApp\app\components\products\product-form.component.ts">
-      <DependentUpon>product-form.component.html</DependentUpon>
+      <DependentUpon>product-testForm.html</DependentUpon>
     </None>
     <None Update="ClientApp\app\components\products\products.component.css">
       <DependentUpon>products.component.html</DependentUpon>
