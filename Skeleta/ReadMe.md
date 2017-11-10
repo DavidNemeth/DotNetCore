@@ -1,6 +1,18 @@
-Skeleton application to serve as a starting point for building well structured, reusable and robust multilayer enterprise solutions.
+Skeleton application to serve as a starting point for building well structured, reusable and robust multilayer enterprise solutions.  
+  
+  
+TODO:  
+**-Enable offline db changes with sync later option**    
+**-Builtin chat and notification system**     
+**-Auth services**      
+**-Modal and preview pages**    
+
 
 ChangeSets:   
+  
+**2017.11.09:**  
+**-Added productForm**  
+**-Sample api calls with Observables**  
   
 **2017.11.06:**  
 **-Added product-detail page**  
