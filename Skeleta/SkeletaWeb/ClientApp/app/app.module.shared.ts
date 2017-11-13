@@ -18,6 +18,8 @@ import { ProductFormComponent } from "./components/products/product-form.compone
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppRoutingModule } from "./app.routing";
+import { MaterialModule } from "./material.module";
 
 
 @NgModule({
@@ -42,16 +44,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 		CommonModule,
 		HttpClientModule,
 		FormsModule,
-		RouterModule.forRoot([
-			{ path: '', redirectTo: 'home', pathMatch: 'full' },
-			{ path: 'home', component: HomeComponent },			
-			{ path: 'products', component: ProductsComponent },
-			{ path: 'products/:id', component: ProductDetailComponent },
-			{ path: 'customer', component: CustomerComponent },
-			{ path: 'productForm', component: ProductFormComponent },
-			{ path: '**', redirectTo: 'home' }
-			
-		])
+		AppRoutingModule,
+		MaterialModule
 	]
 })
 export class AppModuleShared {

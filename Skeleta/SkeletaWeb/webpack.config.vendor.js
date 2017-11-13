@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const merge = require('webpack-merge');
-const treeShakableModules = [
+const treeShakableModules = [,
 	'@angular/animations',
 	'@angular/common',
 	'@angular/compiler',

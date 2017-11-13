@@ -53,6 +53,9 @@
     <None Update="ClientApp\app\components\customer\customer.component.ts">
       <DependentUpon>customer.component.html</DependentUpon>
     </None>
+    <None Update="ClientApp\app\components\home\home.component.css">
+      <DependentUpon>home.component.html</DependentUpon>
+    </None>
     <None Update="ClientApp\app\components\home\home.component.ts">
       <DependentUpon>home.component.html</DependentUpon>
     </None>
