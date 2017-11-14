@@ -1,3 +1,56 @@
-﻿thead {
-	color: #337AB7
+﻿/* Structure */
+.skeleta-container {
+	display: flex;
+	flex-direction: column;
+	min-width: 300px;
+}
+
+
+input[type=text] {
+	font-size: 14px;
+	display: block;
+	background: transparent;
+	width: 30%;
+	border: none;
+	border-bottom: 1px solid #673AB7;
+	margin:15px auto; width:30%;
+	padding:8px;
+}
+
+
+textarea {
+	font-size: 14px;
+	font-family: sans-serif;
+	display: block;
+	background: transparent;
+	width: 100%;
+	border: none;
+	border-bottom: 1px solid #673AB7;
+	resize: vertical;
+}
+
+input:focus {
+	outline: none;
+}
+
+.mat-table {
+	overflow: auto;
+	max-height: 550px;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	display: block;	
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	position: relative;
+	-webkit-transform: translate3d(0, 0, 0);
+}
+h3 {
+	background: #673AB7;
+	margin: 0 0 30px 0;
+	color: #FFF;
+	text-align: left;
+	padding: 10px;
+	overflow: hidden;
+	height: 32px;
 }

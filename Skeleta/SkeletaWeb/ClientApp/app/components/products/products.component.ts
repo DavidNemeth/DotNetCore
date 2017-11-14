@@ -1,6 +1,7 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit, ViewChild } from '@angular/core';
 import { fadeInOut } from '../../services/animations';
 import { ProductService, Product } from "../../services/ProductService";
+import { MatTableDataSource, MatPaginator, PageEvent } from "@angular/material";
 
 @Component({
 	selector: 'app-products',
@@ -9,51 +10,50 @@ import { ProductService, Product } from "../../services/ProductService";
 	animations: [fadeInOut]
 })
 /** products component*/
-export class ProductsComponent implements OnInit {
+export class ProductsComponent {
+	@ViewChild(MatPaginator) paginator: MatPaginator;
+	product: Product;
+	products: Array<Product>;
+	displayedColumns = ['Name', 'Code', 'Price', 'Rating'];
+	dataSource = new MatTableDataSource(this.products);
+	// MatPaginator Inputs	
+	pageSize = 10;
+	pageSizeOptions = [5, 10, 25, 100];
+	// MatPaginator Output
+	pageEvent: PageEvent;
+	isLoaded = false;
 
-	constructor(private _productService: ProductService) {
-
+	constructor(private service: ProductService) {
+		this.products = new Array<Product>();
 	}
 
-	pageTitle: string = 'Product List';
-	showImage: boolean = false;
-	imageWidth: number = 50;
-	imageMargin: number = 2;
-	errorMessage: string;
-	_listFilter: string;
+	//ngOnInit(): void {
+	//	this.loadProducts();
+	//}
+	ngAfterViewInit() {
+		//this.loadProducts();		
+	}
 
-	ngOnInit(): void {
-		this._productService.getProducts()
+	applyFilter(filterValue: string) {
+		filterValue = filterValue.trim(); // Remove whitespace
+		filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+		this.dataSource.filter = filterValue;
+	}
+
+	setPageSizeOptions(setPageSizeOptionsInput: string) {
+		this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
+	}
+
+	private loadProducts() {
+		this.service.getProducts()
 			.subscribe(products => {
 				this.products = products;
-				this.filteredProducts = this.products;
-			},
-			error => this.errorMessage = <any>error);
-	}
-
-	onRatingClicked(message: string): void {
-		this.pageTitle = 'Product List:' + message;
-	}
-
-	get listFilter(): string {
-		return this._listFilter
-	}
-
-	set listFilter(value: string) {
-		this._listFilter = value;
-		this.filteredProducts = this.listFilter ? this.performFilter(this.listFilter) : this.products;
-	}
-
-	filteredProducts: Product[];
-	products: Product[] = [];
-
-	performFilter(filterBy: string): Product[] {
-		filterBy = filterBy.toLocaleLowerCase();
-		return this.products.filter((product: Product) =>
-			product.name.toLocaleLowerCase().indexOf(filterBy) !== -1);
-	}
-
-	ToggleImage(): void {
-		this.showImage = !this.showImage;
+				this.dataSource = new MatTableDataSource(products);
+				this.dataSource.paginator = this.paginator;	
+				this.isLoaded = true;
+				setTimeout(() => {
+					this.isLoaded = false;
+				},40000)
+			});
 	}
 }

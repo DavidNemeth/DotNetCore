@@ -1,22 +1,22 @@
 ﻿input[type=text] {
-  font-size: 14px;
-  display: block;
-  background: transparent;
-  width: 100%;
-  border: none;
-  border-bottom: 1px solid #5264AE;
+	font-size: 14px;
+	display: block;
+	background: transparent;
+	width: 100%;
+	border: none;
+	border-bottom: 1px solid #673AB7;
 }
 
 
 textarea {
-  font-size: 14px;
-  font-family: sans-serif;
-  display: block;
-  background: transparent;
-  width: 100%;
-  border: none;
-  border-bottom: 1px solid #5264AE;
-  resize: vertical;
+	font-size: 14px;
+	font-family: sans-serif;
+	display: block;
+	background: transparent;
+	width: 100%;
+	border: none;
+	border-bottom: 1px solid #673AB7;
+	resize: vertical;
 }
 
 input:focus {
@@ -34,13 +34,13 @@ a {
 }
 
 h3 {
-  background: #1f89ff;
-  margin: 0 0 30px 0;
-  color: #FFF;
-  text-align: left;
-  padding: 10px;
-  overflow: hidden;
-  height: 32px;
+	background: #673AB7;
+	margin: 0 0 30px 0;
+	color: #FFF;
+	text-align: left;
+	padding: 10px;
+	overflow: hidden;
+	height: 32px;
 }
 
 h3 a {
@@ -359,7 +359,7 @@ h3 small {
 	.ngx-datatable.material.single-selection .datatable-body-row.active .datatable-row-group, .ngx-datatable.material.multi-selection .datatable-body-row.active,
 	.ngx-datatable.material.multi-selection .datatable-body-row.active .datatable-row-group, .ngx-datatable.material.multi-click-selection .datatable-body-row.active,
 	.ngx-datatable.material.multi-click-selection .datatable-body-row.active .datatable-row-group {
-		background-color: #304FFE;
+		background-color: #673AB7;
 		color: #FFF;
 	}
 
@@ -367,7 +367,7 @@ h3 small {
 		.ngx-datatable.material.single-selection .datatable-body-row.active:hover .datatable-row-group, .ngx-datatable.material.multi-selection .datatable-body-row.active:hover,
 		.ngx-datatable.material.multi-selection .datatable-body-row.active:hover .datatable-row-group, .ngx-datatable.material.multi-click-selection .datatable-body-row.active:hover,
 		.ngx-datatable.material.multi-click-selection .datatable-body-row.active:hover .datatable-row-group {
-			background-color: #193AE4;
+			background-color: #673AB7;
 			color: #FFF;
 		}
 
@@ -375,7 +375,7 @@ h3 small {
 		.ngx-datatable.material.single-selection .datatable-body-row.active:focus .datatable-row-group, .ngx-datatable.material.multi-selection .datatable-body-row.active:focus,
 		.ngx-datatable.material.multi-selection .datatable-body-row.active:focus .datatable-row-group, .ngx-datatable.material.multi-click-selection .datatable-body-row.active:focus,
 		.ngx-datatable.material.multi-click-selection .datatable-body-row.active:focus .datatable-row-group {
-			background-color: #2041EF;
+			background-color: #673AB7;
 			color: #FFF;
 		}
 
@@ -407,19 +407,19 @@ h3 small {
 
 	.ngx-datatable.material.cell-selection .datatable-body-cell.active,
 	.ngx-datatable.material.cell-selection .datatable-body-cell.active .datatable-row-group {
-		background-color: #304FFE;
+		background-color: #673AB7;
 		color: #FFF;
 	}
 
 		.ngx-datatable.material.cell-selection .datatable-body-cell.active:hover,
 		.ngx-datatable.material.cell-selection .datatable-body-cell.active:hover .datatable-row-group {
-			background-color: #193AE4;
+			background-color: #673AB7;
 			color: #FFF;
 		}
 
 		.ngx-datatable.material.cell-selection .datatable-body-cell.active:focus,
 		.ngx-datatable.material.cell-selection .datatable-body-cell.active:focus .datatable-row-group {
-			background-color: #2041EF;
+			background-color: #673AB7;
 			color: #FFF;
 		}
 
@@ -563,7 +563,7 @@ h3 small {
 				animation: query 0.8s infinite cubic-bezier(0.39, 0.575, 0.565, 1);
 				transition: -webkit-transform .2s linear;
 				transition: transform .2s linear;
-				background-color: #106cc8;
+				background-color: #673AB7;
 				position: absolute;
 				left: 0;
 				top: 0;

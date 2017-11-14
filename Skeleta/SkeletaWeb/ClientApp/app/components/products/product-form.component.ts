@@ -68,6 +68,10 @@ export class ProductFormComponent implements OnInit {
 		//return this.editTemplate;
 	}
 
+	handlePageChange(event: any): void {
+		console.log(event);
+	}
+
 	editProduct(product: Product) {
 		this.selProduct = product;
 	}
