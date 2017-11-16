@@ -2,6 +2,8 @@
 import { fadeInOut } from '../../services/animations';
 import { ProductService, Product } from "../../services/ProductService";
 import { MatTableDataSource, MatPaginator, PageEvent } from "@angular/material";
+import { timer } from "../../services/commonServices";
+import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({
 	selector: 'app-products',
@@ -11,33 +13,32 @@ import { MatTableDataSource, MatPaginator, PageEvent } from "@angular/material";
 })
 /** products component*/
 export class ProductsComponent {
+	pageTitle: string;
+	loadInfo: string;
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	product: Product;
-	products: Array<Product>;
 	displayedColumns = ['Name', 'Code', 'Price', 'Rating'];
-	dataSource = new MatTableDataSource(this.products);
+	products = new MatTableDataSource(new Array<Product>());
 	// MatPaginator Inputs	
 	pageSize = 10;
+	length;
 	pageSizeOptions = [5, 10, 25, 100];
-	// MatPaginator Output
+	// MatPaginator Outputhttp://localhost:49623/products
 	pageEvent: PageEvent;
 	isLoaded = false;
-
-	constructor(private service: ProductService) {
-		this.products = new Array<Product>();
-	}
+	constructor(private service: ProductService) { }
 
 	//ngOnInit(): void {
 	//	this.loadProducts();
 	//}
-	ngAfterViewInit() {
-		//this.loadProducts();		
+	ngAfterViewInit() {		
+		this.loadProducts();
 	}
 
 	applyFilter(filterValue: string) {
 		filterValue = filterValue.trim(); // Remove whitespace
 		filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-		this.dataSource.filter = filterValue;
+		this.products.filter = filterValue;
 	}
 
 	setPageSizeOptions(setPageSizeOptionsInput: string) {
@@ -45,15 +46,42 @@ export class ProductsComponent {
 	}
 
 	private loadProducts() {
+		this.isLoaded = false;
+		this.pageTitle = "Loading..";
+		let loadTime = timer();
 		this.service.getProducts()
 			.subscribe(products => {
-				this.products = products;
-				this.dataSource = new MatTableDataSource(products);
-				this.dataSource.paginator = this.paginator;	
+				this.products = new MatTableDataSource(products);
+				this.products.paginator = this.paginator;
 				this.isLoaded = true;
+				this.loadInfo = `${this.products.data.length} Records loaded in ${loadTime.seconds}`;
+				this.pageTitle = "Products";
+			},
+			error => {
+				this.loadInfo = "Offline mode active - Your work will be saved!";
+				this.pageTitle = "Disconnected - Attempting to Reconnect..";
+				this.Reconnect();
+			}
+			);
+	}
+
+	private Reconnect() {
+		this.service.getProducts()
+			.subscribe(products => {
 				setTimeout(() => {
-					this.isLoaded = false;
-				},40000)
+					this.products = new MatTableDataSource(products);
+					this.products.paginator = this.paginator;
+					this.isLoaded = true;
+					this.loadInfo = `Successfully Reconnected! - Changes synced`;
+					this.pageTitle = "Products";
+				}, 5000)
+			},
+			error => {
+				this.Reconnect();
 			});
+	}
+
+	onRatingClicked(message: string): void {
+		this.pageTitle = 'Product Rating: ' + message;
 	}
 }

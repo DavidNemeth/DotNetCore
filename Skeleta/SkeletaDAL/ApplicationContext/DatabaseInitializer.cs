@@ -31,7 +31,27 @@ namespace SkeletaDAL.ApplicationContext
 		public async Task SeedAsync()
 		{
 			await _context.Database.MigrateAsync().ConfigureAwait(false);
+			if (!await _context.Products.AnyAsync())
+			{
+				for (int i = 0; i < 10000; i++)
+				{
+					var testProduct = new Product
+					{
+						Name = "Test product" + i,
+						Code = "ABCD-2315",
+						Description = "Test Data",
+						Price = 599.9,
+						Rating = 3.2,
+						ImageUrl = "",
+						UnitsInStock = 12,
+						IsActive = true,
+						IsDiscontinued = false
+					};
 
+					_context.Products.Add(testProduct);
+				}
+				await _context.SaveChangesAsync();
+			}
 			if (!await _context.Users.AnyAsync())
 			{
 				_logger.LogInformation("Generating inbuilt accounts");
@@ -123,6 +143,23 @@ namespace SkeletaDAL.ApplicationContext
 					CreatedDate = DateTime.Now,
 					UpdatedDate = DateTime.Now
 				};
+
+				var testProduct = new Product
+				{
+					Name = "Test product",
+					Code = "ABCD-2315",
+					Description = "Test Data",
+					Price = 599.9,
+					Rating = 3.2,
+					ImageUrl = "",
+					UnitsInStock = 12,
+					IsActive = true,
+					IsDiscontinued = false
+				};
+				for (int i = 0; i < 1000; i++)
+				{
+					_context.Products.Add(testProduct);
+				}
 
 				_context.Customers.Add(testCustomer1);
 				_context.Customers.Add(testCustomer2);

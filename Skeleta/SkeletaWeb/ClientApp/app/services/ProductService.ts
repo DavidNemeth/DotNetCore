@@ -5,6 +5,7 @@ import { FormGroup, FormControl } from "@angular/forms";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/timeout';
 
 @Injectable()
 export class ProductService {
@@ -13,9 +14,10 @@ export class ProductService {
 	constructor(private http: HttpClient) { }
 
 	getProducts(): Observable<Product[]> {
-		return this.http.get<Product[]>(this._baseUrl)
-			.do(data => console.log('All: ' + JSON.stringify(data)))
+		return this.http.get<Product[]>(this._baseUrl)			
+			.do(data => console.log('All: ' + JSON.stringify(data)))			
 			.catch(this.handleError);
+		
 	}
 
 	getPagedProducts() {
