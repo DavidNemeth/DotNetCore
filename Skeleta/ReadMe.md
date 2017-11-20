@@ -10,6 +10,10 @@ TODO:
 
 ChangeSets:   
   
+**2017.11.16:**  
+**-Implemented Auto reconnect**  
+**-Started Offline work mode**    
+  
 **2017.11.09:**  
 **-Added productForm**  
 **-Sample api calls with Observables**  
