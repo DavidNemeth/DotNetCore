@@ -1,19 +1,89 @@
 ﻿<div>
-	<h3>
-		Products
+	<h3 *ngFor='let sel of selected'>
+		{{sel.name}} {{sel.price | currency}}
+	</h3>
+	<h3 *ngIf="!selected.length">
+		{{pageTitle}}
 	</h3>
 	<input type='text'
 		   style='padding:8px;margin:15px auto;width:30%;'
-		   placeholder='Type to filter the name column...'
+		   placeholder='Search for..'
 		   (keyup)='updateFilter($event)' />
-	<ngx-datatable #table #readOnlyTemplate
+	<ngx-datatable #productsTable #readOnlyTemplate
 				   class='material'
-				   [columns]="columns"
+				   [rows]='rows'
 				   [columnMode]="'force'"
 				   [headerHeight]="50"
 				   [footerHeight]="50"
 				   [rowHeight]="'auto'"
 				   [limit]="10"
-				   [rows]='rows'>
+				   [selected]="selected"
+				   [selectionType]="'single'"
+				   (activate)="onActivate($event)"
+				   (select)='onSelect($event)'>
+
+		<!-- Row Detail DropDown Template -->
+		<ngx-datatable-row-detail [rowHeight]="auto">
+			<ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+				<div class="col-md-2">
+					<img src={{row.imageUrl}} alt="Image not found" />
+				</div>
+				<div class="col-md-5">
+					<ul>
+						<li>Name: {{row.name}}</li>
+						<li>Description: {{row.description}}</li>
+						<li>Price: {{row.price | currency}}</li>
+						<li>
+							Rating:
+							<sk-star [rating]="row.rating"
+									 (ratingClicked)="onRatingClicked($event)">
+							</sk-star>
+						</li>
+					</ul>
+				</div>
+
+			</ng-template>
+		</ngx-datatable-row-detail>
+
+		<!-- Column Templates -->
+		<ngx-datatable-column [width]="50"
+							  [resizeable]="false"
+							  [sortable]="false"
+							  [draggable]="false"
+							  [canAutoResize]="false">
+			<ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+				<a href="javascript:void(0)"
+				   [class.datatable-icon-right]="!expanded"
+				   [class.datatable-icon-down]="expanded"
+				   title="Expand/Collapse Row"
+				   (click)="toggleExpandRow(row)">
+				</a>
+			</ng-template>
+		</ngx-datatable-column>
+
+		<ngx-datatable-column name="Name">
+			<ng-template let-value="value" ngx-datatable-cell-template>
+				<strong>{{value}}</strong>
+			</ng-template>
+		</ngx-datatable-column>
+		<ngx-datatable-column name="Code">
+			<ng-template let-value="value" ngx-datatable-cell-template>
+				<strong>{{value}}</strong>
+			</ng-template>
+		</ngx-datatable-column>
+		<ngx-datatable-column name="Price">
+			<ng-template let-value="value" ngx-datatable-cell-template>
+				<strong>{{value | currency}}</strong>
+			</ng-template>
+		</ngx-datatable-column>
 	</ngx-datatable>
+	<div class='selected-column'>
+		<h4>Selections</h4>
+		<ul>
+			<li *ngFor='let sel of selected'>
+				{{sel.name}}
+			</li>
+			<li *ngIf="!selected.length">No Selections</li>
+		</ul>
+	</div>
 </div>

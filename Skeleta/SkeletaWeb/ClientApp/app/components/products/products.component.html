@@ -2,10 +2,10 @@
 <small>{{loadInfo}}</small>
 <div class="skeleta-container mat-elevation-z8">
 	<button mat-button (click)="loadProducts()" color="primary"><b>{{pageTitle}}</b></button>
-	<mat-table #table [dataSource]="products">
+	<mat-table #table [dataSource]="products" matSort>
 		<!-- Name Column -->
 		<ng-container matColumnDef="Name">
-			<mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
 			<mat-cell *matCellDef="let product"> {{product.name}} </mat-cell>
 		</ng-container>
 		<!-- Code Column -->

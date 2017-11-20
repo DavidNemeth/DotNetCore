@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit, ViewChild } from '@angular/core';
 import { fadeInOut } from '../../services/animations';
 import { ProductService, Product } from "../../services/ProductService";
-import { MatTableDataSource, MatPaginator, PageEvent } from "@angular/material";
+import { MatTableDataSource, MatPaginator, PageEvent, MatSort } from "@angular/material";
 import { timer } from "../../services/commonServices";
 import { HttpErrorResponse } from "@angular/common/http";
 
@@ -13,26 +13,27 @@ import { HttpErrorResponse } from "@angular/common/http";
 })
 /** products component*/
 export class ProductsComponent {
+	showImage = true;
 	pageTitle: string;
 	loadInfo: string;
+	@ViewChild(MatSort) sort: MatSort;
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	product: Product;
-	displayedColumns = ['Name', 'Code', 'Price', 'Rating'];
 	products = new MatTableDataSource(new Array<Product>());
+	displayedColumns = ['Name', 'Code', 'Price', 'Rating'];	
 	// MatPaginator Inputs	
 	pageSize = 10;
 	length;
 	pageSizeOptions = [5, 10, 25, 100];
-	// MatPaginator Outputhttp://localhost:49623/products
 	pageEvent: PageEvent;
 	isLoaded = false;
 	constructor(private service: ProductService) { }
 
-	//ngOnInit(): void {
-	//	this.loadProducts();
-	//}
 	ngAfterViewInit() {		
-		this.loadProducts();
+		this.loadProducts();	
+		this.products.paginator = this.paginator;
+		this.products.sort = this.sort;
+		this.showImage = true;
 	}
 
 	applyFilter(filterValue: string) {
@@ -51,8 +52,7 @@ export class ProductsComponent {
 		let loadTime = timer();
 		this.service.getProducts()
 			.subscribe(products => {
-				this.products = new MatTableDataSource(products);
-				this.products.paginator = this.paginator;
+				this.products = new MatTableDataSource(products);				
 				this.isLoaded = true;
 				this.loadInfo = `${this.products.data.length} Records loaded in ${loadTime.seconds}`;
 				this.pageTitle = "Products";
@@ -83,5 +83,6 @@ export class ProductsComponent {
 
 	onRatingClicked(message: string): void {
 		this.pageTitle = 'Product Rating: ' + message;
+		this.showImage = false;
 	}
 }

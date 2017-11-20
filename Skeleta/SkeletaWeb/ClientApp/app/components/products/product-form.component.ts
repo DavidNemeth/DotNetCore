@@ -11,7 +11,8 @@ import { DatatableComponent } from "@swimlane/ngx-datatable/release";
 	encapsulation: ViewEncapsulation.None
 })
 /** product-form component*/
-export class ProductFormComponent implements OnInit {
+export class ProductFormComponent implements OnInit {	
+	pageTitle: string = "Products";
 	@ViewChild('readOnlyTemplate') readOnlyTemplate: TemplateRef<any>;
 	@ViewChild('editTemplate') editTemplate: TemplateRef<any>;
 	product: Product;
@@ -21,15 +22,12 @@ export class ProductFormComponent implements OnInit {
 	statusMessage: string;
 	loadingIndicator: boolean = true;
 	reorderable: boolean = true;
+	showImage = false;
+	@ViewChild(DatatableComponent) productsTable: DatatableComponent;
+	expanded: any = {};
 	rows: Product[];
 	filteredByName: Product[];
-	columns = [
-		{ name: 'Name' },
-		{ name: 'Code' },
-		{ name: 'Price' },
-		{ name: 'Rating' }
-	];
-	@ViewChild(DatatableComponent) table: DatatableComponent;
+	selected = [];
 
 	constructor(private service: ProductService) {
 		this.products = new Array<Product>();
@@ -43,8 +41,9 @@ export class ProductFormComponent implements OnInit {
 		this.service.getProducts()
 			.subscribe(products => {
 				this.filteredByName = [...products];
-				this.rows = products;				
+				this.rows = products;
 				this.products = products;
+				this.showImage = false;
 			});
 	}
 
@@ -58,7 +57,7 @@ export class ProductFormComponent implements OnInit {
 		// update the rows
 		this.rows = filteredByName;
 		// Whenever the filter changes, always go back to the first page
-		this.table.offset = 0;
+		this.productsTable.offset = 0;
 	}
 
 	addProduct() {
@@ -116,5 +115,30 @@ export class ProductFormComponent implements OnInit {
 				this.products.splice(this.products.indexOf(product), 1);
 		});
 
+	}
+	
+	onExpandRow(row) {
+		this.productsTable.rowDetail.collapseAllRows();
+		this.productsTable.rowDetail.toggleExpandRow(row);
+	}
+	onCollapseRow() {
+		this.productsTable.rowDetail.collapseAllRows();
+	}
+	toggleExpandRow(row) {
+		this.showImage = !this.showImage;
+		this.productsTable.rowDetail.toggleExpandRow(row);
+		let product: Product = row;		
+	}
+
+	
+
+	onSelect({ selected }) {
+		console.log('Select Event', selected, this.selected);
+		this.selected.splice(0, this.selected.length);
+		this.selected.push(...selected);		
+	}
+
+	onActivate(event) {
+		console.log('Activate Event', event);
 	}
 }
