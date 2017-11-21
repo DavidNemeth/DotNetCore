@@ -1,0 +1,10 @@
+﻿<h1 mat-dialog-title>ID:{{product.id}}</h1>
+<div mat-dialog-content>
+	<mat-form-field>
+		<input matInput tabindex="1" [(ngModel)]="product.name">
+	</mat-form-field>	
+</div>
+<div mat-dialog-actions>
+	<button mat-button [mat-dialog-close]="product.name" tabindex="2">Save</button>
+	<button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+</div>

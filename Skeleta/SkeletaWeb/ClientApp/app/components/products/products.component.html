@@ -1,44 +1,90 @@
-﻿<input type="text" (keyup)="applyFilter($event.target.value)" placeholder="Search for...">
-<small>{{loadInfo}}</small>
-<div class="skeleta-container mat-elevation-z8">
-	<button mat-button (click)="loadProducts()" color="primary"><b>{{pageTitle}}</b></button>
-	<mat-table #table [dataSource]="products" matSort>
-		<!-- Name Column -->
-		<ng-container matColumnDef="Name">
-			<mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
-			<mat-cell *matCellDef="let product"> {{product.name}} </mat-cell>
-		</ng-container>
-		<!-- Code Column -->
-		<ng-container matColumnDef="Code">
-			<mat-header-cell *matHeaderCellDef> Code </mat-header-cell>
-			<mat-cell *matCellDef="let product"> {{product.code}} </mat-cell>
-		</ng-container>
-		<!-- Price Column -->
-		<ng-container matColumnDef="Price">
-			<mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
-			<mat-cell *matCellDef="let product"> {{product.price}} </mat-cell>
-		</ng-container>
-		<!-- Rating Column -->
-		<ng-container matColumnDef="Rating">
-			<mat-header-cell *matHeaderCellDef> Rating </mat-header-cell>
-			<mat-cell *matCellDef="let product">
-				<sk-star [rating]="product.rating"
-						 (ratingClicked)="onRatingClicked($event)">
-				</sk-star>
-			</mat-cell>
-		</ng-container>
-		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-		<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-	</mat-table>
-	<mat-progress-bar *ngIf="!isLoaded" mode="indeterminate"></mat-progress-bar>
-	<mat-paginator [length]="length"
-				   [pageSize]="pageSize"
-				   [pageSizeOptions]="pageSizeOptions"
-				   (page)="pageEvent = $event">
-	</mat-paginator>
+﻿<div>
+	<input type='text'
+		   style='padding:8px;margin:15px auto;width:30%;'
+		   placeholder='Search for..'
+		   (keyup)='updateFilter($event)' />
+	<small>{{loadInfo}}</small>
+	<div class="skeleta-container mat-elevation-z8">
+		<button mat-button (click)="loadProducts()" color="primary">
+			<b>{{pageTitle}}</b>
+		</button>
+		<mat-progress-bar *ngIf="!isLoaded" mode="indeterminate"></mat-progress-bar>
+		<ngx-datatable #productsTable #readOnlyTemplate
+					   class='material'
+					   [rows]='products'
+					   [columnMode]="'force'"
+					   [headerHeight]="30"
+					   [footerHeight]="30"
+					   [rowHeight]="'auto'"
+					   [limit]="8"
+					   [selected]="selected"
+					   [selectionType]="'single'"
+					   (select)='onSelect($event)'>
+
+			<!-- Row Detail DropDown Template -->
+			<ngx-datatable-row-detail [rowHeight]="auto">
+				<ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+					<div class="col-md-2">
+						<img src={{row.imageUrl}} alt="Image not found" />
+					</div>
+					<div class="col-md-5">
+						<ul>
+							<li>Name: {{row.name}}</li>
+							<li>Description: {{row.description}}</li>
+							<li>Price: {{row.price | currency}}</li>
+							<li>
+								Rating:
+								<sk-star [rating]="row.rating"
+										 (ratingClicked)="onRatingClicked($event)">
+								</sk-star>
+							</li>
+						</ul>
+					</div>
+
+				</ng-template>
+			</ngx-datatable-row-detail>
+
+			<!-- Column Templates -->
+			<ngx-datatable-column [width]="50"
+								  [resizeable]="false"
+								  [sortable]="false"
+								  [draggable]="false"
+								  [canAutoResize]="false">
+				<ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+					<a href="javascript:void(0)"
+					   [class.datatable-icon-right]="!expanded"
+					   [class.datatable-icon-down]="expanded"
+					   title="Expand/Collapse Row"
+					   (click)="toggleExpandRow(row)">
+					</a>
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="Id">
+				<ng-template let-value="value" ngx-datatable-cell-template>
+					<strong>{{value}}</strong>
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="Name">
+				<ng-template let-value="value" ngx-datatable-cell-template>
+					<strong>{{value}}</strong>
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="Code">
+				<ng-template let-value="value" ngx-datatable-cell-template>
+					<strong>{{value}}</strong>
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="Price">
+				<ng-template let-value="value" ngx-datatable-cell-template>
+					<strong>{{value | currency}}</strong>
+				</ng-template>
+			</ngx-datatable-column>
+			<ngx-datatable-column name="">
+				<ng-template let-row="row" ngx-datatable-cell-template>
+					<mat-icon color="default" (click)="editProduct(row)">edit</mat-icon>
+					<mat-icon color="warn" (click)="deleteProduct(row)">delete</mat-icon>
+				</ng-template>
+			</ngx-datatable-column>
+		</ngx-datatable>
+	</div>
 </div>
-<!--<img *ngIf="showImage"
-	 [src]='product.imageUrl'
-	 [title]="product.Name"
-	 [style.width.px]="imageWidth"
-	 [style.margin.px]="imageMargin">-->

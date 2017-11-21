@@ -11,6 +11,7 @@
 	"homepage": "https://github.com/DavidNemeth",
 	"repository": "https://github.com/DavidNemeth/DotNetCore/tree/master/Skeleta",
 	"dependencies": {
+		"ngx-filter-pipe": "^1.0.0",
 		"@angular/animations": "^5.0.0",
 		"@angular/material": "^5.0.0",
 		"@angular/cdk": "^5.0.0",

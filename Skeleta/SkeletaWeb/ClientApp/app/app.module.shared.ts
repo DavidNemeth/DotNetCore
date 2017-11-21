@@ -8,19 +8,19 @@ import { AppComponent } from './components/app/app.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProductsComponent } from './components/products/products.component';
-import { ProductDetailComponent } from './components/products/product-detail.component';
+import { ProductModalComponent } from './components/products/product-modal.component';
 import { ConvertToSpacePipe } from "./pipes/convert-to-space.pipe";
 import { GroupByPipe } from './pipes/group-by.pipe';
 import { StarComponent } from './components/shared/star.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { CustomerComponent } from "./components/customer/customer.component";
-import { ProductFormComponent } from "./components/products/product-form.component";
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from "./app.routing";
 import { MaterialModule } from "./material.module";
-
+import { FilterPipeModule } from 'ngx-filter-pipe';
+import { MatDialogModule } from "@angular/material";
 
 @NgModule({
 	declarations: [
@@ -28,16 +28,19 @@ import { MaterialModule } from "./material.module";
 		NavMenuComponent,
 		HomeComponent,
 		ProductsComponent,
+		ProductModalComponent,
 		CustomerComponent,
-		ProductFormComponent,
-		ProductDetailComponent,
 		GroupByPipe,
 		ConvertToSpacePipe,
-		StarComponent		
+		StarComponent
+	],
+	entryComponents: [		
+		ProductsComponent,
+		ProductModalComponent
 	],
 	imports: [
 		ModalModule.forRoot(),
-		BrowserAnimationsModule,		
+		BrowserAnimationsModule,
 		ReactiveFormsModule,
 		NoopAnimationsModule,
 		NgxDatatableModule,
@@ -45,7 +48,9 @@ import { MaterialModule } from "./material.module";
 		HttpClientModule,
 		FormsModule,
 		AppRoutingModule,
-		MaterialModule
+		MaterialModule,
+		FilterPipeModule,
+		MatDialogModule
 	]
 })
 export class AppModuleShared {
