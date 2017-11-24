@@ -27,7 +27,7 @@
 				<ngx-datatable-row-detail [rowHeight]="auto">
 					<ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
 						<div class="col-md-2">
-							<img src={{row.imageUrl}} alt="Image not found" />
+							<img class="toolbarImage" [src]="row.imageUrl" alt="Image not found">
 						</div>
 						<div class="col-md-5">
 							<ul>
@@ -97,7 +97,7 @@
 			<mat-toolbar>{{product.name}} {{product.price | currency}}</mat-toolbar>
 			<mat-grid-list cols="4" rowHeight="1:1">
 				<mat-grid-tile colspan='1'>
-					<img class="toolbarImage" [src]="product.imageUrl">
+					<img class="toolbarImage" [src]="product.imageUrl" alt="Image not found">
 				</mat-grid-tile>
 				<mat-grid-tile colspan='3'>			
 						<mat-card-content>
