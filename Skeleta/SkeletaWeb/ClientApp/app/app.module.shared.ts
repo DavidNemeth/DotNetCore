@@ -8,7 +8,6 @@ import { AppComponent } from './components/app/app.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProductsComponent } from './components/products/products.component';
-import { ProductModalComponent } from './components/products/product-modal.component';
 import { ConvertToSpacePipe } from "./pipes/convert-to-space.pipe";
 import { GroupByPipe } from './pipes/group-by.pipe';
 import { StarComponent } from './components/shared/star.component';
@@ -21,6 +20,7 @@ import { AppRoutingModule } from "./app.routing";
 import { MaterialModule } from "./material.module";
 import { FilterPipeModule } from 'ngx-filter-pipe';
 import { MatDialogModule } from "@angular/material";
+import { ProductEditComponent } from "./components/products/product-edit.component";
 
 @NgModule({
 	declarations: [
@@ -28,15 +28,13 @@ import { MatDialogModule } from "@angular/material";
 		NavMenuComponent,
 		HomeComponent,
 		ProductsComponent,
-		ProductModalComponent,
+		ProductEditComponent,
 		CustomerComponent,
 		GroupByPipe,
 		ConvertToSpacePipe,
 		StarComponent
 	],
-	entryComponents: [		
-		ProductsComponent,
-		ProductModalComponent
+	entryComponents: [				
 	],
 	imports: [
 		ModalModule.forRoot(),

@@ -13,37 +13,37 @@ export class ProductService {
 
 	constructor(private http: HttpClient) { }
 
-	getProducts(): Observable<Product[]> {
-		return this.http.get<Product[]>(this._baseUrl)			
-			.do(data => console.log('All: ' + JSON.stringify(data)))			
+	getProducts(): Observable<IProduct[]> {
+		return this.http.get<IProduct[]>(this._baseUrl)
+			.do(data => console.log('All: ' + JSON.stringify(data)))
 			.catch(this.handleError);
-		
+
 	}
 
 	getPagedProducts() {
 		//todo
 	}
 
-	getProduct(id: number): Observable<Product> {
+	getProduct(id: number): Observable<IProduct> {
 		const url = `${this._baseUrl}/${id}`;
-		return this.http.get<Product>(url)
+		return this.http.get<IProduct>(url)
 			.catch(this.handleError);
 	}
 
-	updateProduct(product: Product): Observable<Product> {
+	updateProduct(product: IProduct): Observable<IProduct> {
 		const url = `${this._baseUrl}/${product.id}`;
 		return this.http.put(url, product)
 			.catch(this.handleError);
-	}	
+	}
 
-	addProduct(product: Product): Observable < Product > {
+	addProduct(product: IProduct): Observable<IProduct> {
 		return this.http.post(this._baseUrl, product)
 			.catch(this.handleError);
 	}
 
-	deleteProduct(id: number): Observable<Product> {
+	deleteProduct(id: number): Observable<IProduct> {
 		const url = `${this._baseUrl}/${id}`;
-		return this.http.delete<Product>(url)
+		return this.http.delete<IProduct>(url)
 			.catch(this.handleError);
 	}
 
@@ -53,7 +53,17 @@ export class ProductService {
 	}
 }
 
-export class Product {
+export interface IProduct {
+	id: number;
+	name: string;
+	code: string;
+	description: string;
+	price: number;
+	rating: number;
+	imageUrl: string;
+}
+
+export class Product implements IProduct{
 	constructor(
 		public id: number,
 		public name: string,

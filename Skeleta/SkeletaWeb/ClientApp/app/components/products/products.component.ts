@@ -1,11 +1,10 @@
 ﻿import { Component, OnInit, ViewChild, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
-import { Product, ProductService } from "../../services/ProductService";
+import { Product, ProductService, IProduct } from "../../services/ProductService";
 import { Observable } from 'rxjs/Observable';
 import { DatatableComponent } from "@swimlane/ngx-datatable/release";
 import { timer } from "../../services/commonServices";
 import { MatDialog } from "@angular/material";
-import { ProductModalComponent } from "./product-modal.component";
 
 @Component({
 	selector: 'app-product-form',
@@ -13,23 +12,22 @@ import { ProductModalComponent } from "./product-modal.component";
 	styleUrls: ['./products.component.css'],
 	encapsulation: ViewEncapsulation.None
 })
-/** product-form component*/
+	/** product-form component*/	
 export class ProductsComponent implements OnInit {
+	viewStates: string = "List";
+	isNewRecord: boolean;
 	canRestore: boolean;
 	loadInfo: string;
 	pageTitle: string = "Products";
-	@ViewChild('readOnlyTemplate') readOnlyTemplate: TemplateRef<any>;
-	@ViewChild('editTemplate') editTemplate: TemplateRef<any>;
-	product: Product;
+	product: IProduct;
 	@ViewChild(DatatableComponent) productsTable: DatatableComponent;
 	expanded: any = {};
-	products: Product[];
-	filteredByName: Product[];
+	products: IProduct[];
+	filteredByName: IProduct[];
 	selected = [];
 	isLoaded = false;
 
 	constructor(private service: ProductService, public editModal: MatDialog) {
-		this.products = new Array<Product>();
 	}
 
 	ngOnInit(): void {
@@ -53,6 +51,18 @@ export class ProductsComponent implements OnInit {
 				this.pageTitle = "Disconnected - Attempting to Reconnect..";
 				this.Reconnect();
 			});
+	}
+
+	private loadProduct(row): void {
+		let product: Product = row;
+		this.product = product;
+		if (this.product != null) {
+			this.viewStates = "Edit";
+		}
+	}
+
+	cancel(): void {
+
 	}
 
 	private Reconnect() {
@@ -91,29 +101,24 @@ export class ProductsComponent implements OnInit {
 		this.selected.push(...selected);
 	}
 
+
+	back(): void {
+		this.viewStates = "List";
+	}
 	//*Client side Ops*//
 	deleteProduct(product: Product) {
 		this.products = this.products.filter(item => item.id !== product.id);
 	}
 
 	updateProduct(product: Product) {
-
-	}
-
-	addProduct() {
-
-	}
-
-	editProduct(product): void {
-		this.product = product;
-		let dialogRef = this.editModal.open(ProductModalComponent, {
-			width: '250px',
-			data: { product: product }
-		});
-
-		dialogRef.afterClosed().subscribe(result => {
-			console.log('The dialog was closed');
-			product = this.product;
-		});
+		this.service.updateProduct(product)
+			.subscribe(product => {
+				this.pageTitle = `${this.product.name} Successfully Updated!`;
+			},
+			error => {
+				this.pageTitle = error;
+			}
+			);
+		this.viewStates = "List";
 	}
 }
