@@ -1,5 +1,15 @@
-﻿.toolbarImage {
-	height:200px;
+﻿img {
+	height:230px;
+	width: auto;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.toolbarImage {
+	/*width: 100%;
+	height: 200px;
+	overflow: hidden;
+	position: relative;*/
 }
 
 .skeleta-form {
@@ -10,4 +20,8 @@
 
 .skeleta-full-width {
 	width: 100%;
+}
+
+mat-card-content {
+	margin-bottom: 0px !important;
 }
