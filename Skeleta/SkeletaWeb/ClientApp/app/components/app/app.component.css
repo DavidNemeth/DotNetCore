@@ -4,6 +4,7 @@
 		padding-top: 50px;
 	}
 }
+
 .ngx-datatable.material.single-selection .datatable-body-row.active, .ngx-datatable.material.single-selection .datatable-body-row.active .datatable-row-group, .ngx-datatable.material.multi-selection .datatable-body-row.active, .ngx-datatable.material.multi-selection .datatable-body-row.active .datatable-row-group, .ngx-datatable.material.multi-click-selection .datatable-body-row.active, .ngx-datatable.material.multi-click-selection .datatable-body-row.active .datatable-row-group {
 	background-color: rgba(103, 58, 183, 0.40) !important;
 }
@@ -733,4 +734,19 @@ h3 {
 		opacity: 0;
 		transform: translateX(-50%) scale(0, 1);
 	}
+}
+.material-icons.md-18 {
+	font-size: 18px;
+}
+
+.material-icons.md-24 {
+	font-size: 24px;
+}
+
+.material-icons.md-36 {
+	font-size: 36px;
+}
+
+.material-icons.md-48 {
+	font-size: 48px;
 }

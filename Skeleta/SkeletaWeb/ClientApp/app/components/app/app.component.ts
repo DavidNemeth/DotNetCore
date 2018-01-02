@@ -6,7 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
 	selector: 'skeleta-app',
 	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css', '../../styles.css'],
+	styleUrls: ['./app.component.css', '../../style.css'],
 	encapsulation: ViewEncapsulation.None,
 	providers: [
 		ProductService,

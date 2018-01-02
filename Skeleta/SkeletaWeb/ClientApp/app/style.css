@@ -1,0 +1,12 @@
+﻿@import url('https://fonts.googleapis.com/css?family=Muli:400,700');
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+@import './assets/styles/ngx-datatable.css';
+@import './assets/styles/alertify.core.css';
+@import './assets/styles/alertify.bootstrap.css';
+
+
+body {
+	background: #e8e8e8;
+	font-family: 'Muli';
+}

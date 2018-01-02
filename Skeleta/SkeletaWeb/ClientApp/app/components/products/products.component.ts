@@ -51,9 +51,9 @@ export class ProductsComponent implements OnInit {
 				this.pageTitle = "Disconnected - Attempting to Reconnect..";
 				this.Reconnect();
 			});
-	}
+	}	
 
-	private loadProduct(row): void {
+	private loadExpanded(row): void {
 		let product: Product = row;
 		this.product = product;
 		if (this.product != null) {
@@ -104,14 +104,15 @@ export class ProductsComponent implements OnInit {
 
 	back(): void {
 		this.viewStates = "List";
+		this.loadProducts();
 	}
 	//*Client side Ops*//
 	deleteProduct(product: Product) {
 		this.products = this.products.filter(item => item.id !== product.id);
 	}
 
-	updateProduct(product: Product) {
-		this.service.updateProduct(product)
+	updateProduct() {
+		this.service.updateProduct(this.product)
 			.subscribe(product => {
 				this.pageTitle = `${this.product.name} Successfully Updated!`;
 			},
