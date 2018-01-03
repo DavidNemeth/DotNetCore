@@ -12,7 +12,7 @@ import { MatDialog } from "@angular/material";
 	styleUrls: ['./products.component.css'],
 	encapsulation: ViewEncapsulation.None
 })
-	/** product-form component*/	
+/** product-form component*/
 export class ProductsComponent implements OnInit {
 	viewStates: string = "List";
 	isNewRecord: boolean;
@@ -51,9 +51,14 @@ export class ProductsComponent implements OnInit {
 				this.pageTitle = "Disconnected - Attempting to Reconnect..";
 				this.Reconnect();
 			});
-	}	
+	}
 
-	private loadExpanded(row): void {
+	private addView() {
+		this.product = new Product(0, '', '', '', 0, 0, '');
+		this.viewStates = "Add";
+	}
+
+	private editProduct(row): void {
 		let product: Product = row;
 		this.product = product;
 		if (this.product != null) {
@@ -106,9 +111,19 @@ export class ProductsComponent implements OnInit {
 		this.viewStates = "List";
 		this.loadProducts();
 	}
-	//*Client side Ops*//
+
+
 	deleteProduct(product: Product) {
-		this.products = this.products.filter(item => item.id !== product.id);
+		this.service.deleteProduct(product.id)
+			.subscribe(product => {
+				this.pageTitle = `${product.name} Successfully Deleted!`;
+				this.products = this.products.filter(item => item.id !== product.id);
+			},
+			error => {
+				this.pageTitle = error;
+			}
+			);
+		this.viewStates = "List";
 	}
 
 	updateProduct() {
@@ -121,5 +136,20 @@ export class ProductsComponent implements OnInit {
 			}
 			);
 		this.viewStates = "List";
+	}
+
+	addProduct() {
+		this.service.addProduct(this.product)
+			.subscribe(product => {
+				this.pageTitle = `${this.product.name} Successfully Added!`;
+				this.products.push(this.product);
+				this.loadProducts();
+				this.viewStates = "List";	
+			},
+			error => {
+				this.pageTitle = error;
+				this.viewStates = "List";	
+			}
+			);
 	}
 }

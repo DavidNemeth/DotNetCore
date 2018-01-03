@@ -6,7 +6,7 @@
 			   style='padding:8px;margin:15px auto;width:30%;'
 			   placeholder='Search for..'
 			   (keyup)='updateFilter($event)' />
-		<input type="button" value="Add" class="btn btn-default" (click)="addProduct()" />
+		<input type="button" value="Add" class="btn btn-default" (click)="addView()" />
 		<small>{{loadInfo}}</small>
 		<div class="skeleta-container mat-elevation-z8">
 			<button mat-button (click)="loadProducts()" color="primary">
@@ -57,7 +57,7 @@
 									  [canAutoResize]="false">
 					<ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
 						<mat-icon *ngIf="!expanded" color="primary" class="md-24" (click)="toggleExpandRow(row)">arrow_drop_down</mat-icon>
-						<mat-icon *ngIf="expanded" color="primary" class="md-24" (click)="toggleExpandRow(row)">arrow_drop_up</mat-icon>						
+						<mat-icon *ngIf="expanded" color="primary" class="md-24" (click)="toggleExpandRow(row)">arrow_drop_up</mat-icon>
 					</ng-template>
 				</ngx-datatable-column>
 				<ngx-datatable-column name="Id">
@@ -82,7 +82,7 @@
 				</ngx-datatable-column>
 				<ngx-datatable-column name="">
 					<ng-template let-row="row" ngx-datatable-cell-template>
-						<a (click)="loadExpanded(row)"><mat-icon color="default">edit</mat-icon></a>
+						<a (click)="editProduct(row)"><mat-icon color="default">edit</mat-icon></a>
 						<mat-icon color="warn" (click)="deleteProduct(row)">delete</mat-icon>
 					</ng-template>
 				</ngx-datatable-column>
@@ -91,7 +91,7 @@
 	</div>
 
 	<!--EDIT Product Section-->
-	<div *ngSwitchCase="'Edit'">		
+	<div *ngSwitchCase="'Edit'">
 		<mat-card color="primary" class="skeleta-container mat-elevation-z10">
 			<mat-grid-list cols="4" rowHeight="1:1">
 				<mat-grid-tile colspan='1'>
@@ -126,7 +126,7 @@
 								</button>
 							</mat-form-field>
 							<mat-form-field class="skeleta-full-width">
-								<input [(ngModel)]="product.imageUrl" matInput placeholder="Image Link" name="imageUrl"/>
+								<input [(ngModel)]="product.imageUrl" matInput placeholder="Image Link" name="imageUrl" />
 								<button mat-button *ngIf="product.imageUrl" matSuffix mat-icon-button aria-label="Clear" (click)="product.imageUrl=''">
 									<mat-icon>close</mat-icon>
 								</button>
@@ -138,7 +138,7 @@
 								</button>
 							</mat-form-field>
 						</mat-card-content>
-						<button mat-raised-button type="submit" (click)="updateProduct()" color="primary" [disabled]="!productForm.form.valid">
+						<button mat-raised-button type="submit" color="primary" [disabled]="!productForm.form.valid">
 							<b>Update</b>
 						</button>
 						<button mat-raised-button (click)="back()">
@@ -147,6 +147,66 @@
 					</form>
 				</mat-grid-tile>
 			</mat-grid-list>
-		</mat-card>		
+		</mat-card>
 	</div>
+
+	<div *ngSwitchCase="'Add'">
+		<mat-card color="primary" class="skeleta-container mat-elevation-z10">
+			<mat-grid-list cols="4" rowHeight="1:1">
+				<mat-grid-tile colspan='1'>
+					<img class="toolbarImage" [src]="product.imageUrl" alt="Image not found">
+				</mat-grid-tile>
+				<mat-grid-tile colspan='3'>
+					<form (ngSubmit)="addProduct()" #productForm="ngForm">
+						<mat-card-content>
+							<mat-form-field>
+								<input required maxlength="100" [(ngModel)]="product.name" matInput placeholder="Name" name="name">
+								<button mat-button *ngIf="product.name" matSuffix mat-icon-button aria-label="Clear" (click)="product.name=''">
+									<mat-icon>close</mat-icon>
+								</button>
+							</mat-form-field>
+							<mat-form-field>
+								<input required maxlength="9" [(ngModel)]="product.code" matInput placeholder="Code" name="code">
+								<button mat-button *ngIf="product.code" matSuffix mat-icon-button aria-label="Clear" (click)="product.code=''">
+									<mat-icon>close</mat-icon>
+								</button>
+							</mat-form-field>
+							<mat-form-field>
+								<input required maxlength="6" [(ngModel)]="product.price" matInput placeholder="Price" type="number" name="price">
+								<button mat-button *ngIf="product.price" matSuffix mat-icon-button aria-label="Clear" (click)="product.price=''">
+									<mat-icon>close</mat-icon>
+								</button>
+								<span matPrefix>$&nbsp;</span>
+							</mat-form-field>
+							<mat-form-field>
+								<input [(ngModel)]="product.rating" matInput placeholder="Rating" type="number" name="rating">
+								<button mat-button *ngIf="product.rating" matSuffix mat-icon-button aria-label="Clear" (click)="product.rating=''">
+									<mat-icon>close</mat-icon>
+								</button>
+							</mat-form-field>
+							<mat-form-field class="skeleta-full-width">
+								<input [(ngModel)]="product.imageUrl" matInput placeholder="Image Link" name="imageUrl" />
+								<button mat-button *ngIf="product.imageUrl" matSuffix mat-icon-button aria-label="Clear" (click)="product.imageUrl=''">
+									<mat-icon>close</mat-icon>
+								</button>
+							</mat-form-field>
+							<mat-form-field class="skeleta-full-width">
+								<input [(ngModel)]="product.description" matInput placeholder="Description" name="description" />
+								<button mat-button *ngIf="product.description" matSuffix mat-icon-button aria-label="Clear" (click)="product.description=''">
+									<mat-icon>close</mat-icon>
+								</button>
+							</mat-form-field>
+						</mat-card-content>
+						<button mat-raised-button type="submit" color="primary" [disabled]="!productForm.form.valid">
+							<b>Create</b>
+						</button>
+						<button mat-raised-button (click)="back()">
+							<b>Cancel</b>
+						</button>
+					</form>
+				</mat-grid-tile>
+			</mat-grid-list>
+		</mat-card>
+	</div>
+
 </main>
