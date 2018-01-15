@@ -77,6 +77,12 @@
     <None Update="ClientApp\app\components\products\products.component.ts">
       <DependentUpon>products.component.html</DependentUpon>
     </None>
+    <None Update="ClientApp\app\components\shared\confirm.component.css">
+      <DependentUpon>confirm.component.html</DependentUpon>
+    </None>
+    <None Update="ClientApp\app\components\shared\confirm.component.ts">
+      <DependentUpon>confirm.component.html</DependentUpon>
+    </None>
     <None Update="ClientApp\app\components\shared\star.component.css">
       <DependentUpon>star.component.html</DependentUpon>
     </None>

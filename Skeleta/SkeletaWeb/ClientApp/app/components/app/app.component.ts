@@ -2,6 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { CustomerService } from "../../services/CustomerService";
 import { ProductService } from "../../services/ProductService";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PubSubService } from '../../services/pub-sub.service';
 
 @Component({
 	selector: 'skeleta-app',
@@ -10,6 +11,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 	encapsulation: ViewEncapsulation.None,
 	providers: [
 		ProductService,
+		PubSubService,
 		CustomerService
 	]
 })

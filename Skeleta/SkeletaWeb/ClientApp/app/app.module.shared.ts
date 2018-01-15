@@ -21,6 +21,7 @@ import { MaterialModule } from "./material.module";
 import { FilterPipeModule } from 'ngx-filter-pipe';
 import { MatDialogModule } from "@angular/material";
 import { ProductEditComponent } from "./components/products/product-edit.component";
+import { ConfirmComponent } from './components/shared/confirm.component';
 
 @NgModule({
 	declarations: [
@@ -32,9 +33,11 @@ import { ProductEditComponent } from "./components/products/product-edit.compone
 		CustomerComponent,
 		GroupByPipe,
 		ConvertToSpacePipe,
-		StarComponent
+		StarComponent,
+		ConfirmComponent
 	],
-	entryComponents: [				
+	entryComponents: [	
+		ConfirmComponent
 	],
 	imports: [
 		ModalModule.forRoot(),

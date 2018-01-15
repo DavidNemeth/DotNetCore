@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { DatatableComponent } from "@swimlane/ngx-datatable/release";
 import { timer } from "../../services/commonServices";
 import { MatDialog } from "@angular/material";
+import { ConfirmComponent } from '../shared/confirm.component';
 
 @Component({
 	selector: 'app-product-form',
@@ -27,7 +28,7 @@ export class ProductsComponent implements OnInit {
 	selected = [];
 	isLoaded = false;
 
-	constructor(private service: ProductService, public editModal: MatDialog) {
+	constructor(private service: ProductService, public dialog: MatDialog) {
 	}
 
 	ngOnInit(): void {
@@ -110,14 +111,19 @@ export class ProductsComponent implements OnInit {
 	back(): void {
 		this.viewStates = "List";
 		this.loadProducts();
-	}
-
+	}	
 
 	deleteProduct(product: Product) {
 		this.service.deleteProduct(product.id)
 			.subscribe(product => {
-				this.pageTitle = `${product.name} Successfully Deleted!`;
 				this.products = this.products.filter(item => item.id !== product.id);
+				for (var i = 0; i < this.products.length; i++) {
+					var current = this.products[i];
+					if (current.id === product.id) {
+						this.products.splice(i, 1);
+						break;
+					}
+				}
 			},
 			error => {
 				this.pageTitle = error;
@@ -144,12 +150,28 @@ export class ProductsComponent implements OnInit {
 				this.pageTitle = `${this.product.name} Successfully Added!`;
 				this.products.push(this.product);
 				this.loadProducts();
-				this.viewStates = "List";	
+				this.viewStates = "List";
 			},
 			error => {
 				this.pageTitle = error;
-				this.viewStates = "List";	
+				this.viewStates = "List";
 			}
 			);
 	}
+
+	/* Dialogs */
+
+	deleteDialog(itemToDelete): void {
+		let dialogRef = this.dialog.open(ConfirmComponent, {
+			width: '250px',
+			data: { message: `Delete ${itemToDelete.name}?` }
+		});
+
+		dialogRef.afterClosed().subscribe(result => {
+			console.log('The dialog was closed');
+			if (result)
+				this.deleteProduct(itemToDelete);
+		});
+	}
+	
 }

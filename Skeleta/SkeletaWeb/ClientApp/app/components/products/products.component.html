@@ -83,7 +83,7 @@
 				<ngx-datatable-column name="">
 					<ng-template let-row="row" ngx-datatable-cell-template>
 						<a (click)="editProduct(row)"><mat-icon color="default">edit</mat-icon></a>
-						<mat-icon color="warn" (click)="deleteProduct(row)">delete</mat-icon>
+						<a (click)="deleteDialog(row)"><mat-icon color="warn">delete</mat-icon></a>
 					</ng-template>
 				</ngx-datatable-column>
 			</ngx-datatable>
