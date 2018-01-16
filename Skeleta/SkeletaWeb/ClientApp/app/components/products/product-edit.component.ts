@@ -10,6 +10,4 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 export class ProductEditComponent {
 	constructor(public dialogRef: MatDialogRef<ProductEditComponent>,
 		@Inject(MAT_DIALOG_DATA) public data: any) { }
-
-
 }

@@ -170,7 +170,7 @@ export class ProductsComponent implements OnInit {
 		});
 
 		dialogRef.afterClosed().subscribe(result => {
-			console.log('The CLOSE DIALOG was closed');
+			console.log('deleteDialog was closed');
 			if (result)
 				this.deleteProduct(product);
 		});
@@ -184,7 +184,7 @@ export class ProductsComponent implements OnInit {
 		});
 
 		dialogRef.afterClosed().subscribe(result => {
-			console.log('The CLOSE DIALOG was closed');
+			console.log('editDialog was closed');
 			if (result)
 				this.updateProduct(product);
 			else

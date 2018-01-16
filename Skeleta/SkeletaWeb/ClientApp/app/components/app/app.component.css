@@ -191,10 +191,7 @@ h3 {
 		display: flex;
 		-webkit-box-orient: horizontal;
 		-webkit-box-direction: normal;
-		-ms-flex-direction: row;
 		flex-direction: row;
-		-ms-flex-flow: row;
-		-o-flex-flow: row;
 		flex-flow: row;
 	}
 
@@ -232,7 +229,6 @@ h3 {
 			-webkit-box-align: stretch;
 			-ms-flex-align: stretch;
 			align-items: stretch;
-			-webkit-align-items: stretch;
 		}
 
 		.ngx-datatable .datatable-header .datatable-header-cell {
