@@ -6,6 +6,7 @@ import { DatatableComponent } from "@swimlane/ngx-datatable/release";
 import { timer } from "../../services/commonServices";
 import { MatDialog } from "@angular/material";
 import { ConfirmComponent } from '../shared/confirm.component';
+import { ProductEditComponent } from './product-edit.component';
 
 @Component({
 	selector: 'app-product-form',
@@ -21,6 +22,7 @@ export class ProductsComponent implements OnInit {
 	loadInfo: string;
 	pageTitle: string = "Products";
 	product: IProduct;
+	tempProduct: IProduct;
 	@ViewChild(DatatableComponent) productsTable: DatatableComponent;
 	expanded: any = {};
 	products: IProduct[];
@@ -132,10 +134,10 @@ export class ProductsComponent implements OnInit {
 		this.viewStates = "List";
 	}
 
-	updateProduct() {
-		this.service.updateProduct(this.product)
+	updateProduct(product: Product) {
+		this.service.updateProduct(product)
 			.subscribe(product => {
-				this.pageTitle = `${this.product.name} Successfully Updated!`;
+				this.pageTitle = `${product.name} Successfully Updated!`;
 			},
 			error => {
 				this.pageTitle = error;
@@ -161,17 +163,32 @@ export class ProductsComponent implements OnInit {
 
 	/* Dialogs */
 
-	deleteDialog(itemToDelete): void {
+	deleteDialog(product): void {
 		let dialogRef = this.dialog.open(ConfirmComponent, {
 			width: '250px',
-			data: { message: `Delete ${itemToDelete.name}?` }
+			data: { message: `Delete ${product.name}?` }
 		});
 
 		dialogRef.afterClosed().subscribe(result => {
-			console.log('The dialog was closed');
+			console.log('The CLOSE DIALOG was closed');
 			if (result)
-				this.deleteProduct(itemToDelete);
+				this.deleteProduct(product);
 		});
 	}
-	
+
+	editDialog(product): void {
+		this.tempProduct = this.product;
+		let dialogRef = this.dialog.open(ProductEditComponent, {
+			width: '800px',
+			data: { product: product }
+		});
+
+		dialogRef.afterClosed().subscribe(result => {
+			console.log('The CLOSE DIALOG was closed');
+			if (result)
+				this.updateProduct(product);
+			else
+				this.loadProducts();
+		});
+	}
 }

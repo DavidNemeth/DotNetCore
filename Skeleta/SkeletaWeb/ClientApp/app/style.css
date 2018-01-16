@@ -10,3 +10,9 @@ body {
 	background: #e8e8e8;
 	font-family: 'Muli';
 }
+.spacer {
+	flex: 1 1 auto;
+}
+.info-icon{
+	color:snow
+}

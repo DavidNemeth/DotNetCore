@@ -1,6 +1,5 @@
-﻿import { Component, OnInit } from '@angular/core';
-import { ProductService, Product, IProduct } from "../../services/ProductService";
-import { ActivatedRoute, Router } from "@angular/router";
+﻿import { Component, EventEmitter, Output, Inject, Input } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
 	selector: 'app-product-edit',
@@ -8,30 +7,9 @@ import { ActivatedRoute, Router } from "@angular/router";
 	styleUrls: ['./product-edit.component.css']
 })
 /** product-edit component*/
-export class ProductEditComponent implements OnInit {
-	products: Product[];
-	/** product-edit ctor */
-	pageTitle: string = 'Product Detail';
-	prod: IProduct;	
-	constructor(private service: ProductService, private router: Router, private route: ActivatedRoute) {		
-	}
+export class ProductEditComponent {
+	constructor(public dialogRef: MatDialogRef<ProductEditComponent>,
+		@Inject(MAT_DIALOG_DATA) public data: any) { }
 
-	ngOnInit(): void {
-		this.loadProduct();
-	}
 
-	loadProduct(): void {
-		let id = +this.route.snapshot.paramMap.get('id');
-		this.service.getProduct(id)
-			.subscribe(product => {
-				this.prod = product;
-			},
-			error => {
-				this.pageTitle = error;
-			});
-	}
-
-	cancel(): void {
-		this.router.navigate(['/products']);
-	}
 }

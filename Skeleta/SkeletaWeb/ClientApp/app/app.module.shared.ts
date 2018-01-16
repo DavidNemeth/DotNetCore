@@ -37,7 +37,8 @@ import { ConfirmComponent } from './components/shared/confirm.component';
 		ConfirmComponent
 	],
 	entryComponents: [	
-		ConfirmComponent
+		ConfirmComponent,
+		ProductEditComponent
 	],
 	imports: [
 		ModalModule.forRoot(),

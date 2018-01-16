@@ -6,7 +6,7 @@
 			   style='padding:8px;margin:15px auto;width:30%;'
 			   placeholder='Search for..'
 			   (keyup)='updateFilter($event)' />
-		<input type="button" value="Add" class="btn btn-default" (click)="addView()" />
+		<a style="margin-left:3%" (click)="addView(row)"><mat-icon color="primary">add_circle</mat-icon></a>
 		<small>{{loadInfo}}</small>
 		<div class="skeleta-container mat-elevation-z8">
 			<button mat-button (click)="loadProducts()" color="primary">
@@ -82,7 +82,7 @@
 				</ngx-datatable-column>
 				<ngx-datatable-column name="">
 					<ng-template let-row="row" ngx-datatable-cell-template>
-						<a (click)="editProduct(row)"><mat-icon color="default">edit</mat-icon></a>
+						<a (click)="editDialog(row)"><mat-icon color="default">edit</mat-icon></a>
 						<a (click)="deleteDialog(row)"><mat-icon color="warn">delete</mat-icon></a>
 					</ng-template>
 				</ngx-datatable-column>

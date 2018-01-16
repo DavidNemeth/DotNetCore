@@ -1,4 +1,4 @@
-<div class='main-nav'>
+<!--<div class='main-nav'>
 	<div class='navbar navbar-inverse'>
 		<div class='navbar-header'>
 			<button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>
@@ -21,8 +21,16 @@
 					<a [routerLink]="['/products']">
 						<span class='glyphicon glyphicon-education'></span> Products
 					</a>
-				</li>  							 
+				</li>
 			</ul>
 		</div>
 	</div>
-</div>
+</div>-->
+<mat-toolbar color="primary">
+	<mat-toolbar-row>
+		<a class='navbar-brand' [routerLink]="['/home']">SkeletaWeb</a>
+		<mat-icon [routerLink]="['/products']">assignment</mat-icon>
+		<span class="spacer"></span>
+		<a href="/swagger" class="info-icon"><mat-icon>info</mat-icon></a>
+	</mat-toolbar-row>
+</mat-toolbar>
