@@ -6,7 +6,7 @@
 			   style='padding:8px;margin:15px auto;width:30%;'
 			   placeholder='Search for..'
 			   (keyup)='updateFilter($event)' />
-		<a style="margin-left:3%" (click)="addView(row)"><mat-icon color="primary">add_circle</mat-icon></a>
+		<a style="margin-left:3%" (click)="addDialog()"><mat-icon color="primary">add_circle</mat-icon></a>
 		<small>{{loadInfo}}</small>
 		<div class="skeleta-container mat-elevation-z8">
 			<button mat-button (click)="loadProducts()" color="primary">
@@ -80,6 +80,11 @@
 						<strong>{{value | currency}}</strong>
 					</ng-template>
 				</ngx-datatable-column>
+				<ngx-datatable-column name="CreatedDate">
+					<ng-template let-value="value" ngx-datatable-cell-template>
+						<strong>{{value}}</strong>
+					</ng-template>
+				</ngx-datatable-column>
 				<ngx-datatable-column name="">
 					<ng-template let-row="row" ngx-datatable-cell-template>
 						<a (click)="editDialog(row)"><mat-icon color="default">edit</mat-icon></a>
@@ -89,64 +94,4 @@
 			</ngx-datatable>
 		</div>
 	</div>
-
-	<div *ngSwitchCase="'Add'">
-		<mat-card color="primary" class="skeleta-container mat-elevation-z10">
-			<mat-grid-list cols="4" rowHeight="1:1">
-				<mat-grid-tile colspan='1'>
-					<img class="toolbarImage" [src]="product.imageUrl" alt="Image not found">
-				</mat-grid-tile>
-				<mat-grid-tile colspan='3'>
-					<form (ngSubmit)="addProduct()" #productForm="ngForm">
-						<mat-card-content>
-							<mat-form-field>
-								<input required maxlength="100" [(ngModel)]="product.name" matInput placeholder="Name" name="name">
-								<button mat-button *ngIf="product.name" matSuffix mat-icon-button aria-label="Clear" (click)="product.name=''">
-									<mat-icon>close</mat-icon>
-								</button>
-							</mat-form-field>
-							<mat-form-field>
-								<input required maxlength="9" [(ngModel)]="product.code" matInput placeholder="Code" name="code">
-								<button mat-button *ngIf="product.code" matSuffix mat-icon-button aria-label="Clear" (click)="product.code=''">
-									<mat-icon>close</mat-icon>
-								</button>
-							</mat-form-field>
-							<mat-form-field>
-								<input required maxlength="6" [(ngModel)]="product.price" matInput placeholder="Price" type="number" name="price">
-								<button mat-button *ngIf="product.price" matSuffix mat-icon-button aria-label="Clear" (click)="product.price=''">
-									<mat-icon>close</mat-icon>
-								</button>
-								<span matPrefix>$&nbsp;</span>
-							</mat-form-field>
-							<mat-form-field>
-								<input [(ngModel)]="product.rating" matInput placeholder="Rating" type="number" name="rating">
-								<button mat-button *ngIf="product.rating" matSuffix mat-icon-button aria-label="Clear" (click)="product.rating=''">
-									<mat-icon>close</mat-icon>
-								</button>
-							</mat-form-field>
-							<mat-form-field class="skeleta-full-width">
-								<input [(ngModel)]="product.imageUrl" matInput placeholder="Image Link" name="imageUrl" />
-								<button mat-button *ngIf="product.imageUrl" matSuffix mat-icon-button aria-label="Clear" (click)="product.imageUrl=''">
-									<mat-icon>close</mat-icon>
-								</button>
-							</mat-form-field>
-							<mat-form-field class="skeleta-full-width">
-								<input [(ngModel)]="product.description" matInput placeholder="Description" name="description" />
-								<button mat-button *ngIf="product.description" matSuffix mat-icon-button aria-label="Clear" (click)="product.description=''">
-									<mat-icon>close</mat-icon>
-								</button>
-							</mat-form-field>
-						</mat-card-content>
-						<button mat-raised-button type="submit" color="primary" [disabled]="!productForm.form.valid">
-							<b>Create</b>
-						</button>
-						<button mat-raised-button (click)="back()">
-							<b>Cancel</b>
-						</button>
-					</form>
-				</mat-grid-tile>
-			</mat-grid-list>
-		</mat-card>
-	</div>
-
 </main>

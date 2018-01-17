@@ -44,7 +44,7 @@ export class ProductsComponent implements OnInit {
 		this.service.getProducts()
 			.subscribe(products => {
 				this.filteredByName = [...products];
-				this.products = products;
+				this.products = products.sort(p=>p.createdDate);
 				this.isLoaded = true;
 				this.pageTitle = "Products";
 				this.loadInfo = `${this.products.length} Records loaded in ${loadTime.seconds}`;
@@ -57,7 +57,7 @@ export class ProductsComponent implements OnInit {
 	}
 
 	private addView() {
-		this.product = new Product(0, '', '', '', 0, 0, '');
+		this.product = new Product(0, '', '', '', 0, 0, '', null);
 		this.viewStates = "Add";
 	}
 
@@ -176,8 +176,7 @@ export class ProductsComponent implements OnInit {
 		});
 	}
 
-	editDialog(product): void {
-		this.tempProduct = this.product;
+	editDialog(product): void {		
 		let dialogRef = this.dialog.open(ProductEditComponent, {
 			width: '800px',
 			data: { product: product }
@@ -189,6 +188,20 @@ export class ProductsComponent implements OnInit {
 				this.updateProduct(product);
 			else
 				this.loadProducts();
+		});
+	}
+
+	addDialog(): void {
+		this.product = new Product(0, '', '', '', 0, 0, '', null)
+		let dialogRef = this.dialog.open(ProductEditComponent, {
+			width: '800px',
+			data: { product: this.product }
+		});
+
+		dialogRef.afterClosed().subscribe(result => {
+			console.log('editDialog was closed');
+			if (result)
+				this.addProduct();			
 		});
 	}
 }

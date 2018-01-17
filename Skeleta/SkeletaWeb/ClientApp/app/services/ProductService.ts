@@ -32,12 +32,12 @@ export class ProductService {
 	}
 
 	updateProduct(product: IProduct): Observable<IProduct> {
-		const url = `${this._baseUrl}/${product.id}`;
+		const url = `${this._baseUrl}/${product.id}`;		
 		return this.http.put(url, product)
 			.catch(this.handleError);
 	}
 
-	addProduct(product: IProduct): Observable<IProduct> {
+	addProduct(product: IProduct): Observable<IProduct> {		
 		return this.http.post(this._baseUrl, product)
 			.catch(this.handleError);
 	}
@@ -62,6 +62,7 @@ export interface IProduct {
 	price: number;
 	rating: number;
 	imageUrl: string;
+	createdDate: any;
 }
 
 export class Product implements IProduct{
@@ -72,6 +73,8 @@ export class Product implements IProduct{
 		public description: string,
 		public price: number,
 		public rating: number,
-		public imageUrl: string
+		public imageUrl: string,
+		public createdDate: any
+		
 	) { }
 }

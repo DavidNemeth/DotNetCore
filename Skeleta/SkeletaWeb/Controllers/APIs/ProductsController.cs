@@ -5,6 +5,7 @@ using SkeletaDAL;
 using SkeletaDAL.Models;
 using SkeletaWeb.Services;
 using SkeletaWeb.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -49,7 +50,7 @@ namespace SkeletaWeb.Controllers.APIs
 			if (!ModelState.IsValid)
 				return BadRequest(ModelState);
 			var itemToAdd = Mapper.Map<Product>(product);
-
+			itemToAdd.CreatedDate = DateTime.Now;
 			context.Products.Add(itemToAdd);
 			await context.SaveChangesAsync();
 

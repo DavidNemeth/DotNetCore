@@ -65,12 +65,6 @@
     <None Update="ClientApp\app\components\navmenu\navmenu.component.ts">
       <DependentUpon>navmenu.component.html</DependentUpon>
     </None>
-    <None Update="ClientApp\app\components\products\product-add.component.css">
-      <DependentUpon>product-add.component.html</DependentUpon>
-    </None>
-    <None Update="ClientApp\app\components\products\product-add.component.ts">
-      <DependentUpon>product-add.component.html</DependentUpon>
-    </None>
     <None Update="ClientApp\app\components\products\product-edit.component.css">
       <DependentUpon>product-edit.component.html</DependentUpon>
     </None>
