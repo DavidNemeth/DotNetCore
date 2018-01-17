@@ -4,11 +4,15 @@ Skeleton application to serve as a starting point for building well structured, 
 TODO:  
 **-Enable offline db changes with sync later option**    
 **-Builtin chat and notification system**     
-**-Auth services**      
-**-Modal and preview pages**    
+**-Auth services**       
 
 
 ChangeSets:   
+  
+ **2018:**   
+ **-Added modal edit and add for sample datasets**    
+ **-Sample crud working with good speed (large dataset added for testing)**   
+ **-Menu and sidebar changed for simplicity** 
   
 **2017.11.16:**  
 **-Implemented Auto reconnect**  
