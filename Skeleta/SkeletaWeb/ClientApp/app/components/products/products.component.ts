@@ -29,6 +29,16 @@ export class ProductsComponent implements OnInit {
 	selected = [];
 	isLoaded = false;
 
+	/*NGX DATATABLE ICON CONFIG*/
+	iconsCss = {
+		sortAscending: 'glyphicon glyphicon-chevron-down',
+		sortDescending: 'glyphicon glyphicon-chevron-up',
+		pagerLeftArrow: 'glyphicon glyphicon-chevron-left',
+		pagerRightArrow: 'glyphicon glyphicon-chevron-right',
+		pagerPrevious: 'glyphicon glyphicon-backward',
+		pagerNext: 'glyphicon glyphicon-forward'
+	};
+	
 	constructor(private service: ProductService, public dialog: MatDialog) {
 	}
 
