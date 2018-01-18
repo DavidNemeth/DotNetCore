@@ -15,8 +15,7 @@ import { ProductEditComponent } from './product-edit.component';
 	encapsulation: ViewEncapsulation.None
 })
 /** product-form component*/
-export class ProductsComponent implements OnInit {
-	viewStates: string = "List";
+export class ProductsComponent implements OnInit {	
 	isNewRecord: boolean;
 	canRestore: boolean;
 	loadInfo: string;
@@ -56,23 +55,6 @@ export class ProductsComponent implements OnInit {
 			});
 	}
 
-	private addView() {
-		this.product = new Product(0, '', '', '', 0, 0, '', new Date());
-		this.viewStates = "Add";
-	}
-
-	private editProduct(row): void {
-		let product: Product = row;
-		this.product = product;
-		if (this.product != null) {
-			this.viewStates = "Edit";
-		}
-	}
-
-	cancel(): void {
-
-	}
-
 	private Reconnect() {
 		this.service.getProducts()
 			.subscribe(products => {
@@ -108,12 +90,7 @@ export class ProductsComponent implements OnInit {
 		this.selected.splice(0, this.selected.length);
 		this.selected.push(...selected);
 	}
-
-
-	back(): void {
-		this.viewStates = "List";
-		this.loadProducts();
-	}	
+	
 
 	deleteProduct(product: Product) {
 		this.service.deleteProduct(product.id)
@@ -131,7 +108,7 @@ export class ProductsComponent implements OnInit {
 				this.pageTitle = error;
 			}
 			);
-		this.viewStates = "List";
+	
 	}
 
 	updateProduct(product: IProduct) {
@@ -143,7 +120,7 @@ export class ProductsComponent implements OnInit {
 				this.pageTitle = error;
 			}
 			);
-		this.viewStates = "List";
+		
 	}
 
 	addProduct() {
@@ -151,12 +128,11 @@ export class ProductsComponent implements OnInit {
 			.subscribe(product => {
 				this.pageTitle = `Product Successfully Added!`;
 				this.products.push(this.product);
-				this.loadProducts();
-				this.viewStates = "List";
+				this.loadProducts();				
 			},
 			error => {
 				this.pageTitle = error;
-				this.viewStates = "List";
+			
 			}
 			);
 	}

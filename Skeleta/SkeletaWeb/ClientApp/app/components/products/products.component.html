@@ -1,7 +1,7 @@
 ﻿<main [ngSwitch]="viewStates">
 
 	<!--Product List Section-->
-	<div *ngSwitchCase="'List'">
+	<div>
 		<input type='text'
 			   style='padding:8px;margin:15px auto;width:30%;'
 			   placeholder='Search for..'
@@ -82,7 +82,7 @@
 				</ngx-datatable-column>
 				<ngx-datatable-column name="CreatedDate">
 					<ng-template let-value="value" ngx-datatable-cell-template>
-						<strong>{{value}}</strong>
+						<strong>{{value | date}}</strong>
 					</ng-template>
 				</ngx-datatable-column>
 				<ngx-datatable-column name="">
