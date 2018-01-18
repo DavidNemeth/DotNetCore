@@ -1,4 +1,6 @@
-﻿namespace SkeletaWeb.ViewModels
+﻿using System;
+
+namespace SkeletaWeb.ViewModels
 {
 	public class ProductViewModel
 	{
@@ -9,5 +11,6 @@
 		public double Price { get; set; }
 		public double Rating { get; set; }
 		public string ImageUrl { get; set; }
+		public DateTime CreatedDate { get; set; }
 	}
 }

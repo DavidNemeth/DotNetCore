@@ -57,7 +57,7 @@ export class ProductsComponent implements OnInit {
 	}
 
 	private addView() {
-		this.product = new Product(0, '', '', '', 0, 0, '', null);
+		this.product = new Product(0, '', '', '', 0, 0, '', new Date());
 		this.viewStates = "Add";
 	}
 
@@ -134,10 +134,10 @@ export class ProductsComponent implements OnInit {
 		this.viewStates = "List";
 	}
 
-	updateProduct(product: Product) {
+	updateProduct(product: IProduct) {
 		this.service.updateProduct(product)
-			.subscribe(product => {
-				this.pageTitle = `${product.name} Successfully Updated!`;
+			.subscribe(product => {		
+				this.pageTitle = `Product Successfully Edited!`;
 			},
 			error => {
 				this.pageTitle = error;
@@ -149,7 +149,7 @@ export class ProductsComponent implements OnInit {
 	addProduct() {
 		this.service.addProduct(this.product)
 			.subscribe(product => {
-				this.pageTitle = `${this.product.name} Successfully Added!`;
+				this.pageTitle = `Product Successfully Added!`;
 				this.products.push(this.product);
 				this.loadProducts();
 				this.viewStates = "List";
@@ -192,7 +192,7 @@ export class ProductsComponent implements OnInit {
 	}
 
 	addDialog(): void {
-		this.product = new Product(0, '', '', '', 0, 0, '', null)
+		this.product = new Product(0, '', '', '', 0, 0, '', new Date())
 		let dialogRef = this.dialog.open(ProductEditComponent, {
 			width: '800px',
 			data: { product: this.product }
