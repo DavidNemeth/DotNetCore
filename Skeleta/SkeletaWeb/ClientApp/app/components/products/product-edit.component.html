@@ -1,38 +1,38 @@
 ﻿<form #productForm="ngForm">
 	<mat-form-field>
 		<input required maxlength="100" [(ngModel)]="data.product.name" matInput placeholder="Name" name="name">
-		<button mat-button *ngIf="data.product.name" matSuffix mat-icon-button aria-label="Clear" (click)="data.product.name=''">
+		<button tabindex="-1" mat-button *ngIf="data.product.name" matSuffix mat-icon-button aria-label="Clear" (click)="data.product.name=''">
 			<mat-icon>close</mat-icon>
 		</button>
 	</mat-form-field>
 	<mat-form-field>
 		<input required maxlength="9" [(ngModel)]="data.product.code" matInput placeholder="Code" name="code">
-		<button mat-button *ngIf="data.product.code" matSuffix mat-icon-button aria-label="Clear" (click)="data.product.code=''">
+		<button tabindex="-1" mat-button *ngIf="data.product.code" matSuffix mat-icon-button aria-label="Clear" (click)="data.product.code=''">
 			<mat-icon>close</mat-icon>
 		</button>
 	</mat-form-field>
 	<mat-form-field>
 		<input required maxlength="6" [(ngModel)]="data.product.price" matInput placeholder="Price" type="number" name="price">
-		<button mat-button *ngIf="data.product.price" matSuffix mat-icon-button aria-label="Clear" (click)="data.product.price=''">
+		<button tabindex="-1" mat-button *ngIf="data.product.price" matSuffix mat-icon-button aria-label="Clear" (click)="data.product.price=''">
 			<mat-icon>close</mat-icon>
 		</button>
 		<span matPrefix>$&nbsp;</span>
 	</mat-form-field>
 	<mat-form-field>
 		<input [(ngModel)]="data.product.rating" matInput placeholder="Rating" type="number" name="rating">
-		<button mat-button *ngIf="data.product.rating" matSuffix mat-icon-button aria-label="Clear" (click)="data.product.rating=''">
+		<button tabindex="-1" mat-button *ngIf="data.product.rating" matSuffix mat-icon-button aria-label="Clear" (click)="data.product.rating=''">
 			<mat-icon>close</mat-icon>
 		</button>
 	</mat-form-field>
 	<mat-form-field class="skeleta-full-width">
 		<input [(ngModel)]="data.product.imageUrl" matInput placeholder="Image Link" name="imageUrl" />
-		<button mat-button *ngIf="data.product.imageUrl" matSuffix mat-icon-button aria-label="Clear" (click)="data.product.imageUrl=''">
+		<button tabindex="-1" mat-button *ngIf="data.product.imageUrl" matSuffix mat-icon-button aria-label="Clear" (click)="data.product.imageUrl=''">
 			<mat-icon>close</mat-icon>
 		</button>
 	</mat-form-field>
 	<mat-form-field class="skeleta-full-width">
 		<input [(ngModel)]="data.product.description" matInput placeholder="Description" name="description" />
-		<button mat-button *ngIf="data.product.description" matSuffix mat-icon-button aria-label="Clear" (click)="data.product.description=''">
+		<button tabindex="-1" mat-button *ngIf="data.product.description" matSuffix mat-icon-button aria-label="Clear" (click)="data.product.description=''">
 			<mat-icon>close</mat-icon>
 		</button>
 	</mat-form-field>

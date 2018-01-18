@@ -135,10 +135,10 @@ export class ProductsComponent implements OnInit {
 
 	addProduct() {
 		this.service.addProduct(this.product)
-			.subscribe(product => {
-				this.pageTitle = `Product Successfully Added!`;
+			.subscribe(product => {				
 				this.products.push(this.product);
-				this.loadProducts();				
+				this.loadProducts();	
+				this.pageTitle = `Product Successfully Added!`;
 			},
 			error => {
 				this.pageTitle = error;
