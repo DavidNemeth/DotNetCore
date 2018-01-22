@@ -104,4 +104,25 @@
 			</div>
 		</mat-step>
 	</mat-horizontal-stepper>
+	<mat-card>
+		<form class="example-form">
+			<mat-form-field class="example-full-width">
+				<input matInput placeholder="Country" aria-label="Country" [matAutocomplete]="auto" [formControl]="countryCtrl">
+				<mat-autocomplete #auto="matAutocomplete">
+					<mat-option *ngFor="let country of filteredCountries | async" [value]="country.name">
+						<img style="vertical-align:middle;" aria-hidden src="{{country.flag}}" height="25" />
+						<span>{{ country.name }}</span> |
+						<small>Population: {{country.population}}</small>
+					</mat-option>
+				</mat-autocomplete>
+			</mat-form-field>
+
+			<br />
+
+			<mat-slide-toggle [checked]="countryCtrl.disabled"
+							  (change)="countryCtrl.disabled ? countryCtrl.enable() : countryCtrl.disable()">
+				Disable Input?
+			</mat-slide-toggle>
+		</form>
+	</mat-card>
 </div>
